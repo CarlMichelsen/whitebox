@@ -5,6 +5,8 @@
 
 # dotenv files
 .env
+Api/secrets.json
+Api/wwwroot/*
 
 # User-specific files
 *.rsuser

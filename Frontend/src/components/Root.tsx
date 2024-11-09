@@ -4,10 +4,10 @@ type RootProps = {
     children: ReactNode;
 }
 
-const Root: FC<RootProps> = ({ children }) => {
+const Root: FC<RootProps> = ({children}) => {
     return (
-        <main className="hide-scrollbar overflow-y-hidden overflow-x-scroll h-screen">
-            <h1 className="text-2xl">Root</h1>
+        <main
+            className="hide-scrollbar overflow-y-hidden min-h-screen">
             {children}
         </main>
     );

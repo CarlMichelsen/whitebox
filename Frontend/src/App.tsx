@@ -3,7 +3,7 @@ import {getUser} from "./util/helpers/getUser.ts";
 import {useQuery} from "react-query";
 import {FC, ReactNode, useEffect} from "react";
 import {login, logout} from "./state/auth";
-import LoggedOut from "./routes/LoggedOut.tsx";
+import LoggedOut from "./components/LoggedOut.tsx";
 import Root from "./components/Root.tsx";
 
 type AppProps = {
