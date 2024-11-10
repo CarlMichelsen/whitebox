@@ -3,10 +3,14 @@
 ##
 ## Get latest from `dotnet new gitignore`
 
-# dotenv files
-.env
+# custom
+.vite
+Frontend/dist
 Api/secrets.json
 Api/wwwroot/*
+
+# dotenv files
+.env
 
 # User-specific files
 *.rsuser
