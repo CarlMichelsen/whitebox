@@ -34,7 +34,7 @@ const App: FC<AppProps> = ({ children }) => {
     switch (auth.status) {
         case "loggedIn": return <Root>{children}</Root>;
         case "loggedOut": return <Root><LoggedOut /></Root>;
-        case "pending": return <p>Pending...</p>;
+        case "pending": return null;
         default: throw new Error("Invalid auth status");
     }
 }

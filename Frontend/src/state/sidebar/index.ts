@@ -6,7 +6,7 @@ type SidebarState = {
 }
 
 const initialState: SidebarState = {
-    isOpen: true,
+    isOpen: window.screen.width > 600,
 }
 
 export const sidebarSlice = createSlice({

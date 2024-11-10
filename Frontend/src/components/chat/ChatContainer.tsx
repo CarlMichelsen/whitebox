@@ -3,7 +3,7 @@ import {FC} from "react";
 const ChatContainer: FC = () => {
 
     return (
-        <>
+        <div className="pt-12">
             <h1>ChatContainer</h1>
             
             <br/>
@@ -72,7 +72,7 @@ const ChatContainer: FC = () => {
                 placerat justo nisl, et lobortis purus placerat tempus. Duis accumsan ipsum nisl, id maximus erat
                 lacinia id.
             </p>
-        </>
+        </div>
     );
 }
 

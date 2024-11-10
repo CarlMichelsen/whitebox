@@ -22,7 +22,7 @@ const SidebarBottomBox: FC = () => {
                     <p>{auth.user!.username}</p>
                     <button
                         onClick={onLogoutClick}
-                        className="rounded-sm bg-red-900 hover:bg-red-900 hover:font-bold w-full">
+                        className="rounded-sm bg-red-600 dark:bg-red-800 hover:font-bold w-full">
                         Logout
                     </button>
                 </div>
