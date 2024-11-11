@@ -1,9 +1,9 @@
 import {FC} from "react";
 import Sidebar from "../components/chat/Sidebar.tsx";
 import ChatContainer from "../components/chat/ChatContainer.tsx";
-import PageContent from "../components/page/PageContent.tsx";
 import {useAppSelector} from "../hooks.ts";
 import ConversationSelector from "../components/chat/ConversationSelector.tsx";
+import ChatPageContent from "../components/page/ChatPageContent.tsx";
 
 const Chat: FC = () => {
     const sidebar = useAppSelector(store => store.sidebar)
@@ -18,9 +18,9 @@ const Chat: FC = () => {
                  aria-hidden>
             </div>
             
-            <PageContent>
+            <ChatPageContent>
                 <ChatContainer />
-            </PageContent>
+            </ChatPageContent>
         </div>
     )
 }

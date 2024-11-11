@@ -11,6 +11,8 @@ type SidebarProps = {
 const Sidebar: FC<SidebarProps> = ({ children }) => {
     const sidebar = useAppSelector(store => store.sidebar)
     
+    
+    
     const sidebarClasses = (): string => {
         if (sidebar.isOpen) {
             return "block"
@@ -45,7 +47,9 @@ const Sidebar: FC<SidebarProps> = ({ children }) => {
                 
                 <SearchBox />
                 
-                {children}
+                <div className="hide-scrollbar overflow-y-scroll">
+                    {children}
+                </div>
                 
                 <SidebarBottomBox />
             </aside>

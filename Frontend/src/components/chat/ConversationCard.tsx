@@ -1,21 +1,27 @@
 import {FC, useState} from "react";
 import BurgerMenuBlack from "../../assets/burger-menu-black.svg"
 import BurgerMenuWhite from "../../assets/burger-menu-white.svg"
-import {useDarkMode} from "../../hooks.ts";
+import {useAppDispatch, useDarkMode} from "../../hooks.ts";
+import {ConversationOption} from "../../model/sidebar/conversationOption.ts";
+import {updateTitle} from "../../state/sidebar";
 
 type ConversationCardProps = {
-    tempTitle: string;
+    option: ConversationOption;
 }
 
-const ConversationCard: FC<ConversationCardProps> = ({ tempTitle }) => {
+const ConversationCard: FC<ConversationCardProps> = ({ option }) => {
     const [open, setOpen] = useState(false);
+    const dispatch = useAppDispatch()
     const darkMode = useDarkMode();
     
+    const onClick = () => {
+        dispatch(updateTitle({id: option.id, newTitle: "I've got a new title!"}))
+    }
     
     return (
-        <div className="grid grid-cols-[1fr_auto] border dark:border-neutral-700 border-neutral-300 rounded-sm">
-            <button className="block text-left hover:underline pl-1">
-                <p>{tempTitle}</p>
+        <div className="grid grid-cols-[1fr_auto]" id={"option-"+option.id}>
+            <button onClick={onClick} className="block text-left hover:underline pl-1">
+                {option.title}
             </button>
 
             <button onClick={() => setOpen(!open)} className="block hover:font-bold w-6 h-full">

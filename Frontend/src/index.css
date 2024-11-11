@@ -16,6 +16,20 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+hr {
+  @apply dark:border-neutral-700 border-neutral-300;
+}
+
+.chat-container {
+  /*tailwind-container default breakpoints: @apply w-full sm:w-[640px] md:w-[768px] lg:w-[1024px] xl:w-[1280px] 2xl:w-[1536px];*/
+
+  @apply w-full sm:w-[432px] md:w-[560px] lg:w-[816px] xl:w-[1072px] 2xl:w-[1328px];
+}
+
+.border-color {
+  @apply dark:border-neutral-700 border-neutral-300;
+}
+
 .hide-scrollbar {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* Internet Explorer 10+ */

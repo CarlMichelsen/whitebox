@@ -9,7 +9,7 @@ const ChatContainer: FC = () => {
             <br/>
             
             <p>
-                orem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed sem commodo, sagittis diam eget,
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed sem commodo, sagittis diam eget,
                 porttitor enim. Nam purus felis, molestie vitae scelerisque ut, sagittis interdum dui. Aliquam
                 condimentum vulputate neque, id vehicula lectus placerat non. Orci varius natoque penatibus et
                 magnis dis parturient montes, nascetur ridiculus mus. Pellentesque volutpat ante interdum lacus

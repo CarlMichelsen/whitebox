@@ -1,15 +1,18 @@
 import {FC} from "react";
 import SearchWhite from "../assets/search-white.svg"
 import SearchBlack from "../assets/search-black.svg"
-import {useDarkMode} from "../hooks.ts";
+import {useAppDispatch, useDarkMode} from "../hooks.ts";
+import {setSearch} from "../state/sidebar";
 
 const SearchBox: FC = () => {
+    const dispatch = useAppDispatch()
     const darkMode = useDarkMode();
     
     return (
         <span className="relative mx-1 mb-1">
             <input
                 className="block h-8 w-full pl-0.5 py-0.5 pr-7 border dark:border-neutral-700 border-neutral-300 rounded-sm"
+                onChange={e => dispatch(setSearch(e.target.value))}
                 type="search" />
             
             <img
