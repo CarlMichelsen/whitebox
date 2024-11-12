@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import authReducer from "./auth";
 import sidebarReducer from "./sidebar";
+import inputReducer from "./input";
 
 const customLoggerMiddleware = (storeAPI: { getState: () => RootState }) => (next: (action: any) => any) => (action: any) => {
     if (import.meta.env.VITE_APP_ENV !== 'development') {
@@ -17,6 +18,7 @@ export const store = configureStore({
     reducer: {
         auth: authReducer,
         sidebar: sidebarReducer,
+        input: inputReducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(customLoggerMiddleware),

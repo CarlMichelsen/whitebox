@@ -6,14 +6,14 @@ type PageContentProps = {
     className?: string;
 }
 
-const ChatPageContent: FC<PageContentProps> = ({ children, className = "" }) => {
+const ChatContentWidth: FC<PageContentProps> = ({ children, className = "" }) => {
     const sidebar = useAppSelector(store => store.sidebar)
     
     return (
-        <div className={`mx-auto ${sidebar.isOpen ? "chat-container" : "container"} min-h-screen ${className}`}>
+        <div className={`mx-auto ${sidebar.isOpen ? "chat-container" : "container"} ${className}`}>
             {children}
         </div>
     );
 }
 
-export default ChatPageContent;
+export default ChatContentWidth;

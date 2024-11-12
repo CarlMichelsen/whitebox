@@ -6,6 +6,18 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Compile Remove="src\util\helpers\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="src\util\helpers\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="src\util\helpers\**" />
+    </ItemGroup>
+
     <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(Configuration)'=='Debug'">
         <Exec Command="npm install" />
         <Exec Command="npm run build" />

@@ -20,7 +20,7 @@ const ConversationCard: FC<ConversationCardProps> = ({ option }) => {
     
     return (
         <div className="grid grid-cols-[1fr_auto]" id={"option-"+option.id}>
-            <button onClick={onClick} className="block text-left hover:underline pl-1">
+            <button onClick={onClick} className="block text-left hover:underline">
                 {option.title}
             </button>
 

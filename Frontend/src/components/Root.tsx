@@ -7,7 +7,7 @@ type RootProps = {
 const Root: FC<RootProps> = ({children}) => {
     return (
         <main
-            className="hide-scrollbar overflow-y-hidden min-h-screen">
+            className="overflow-y-hidden min-h-screen">
             {children}
         </main>
     );

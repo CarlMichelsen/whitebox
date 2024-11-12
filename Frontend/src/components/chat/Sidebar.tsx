@@ -11,8 +11,6 @@ type SidebarProps = {
 const Sidebar: FC<SidebarProps> = ({ children }) => {
     const sidebar = useAppSelector(store => store.sidebar)
     
-    
-    
     const sidebarClasses = (): string => {
         if (sidebar.isOpen) {
             return "block"
@@ -38,8 +36,8 @@ const Sidebar: FC<SidebarProps> = ({ children }) => {
     }
     
     return (
-        <>
-            <aside className={`fixed z-30 h-screen w-52 dark:bg-neutral-900 bg-neutral-100 ${sidebarClasses()} grid grid-rows-[auto_auto_1fr_auto]`}>
+        <aside className={`transition-width duration-100 ease-in-out shadow-2xl ${sidebar.isOpen ? "w-0 sm:w-52" : "w-0"}`}>
+            <div className={`fixed z-30 h-screen w-52 dark:bg-neutral-900 bg-neutral-100 ${sidebarClasses()} grid grid-rows-[auto_auto_1fr_auto]`}>
                 <div className="grid grid-cols-[1fr_auto] gap-1">
                     <button className="m-1 bg-blue-600 dark:bg-blue-800 hover:font-bold rounded-sm w-full">New Conversation</button>
                     <ToggleSidebarButton />
@@ -52,14 +50,14 @@ const Sidebar: FC<SidebarProps> = ({ children }) => {
                 </div>
                 
                 <SidebarBottomBox />
-            </aside>
+            </div>
             
-            <div className={`fixed ${toggleButtonClasses()}`}>
+            <div className={`fixed z-30 ${toggleButtonClasses()}`}>
                 <ToggleSidebarButton />
             </div>
             
             <div className={`absolute z-20 h-full w-full bg-black opacity-80 backdrop-blur-3xl ${backdropClasses()}`}></div>
-        </>
+        </aside>
     );
 }
 

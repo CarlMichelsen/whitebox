@@ -12,6 +12,7 @@ const SearchBox: FC = () => {
         <span className="relative mx-1 mb-1">
             <input
                 className="block h-8 w-full pl-0.5 py-0.5 pr-7 border dark:border-neutral-700 border-neutral-300 rounded-sm"
+                placeholder="Under construction"
                 onChange={e => dispatch(setSearch(e.target.value))}
                 type="search" />
             
