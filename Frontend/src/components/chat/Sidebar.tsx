@@ -2,7 +2,7 @@ import {FC, ReactNode} from "react";
 import {useAppSelector} from "../../hooks.ts";
 import ToggleSidebarButton from "./ToggleSidebarButton.tsx";
 import SidebarBottomBox from "./SidebarBottomBox.tsx";
-import SearchBox from "../SearchBox.tsx";
+import SearchBox from "../util/SearchBox.tsx";
 
 type SidebarProps = {
     children: ReactNode;

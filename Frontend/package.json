@@ -1,15 +1,17 @@
 {
   "name": "whitebox-frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.2",
   "type": "module",
   "scripts": {
-    "dev": "VITE_APP_ENV=development vite --port 5444",
-    "build": "tsc -b && vite build",
+    "dev": "vite --port 5444",
+    "build:workers": "tsc -b ./tsconfig.worker.json",
+    "build": "npm run build:workers && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@microsoft/signalr": "^8.0.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

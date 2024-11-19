@@ -1,8 +1,8 @@
 import {FC} from "react";
-import SearchWhite from "../assets/search-white.svg"
-import SearchBlack from "../assets/search-black.svg"
-import {useAppDispatch, useDarkMode} from "../hooks.ts";
-import {setSearch} from "../state/sidebar";
+import SearchWhite from "../../assets/icons/search-white.svg"
+import SearchBlack from "../../assets/icons/search-black.svg"
+import {useAppDispatch, useDarkMode} from "../../hooks.ts";
+import {setSearch} from "../../state/sidebar";
 
 const SearchBox: FC = () => {
     const dispatch = useAppDispatch()

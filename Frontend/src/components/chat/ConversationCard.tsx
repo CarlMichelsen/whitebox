@@ -1,6 +1,6 @@
 import {FC, useState} from "react";
-import BurgerMenuBlack from "../../assets/burger-menu-black.svg"
-import BurgerMenuWhite from "../../assets/burger-menu-white.svg"
+import BurgerMenuBlack from "../../assets/icons/burger-menu-black.svg"
+import BurgerMenuWhite from "../../assets/icons/burger-menu-white.svg"
 import {useAppDispatch, useDarkMode} from "../../hooks.ts";
 import {ConversationOption} from "../../model/sidebar/conversationOption.ts";
 import {updateTitle} from "../../state/sidebar";

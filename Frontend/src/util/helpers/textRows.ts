@@ -6,9 +6,6 @@ const replaceCharacterAtIndex = (originalString: string, index: number, replacem
     return originalString.substring(0, index) + replacement + originalString.substring(index + 1);
 }
 
-console.warn(replaceCharacterAtIndex("testing things is f", 8, "\n"))
-
-
 export const insertLinebreaks = (text: string, maxLineLength: number): string => {
     let count = 0
     

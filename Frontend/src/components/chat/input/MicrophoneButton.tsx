@@ -1,5 +1,5 @@
-import WhiteMicrophone from "../../../assets/microphone-white.svg"
-import BlackMicrophone from "../../../assets/microphone-black.svg"
+import WhiteMicrophone from "../../../assets/icons/microphone-white.svg"
+import BlackMicrophone from "../../../assets/icons/microphone-black.svg"
 import {FC} from "react";
 import {useDarkMode} from "../../../hooks.ts";
 
@@ -8,6 +8,12 @@ type MicrophoneButtonProps = {
     enabled: boolean;
     onClick: () => void;
 }
+
+/*const getConnection = () => {
+    return new HubConnectionBuilder()
+        .withUrl(hostUrl()+"/api/v1/speechToTextHub")
+        .build();
+}*/
 
 const MicrophoneButton: FC<MicrophoneButtonProps> = ({ className = "", enabled, onClick }) => {
     const darkMode = useDarkMode()

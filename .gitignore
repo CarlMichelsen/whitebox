@@ -5,6 +5,7 @@
 
 # custom
 .vite
+Frontend/public/web-workers
 Frontend/dist
 Api/secrets.json
 Api/wwwroot/*

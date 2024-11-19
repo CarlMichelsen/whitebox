@@ -5,11 +5,13 @@ import {countOccurrences} from "../../util/helpers/textRows.ts";
 type InputState = {
     text: string;
     rows: number;
+    speechToText: "connected"|"disconnected"|"pending";
 }
 
 const initialState: InputState = {
     text: "",
     rows: 1,
+    speechToText: "disconnected",
 }
 
 export const authSlice = createSlice({
@@ -22,9 +24,15 @@ export const authSlice = createSlice({
             // TODO: Handle word-wrapping
             state.rows = Math.min(countOccurrences(state.text, '\n'), 10) + 1;
         },
+        setVoice: (state, action: PayloadAction<InputState["speechToText"]>) => {
+            if (state.speechToText !== action.payload) {
+                return;
+            }
+            state.speechToText = action.payload;
+        }
     },
 })
 
-export const { setText } = authSlice.actions
+export const { setText, setVoice } = authSlice.actions
 
 export default authSlice.reducer

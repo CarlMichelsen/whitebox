@@ -25,6 +25,8 @@ app.UseStaticFiles(StaticFileOptionsFactory.Create());
 
 app.MapFallbackToFile("index.html");
 
+app.RegisterEndpoints();
+
 app.MapGet("health", () => Results.Ok());
 
 app.Services.GetRequiredService<ILogger<Program>>()
