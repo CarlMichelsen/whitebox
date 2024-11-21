@@ -9,12 +9,6 @@ type MicrophoneButtonProps = {
     onClick: () => void;
 }
 
-/*const getConnection = () => {
-    return new HubConnectionBuilder()
-        .withUrl(hostUrl()+"/api/v1/speechToTextHub")
-        .build();
-}*/
-
 const MicrophoneButton: FC<MicrophoneButtonProps> = ({ className = "", enabled, onClick }) => {
     const darkMode = useDarkMode()
     

@@ -1,4 +1,4 @@
-namespace Domain.Configuration;
+namespace Application.Configuration;
 
 public static class ApplicationConstants
 {

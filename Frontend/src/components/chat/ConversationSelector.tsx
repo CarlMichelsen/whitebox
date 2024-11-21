@@ -19,7 +19,6 @@ const ConversationSelector: FC = () => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        console.log("once");
         const conversations: ConversationOption[] = [
             {
                 id: uuidV4(),

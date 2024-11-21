@@ -1,4 +1,4 @@
-using Application.Hub;
+using Api.Endpoints;
 
 namespace Api;
 
@@ -11,7 +11,6 @@ public static class EndpointExtensions
             .MapGroup("api/v1")
             .RequireAuthorization();
 
-        apiGroup
-            .MapHub<SpeechToTextHub>("speechToTextHub");
+        apiGroup.RegisterSpeechEndpoints();
     }
 }

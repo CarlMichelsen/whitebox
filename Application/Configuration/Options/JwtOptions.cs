@@ -1,4 +1,4 @@
-namespace Domain.Configuration.Options;
+namespace Application.Configuration.Options;
 
 public sealed class JwtOptions
 {

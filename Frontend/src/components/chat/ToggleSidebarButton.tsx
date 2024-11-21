@@ -12,7 +12,7 @@ const ToggleSidebarButton: FC = () => {
     
     return (
         <button
-            className="w-10 h-10 dark:bg-green-900 bg-green-600 rounded-sm text-xl hover:font-bold m-1"
+            className="w-10 h-10 dark:bg-green-900 bg-green-400 rounded-sm text-lg hover:font-bold m-1"
             onClick={onClick}>{sidebar.isOpen ? "<" : ">"}</button>
     )
 }

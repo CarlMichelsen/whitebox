@@ -1,4 +1,4 @@
-using Domain.Configuration;
+using Application.Configuration;
 
 namespace Api.Middleware;
 

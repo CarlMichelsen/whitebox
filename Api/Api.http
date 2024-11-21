@@ -1,6 +1,6 @@
-@Api_HostAddress = http://localhost:5141
+@Api_HostAddress = http://localhost:5445
 
-GET {{Api_HostAddress}}/weatherforecast/
+POST {{Api_HostAddress}}/api/v1/speech
 Accept: application/json
 
 ###

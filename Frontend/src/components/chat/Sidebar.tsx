@@ -21,10 +21,10 @@ const Sidebar: FC<SidebarProps> = ({ children }) => {
 
     const backdropClasses = (): string => {
         if (sidebar.isOpen) {
-            return "block sm:hidden"
+            return "block sm:hidden opacity-60 dark:opacity-80"
         }
 
-        return "hidden";
+        return "hidden opacity-0";
     }
 
     const toggleButtonClasses = (): string => {
@@ -36,10 +36,10 @@ const Sidebar: FC<SidebarProps> = ({ children }) => {
     }
     
     return (
-        <aside className={`transition-width duration-100 ease-in-out shadow-2xl ${sidebar.isOpen ? "w-0 sm:w-52" : "w-0"}`}>
-            <div className={`fixed z-30 h-screen w-52 dark:bg-neutral-900 bg-neutral-100 ${sidebarClasses()} grid grid-rows-[auto_auto_1fr_auto]`}>
+        <aside className={`transition-width duration-100 ease-in-out shadow-2xl ${sidebar.isOpen ? "w-0 sm:w-64" : "w-0"}`}>
+            <div className={`fixed z-30 h-screen w-64 dark:bg-neutral-900 bg-neutral-100 ${sidebarClasses()} grid grid-rows-[auto_auto_1fr_auto]`}>
                 <div className="grid grid-cols-[1fr_auto] gap-1">
-                    <button className="m-1 bg-blue-600 dark:bg-blue-800 hover:font-bold rounded-sm w-full">New Conversation</button>
+                    <button className="m-1 bg-blue-400 dark:bg-blue-800 hover:font-bold rounded-sm w-full">New Conversation</button>
                     <ToggleSidebarButton />
                 </div>
                 
@@ -56,7 +56,7 @@ const Sidebar: FC<SidebarProps> = ({ children }) => {
                 <ToggleSidebarButton />
             </div>
             
-            <div className={`absolute z-20 h-full w-full bg-black opacity-80 backdrop-blur-3xl ${backdropClasses()}`}></div>
+            <div className={`absolute z-20 h-full w-full bg-black backdrop-blur-3xl ${backdropClasses()}`}></div>
         </aside>
     );
 }

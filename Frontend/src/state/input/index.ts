@@ -5,34 +5,51 @@ import {countOccurrences} from "../../util/helpers/textRows.ts";
 type InputState = {
     text: string;
     rows: number;
-    speechToText: "connected"|"disconnected"|"pending";
+    previousMessage: string|null;
+    editingMessage: string|null;
+    inputState: "ready"|"sending"|"receiving";
 }
 
 const initialState: InputState = {
     text: "",
     rows: 1,
-    speechToText: "disconnected",
+    previousMessage: null,
+    editingMessage: null,
+    inputState: "ready"
 }
 
 export const authSlice = createSlice({
     name: 'input',
     initialState,
     reducers: {
+        setInputState: (state, action: PayloadAction<InputState["inputState"]>) => {
+            state.inputState = action.payload;
+            
+            if (action.payload === "receiving") {
+                state.previousMessage = action.payload;
+                state.text = "";
+                state.rows = 1;
+            }
+        },
+        setEditingMessage: (state, action: PayloadAction<string|null>) => {
+            state.editingMessage = action.payload;
+        },
+        setPreviousMessage: (state, action: PayloadAction<string|null>) => {
+            state.previousMessage = action.payload;
+        },
         setText: (state, action: PayloadAction<string>) => {
+            if (state.inputState === "sending") {
+                return;
+            }
+            
             state.text = action.payload;
 
             // TODO: Handle word-wrapping
             state.rows = Math.min(countOccurrences(state.text, '\n'), 10) + 1;
-        },
-        setVoice: (state, action: PayloadAction<InputState["speechToText"]>) => {
-            if (state.speechToText !== action.payload) {
-                return;
-            }
-            state.speechToText = action.payload;
         }
     },
 })
 
-export const { setText, setVoice } = authSlice.actions
+export const { setText, setEditingMessage, setPreviousMessage, setInputState } = authSlice.actions
 
 export default authSlice.reducer

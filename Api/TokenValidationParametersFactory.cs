@@ -1,5 +1,5 @@
 using System.Text;
-using Domain.Configuration.Options;
+using Application.Configuration.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Api;
@@ -8,7 +8,7 @@ public static class TokenValidationParametersFactory
 {
     public static TokenValidationParameters AccessValidationParameters(JwtOptions jwtOptions)
     {
-        return new()
+        return new TokenValidationParameters
         {
             ValidateIssuer = true,
             ValidateAudience = true,

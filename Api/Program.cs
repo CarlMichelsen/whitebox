@@ -1,6 +1,6 @@
 using Api;
 using Api.Middleware;
-using Domain.Configuration;
+using Application.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,11 +23,11 @@ app.UseAuthorization();
 
 app.UseStaticFiles(StaticFileOptionsFactory.Create());
 
-app.MapFallbackToFile("index.html");
-
 app.RegisterEndpoints();
 
 app.MapGet("health", () => Results.Ok());
+
+app.MapFallbackToFile("index.html");
 
 app.Services.GetRequiredService<ILogger<Program>>()
     .LogInformation(

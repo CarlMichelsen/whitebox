@@ -1,8 +1,10 @@
 using Api.Middleware;
 using Application.Accessor;
-using Domain.Configuration;
-using Domain.Configuration.Options;
+using Application.Configuration;
+using Application.Configuration.Options;
+using Application.Handler;
 using Interface.Accessor;
+using Interface.Handler;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Serilog;
 
@@ -27,9 +29,9 @@ public static class Dependencies
         builder.Services
             .AddScoped<IUserContextAccessor, UserContextAccessor>();
         
-        // SignalR
+        // Handler
         builder.Services
-            .AddSignalR();
+            .AddScoped<ISpeechToTextHandler, SpeechToTextHandler>();
         
         // Auth
         builder.RegisterAuthDependencies();

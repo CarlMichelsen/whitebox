@@ -1,4 +1,5 @@
 import {FC, ReactNode} from "react";
+import EditLogicComponent from "./chat/EditLogicComponent.tsx";
 
 type RootProps = {
     children: ReactNode;
@@ -7,8 +8,9 @@ type RootProps = {
 const Root: FC<RootProps> = ({children}) => {
     return (
         <main
-            className="overflow-y-hidden min-h-screen">
+            className="relative overflow-y-hidden min-h-screen">
             {children}
+            <EditLogicComponent />
         </main>
     );
 }

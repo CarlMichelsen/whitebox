@@ -18,7 +18,7 @@ const App: FC<AppProps> = ({ children }) => {
         {
             queryKey: ['auth'],
             queryFn: getUser,
-            refetchInterval: 1000 * 60,
+            staleTime: 1000 * 60,
         })
     
     useEffect(() => {

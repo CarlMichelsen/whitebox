@@ -14,7 +14,7 @@ const Chat: FC = () => {
             
             <ChatContentWidth className="min-h-screen">
                 <ChatContainer />
-                <ChatInputBox id="chat-text-box" name="chatbox" />
+                <ChatInputBox />
             </ChatContentWidth>
         </div>
     )
