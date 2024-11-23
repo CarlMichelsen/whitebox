@@ -39,7 +39,7 @@ const EditLogicComponent: FC = () => {
     }
 
     useEffect(() => {
-        if (input.editingMessage !== null)
+        if (input.editingMessage !== null && conversation.selectedConversation !== null)
         {
             const editMessage = findMessage(conversation.selectedConversation, input.editingMessage)
             if (editMessage === null) {

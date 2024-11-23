@@ -1,11 +1,11 @@
 ﻿import {Bot, Conversation, ConversationMessage} from "./conversation.ts";
 
-const createMessage = (id: string, nextMessageId: string|null, isBot: boolean, text: string): ConversationMessage => {
+const createMessage = (id: string, previousMessageId: string|null, isBot: boolean, text: string): ConversationMessage => {
     const bot: Bot = { botName: "Bot", iconUrl: "" };
     
     return {
         id,
-        nextMessageId,
+        previousMessageId,
         bot: isBot ? bot : null,
         text,
         media: [],
@@ -22,27 +22,27 @@ export const conversationTestData: Conversation = {
         {
             selectedMessageId: "1",
             messages: {
-                "1": createMessage("1", "2", false, "Hello"),
-                "3": createMessage("3", "4", false, "Go away!")
+                "1": createMessage("1", null, false, "Hello"),
+                "3": createMessage("3", null, false, "Go away!")
             }
         },
         {
             selectedMessageId: "2",
             messages: {
-                "2": createMessage("2", "5", true, "Hi there! How can i help you?"),
-                "4": createMessage("4", null, true, "Alright, let me know if you need anything.")
+                "2": createMessage("2", "1", true, "Hi there! How can i help you?"),
+                "4": createMessage("4", "3", true, "Alright, let me know if you need anything.")
             }
         },
         {
             selectedMessageId: "5",
             messages: {
-                "5": createMessage("5", "6", false, "I would like to hear a joke please")
+                "5": createMessage("5", "2", false, "I would like to hear a joke please")
             }
         },
         {
             selectedMessageId: "6",
             messages: {
-                "6": createMessage("6", "7", true, "Sure, here's one for you:\n" +
+                "6": createMessage("6", "5", true, "Sure, here's one for you:\n" +
                     "\n" +
                     "Why don't skeletons fight each other?\n" +
                     "\n" +
@@ -52,13 +52,13 @@ export const conversationTestData: Conversation = {
         {
             selectedMessageId: "7",
             messages: {
-                "7": createMessage("7", "8", false, "Very funny.")
+                "7": createMessage("7", "6", false, "Very funny.")
             }
         },
         {
             selectedMessageId: "8",
             messages: {
-                "8": createMessage("8", null, true, "Why thankyou")
+                "8": createMessage("8", "7", true, "Why thankyou")
             }
         },
     ],

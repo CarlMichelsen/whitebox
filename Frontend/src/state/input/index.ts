@@ -27,6 +27,7 @@ export const authSlice = createSlice({
             
             if (action.payload === "receiving") {
                 state.previousMessage = action.payload;
+                state.editingMessage = null;
                 state.text = "";
                 state.rows = 1;
             }

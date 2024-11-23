@@ -5,7 +5,7 @@ import {useAppDispatch, useAppSelector} from "../../../hooks.ts";
 import {setInputState, setText} from "../../../state/input";
 import MicrophoneButton from "./MicrophoneButton.tsx";
 import EditIndicator from "./EditIndicator.tsx";
-import {findMessage, getLatestSelectedMessage} from "../../../util/conversationUtil.ts";
+import {findPreviousMessage, getLatestSelectedMessage} from "../../../util/conversationUtil.ts";
 import {ConversationMessage} from "../../../model/conversation/conversation.ts";
 
 const ChatInputBox: FC = () => {
@@ -16,9 +16,9 @@ const ChatInputBox: FC = () => {
     const onSend = (text: string) => {
         if (input.inputState === "ready" && text.length > 1) {
             let replyTo: ConversationMessage | null = null;
-            if (input.editingMessage) {
+            if (input.editingMessage !== null && conversation.selectedConversation !== null) {
                 replyTo = input.editingMessage
-                    ? findMessage(conversation.selectedConversation, input.editingMessage) // TODO: Actually reply to the previous message
+                    ? findPreviousMessage(conversation.selectedConversation, input.editingMessage)
                     : null
             } else {
                 replyTo = conversation.selectedConversation

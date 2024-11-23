@@ -5,15 +5,17 @@ import {ConversationSection} from "../../../model/conversation/conversation.ts";
 
 const SelectedConversation: FC = () => {
     const conversation = useAppSelector(state => state.conversation);
-    //const dispatch = useAppDispatch()
     
-    return (
+    return conversation.selectedConversation !== null ? (
         <ol className="space-y-2 p-1 sm:p-0">
-            {conversation.selectedConversation?.sections.map((cs: ConversationSection) => <ConversationSectionListItem
+            {conversation.selectedConversation.sections
+                .filter((cs: ConversationSection) => cs.selectedMessageId !== null)
+                .map((cs: ConversationSection, index: number) => <ConversationSectionListItem
+                conversationSectionIndex={index}
                 conversationSection={cs}
                 key={cs.selectedMessageId}/>)}
         </ol>
-    );
+    ) : <p>No conversation selected.</p>
 }
 
 export default SelectedConversation;

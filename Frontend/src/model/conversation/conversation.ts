@@ -9,7 +9,7 @@ export type Bot = {
 
 export type ConversationMessage = {
     id: string;
-    nextMessageId: string|null;
+    previousMessageId: string|null;
     bot: Bot|null;
     text: string;
     media: MessageMedia[];
@@ -17,7 +17,7 @@ export type ConversationMessage = {
 }
 
 export type ConversationSection = {
-    selectedMessageId: string;
+    selectedMessageId: string|null;
     messages: { [key: string]: ConversationMessage };
 }
 

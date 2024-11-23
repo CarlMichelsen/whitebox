@@ -8,31 +8,62 @@ import CrossBlack from "../../../../assets/icons/cross-black.svg"
 import {setEditingMessage} from "../../../../state/input";
 
 type UserMessageProps = {
+    branchSelect: (messageId: string) => void;
+    branchList: string[];
     message: ConversationMessage;
 }
 
-const UserMessage: FC<UserMessageProps> = ({ message }) => {
+const UserMessage: FC<UserMessageProps> = ({ branchSelect, branchList, message }) => {
     const input = useAppSelector(state => state.input);
     const dispatch = useAppDispatch()
     const darkMode = useDarkMode();
     
+    const branchId = branchList.findIndex(b => message.id === b) + 1;
+    
+    const selectBranchId = (branchId: number) => {
+        const selectedMessageId = branchList[branchId-1];
+        branchSelect(selectedMessageId);
+    } 
+    
     
     const isEditingThisMessage = input.editingMessage === message.id;
     return (
-        <div className="group flex justify-end">
+        <div className={`group flex justify-end ${branchList.length > 1 ? "mb-8" : ""}`}>
             <div
                 id={"message-"+message.id}
-                className="shadow-2xl px-3 py-2 rounded-md bg-neutral-200 dark:bg-neutral-700 ml-auto inline-block relative">
+                className="relative shadow-2xl px-3 py-2 rounded-md bg-neutral-200 dark:bg-neutral-700 ml-auto inline-block">
                 <button
                     onClick={() => dispatch(setEditingMessage(isEditingThisMessage ? null : message.id))}
                     className="absolute -left-10 top-0 aspect-square w-8 p-1.5 sm:hidden sm:group-hover:block rounded-full hover:bg-neutral-400 dark:hover:bg-neutral-700">
                     <img
+                        draggable="false"
                         src={isEditingThisMessage
                             ? (darkMode ? CrossWhite : CrossBlack)
                             : (darkMode ? EditWhite : EditBlack)}
                         alt="edit"/>
                 </button>
+                
                 <pre className="message-text">{message.text}</pre>
+                
+                {branchList.length > 1 ? (
+                    <div className="absolute px-1 right-0 -bottom-10 h-10 w-32">
+                        <button
+                            disabled={branchId === 1}
+                            onClick={() => selectBranchId(branchId - 1)}
+                            className="aspect-square m-1 pb-0.5 rounded-md w-8 disabled:text-neutral-500 enabled:hover:bg-neutral-400 enabled:dark:hover:bg-neutral-700">
+                            {"<"}
+                        </button>
+                        
+                        <p className="inline-block px-2">{branchId}/{branchList.length}</p>
+                        
+                        <button
+                            disabled={branchId === branchList.length}
+                            onClick={() => selectBranchId(branchId + 1)}
+                            className="aspect-square m-1 pb-0.5 rounded-md w-8 disabled:text-neutral-500 enabled:hover:bg-neutral-400 enabled:dark:hover:bg-neutral-700">
+                            {">"}
+                        </button>
+                    </div>
+                ) : null}
             </div>
         </div>
     )

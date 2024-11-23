@@ -2,25 +2,44 @@
 
 export const findMessage = (c: Conversation, messageId: string): ConversationMessage|null => {
     for (const section of c.sections) {
-        if (!!section.messages[messageId]) {
-            return section.messages[messageId];
+        const message = section.messages[messageId];
+        if (!!message) {
+            return message;
         }
     }
     
     return null;
 }
 
+export const findPreviousMessage = (c: Conversation, messageId: string): ConversationMessage|null => {
+    for (let i = 0; i < c.sections.length; i++) {
+        const section = c.sections[i];
+        const message = section.messages[messageId];
+        
+        if (!!message) {
+            const prevSection = c.sections[i - 1]
+            if (!prevSection) {
+                return null;
+            }
+            
+            if (message.previousMessageId === null) {
+                return null;
+            }
+            
+            return prevSection.messages[message.previousMessageId] ?? null;
+        }
+    }
+
+    return null;
+}
+
 export const getLatestSelectedMessage = (c: Conversation): ConversationMessage|null => {
     let message: ConversationMessage|null = null;
 
-    for (let i = 0; i < c.sections.length; i++) {
+    for (let i = c.sections.length-1; i > 0; i--) {
         const section: ConversationSection|null = c.sections[i] ?? null;
-        if (section === null) {
-            return message;
-        }
-        
-        if (message?.nextMessageId === null) {
-            return message;
+        if (section?.selectedMessageId === null) {
+            continue;
         }
         
         message = section.messages[section.selectedMessageId] ?? null;
