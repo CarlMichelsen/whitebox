@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Frontend", "Frontend\Fronte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "Database\Database.csproj", "{8C856473-48C0-4E05-850E-FC31C2B63D9E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{06251BFE-803B-4B40-A6A7-146F87D5F086}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LlmIntegration", "LlmIntegration\LlmIntegration.csproj", "{1A8D257A-E987-4E7A-9714-F2F010224FC9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +52,13 @@ Global
 		{8C856473-48C0-4E05-850E-FC31C2B63D9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C856473-48C0-4E05-850E-FC31C2B63D9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C856473-48C0-4E05-850E-FC31C2B63D9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06251BFE-803B-4B40-A6A7-146F87D5F086}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06251BFE-803B-4B40-A6A7-146F87D5F086}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06251BFE-803B-4B40-A6A7-146F87D5F086}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06251BFE-803B-4B40-A6A7-146F87D5F086}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A8D257A-E987-4E7A-9714-F2F010224FC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A8D257A-E987-4E7A-9714-F2F010224FC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A8D257A-E987-4E7A-9714-F2F010224FC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A8D257A-E987-4E7A-9714-F2F010224FC9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -15,6 +15,6 @@ public class UserContextAccessor(
             throw new ArgumentNullException(nameof(httpContext));
         }
         
-        return UserContextManager.GetUserContext(context);
+        return HttpUserContextAccessor.GetUserContext(context);
     }
 }

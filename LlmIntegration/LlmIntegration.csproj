@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>LLMIntegration</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Google\" />
+      <Folder Include="Grok\" />
+      <Folder Include="OpenAi\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Interface\Interface.csproj" />
+    </ItemGroup>
+
+</Project>

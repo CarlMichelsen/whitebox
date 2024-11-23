@@ -1,10 +1,11 @@
 using System.Text.Json;
 using Domain.Exception;
+using Domain.User;
 using Microsoft.AspNetCore.Http;
 
-namespace Domain.User;
+namespace Application.Accessor;
 
-public static class UserContextManager
+public static class HttpUserContextAccessor
 {
     public static UserContext GetUserContext(HttpContext httpContext)
     {

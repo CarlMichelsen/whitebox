@@ -5,6 +5,7 @@
 
 # custom
 .vite
+Test/appsettings.integrationtest.json
 Frontend/public/web-workers
 Frontend/dist
 Api/secrets.json

@@ -8,3 +8,6 @@ sudo docker run -d --restart always --name development-database \
   -v /home/carl/Docker/postgres:/var/lib/postgresql/data \
   postgres:17.0
 ```
+
+# Integration Tests
+Add ```appsettings.integrationtest.json``` to the root of the ```Test``` to run integration tests.
