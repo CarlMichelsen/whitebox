@@ -15,9 +15,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Dto\Llm\Anthropic\Stream\" />
       <Folder Include="Dto\Llm\Google\" />
-      <Folder Include="Dto\Llm\Grok\" />
+      <Folder Include="Dto\Llm\X\" />
       <Folder Include="Dto\Llm\OpenAi\" />
     </ItemGroup>
 

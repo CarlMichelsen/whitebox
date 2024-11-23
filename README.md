@@ -10,4 +10,4 @@ sudo docker run -d --restart always --name development-database \
 ```
 
 # Integration Tests
-Add ```appsettings.integrationtest.json``` to the root of the ```Test``` to run integration tests.
+Add ```appsettings.integrationtest.json``` to the root of the ```Test``` project to run integration tests.
