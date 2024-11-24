@@ -25,12 +25,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Llm\Google\" />
-      <Folder Include="Llm\X\" />
-      <Folder Include="Llm\OpenAi\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Interface\Interface.csproj" />
       <ProjectReference Include="..\LlmIntegration\LlmIntegration.csproj" />
     </ItemGroup>

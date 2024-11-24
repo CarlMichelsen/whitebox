@@ -15,9 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Dto\Llm\Google\" />
       <Folder Include="Dto\Llm\X\" />
-      <Folder Include="Dto\Llm\OpenAi\" />
     </ItemGroup>
 
 </Project>

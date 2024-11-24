@@ -7,19 +7,20 @@ namespace LLMIntegration.Anthropic;
 
 public static class AnthropicDependencies
 {
-    public static ServiceCollection RegisterClaudeDependencies(this ServiceCollection services, IConfigurationRoot configuration, string userAgent)
+    public static ServiceCollection RegisterAnthropicDependencies(this ServiceCollection services, IConfigurationRoot configuration, string userAgent)
     {
         services
             .Configure<AnthropicOptions>(configuration.GetSection(AnthropicOptions.SectionName));
         
         services.AddHttpClient<AnthropicClient>((sp, client) =>
         {
-            var claudeOptions = sp.GetRequiredService<IOptions<AnthropicOptions>>();
-            client.DefaultRequestHeaders.Add("x-api-key", claudeOptions.Value.ApiKeys.First());
-            client.DefaultRequestHeaders.Add("anthropic-version", claudeOptions.Value.AnthropicVersion);
+            var anthropicOptions = sp.GetRequiredService<IOptions<AnthropicOptions>>();
+            var apiKey = ApiKeyUtil.GetRandomKey(anthropicOptions.Value.ApiKeys);
+            client.DefaultRequestHeaders.Add("x-api-key", apiKey);
+            client.DefaultRequestHeaders.Add("anthropic-version", anthropicOptions.Value.AnthropicVersion);
             client.DefaultRequestHeaders.Add("Accept", "application/json");
             client.DefaultRequestHeaders.UserAgent.ParseAdd(userAgent);
-            client.BaseAddress = new Uri(claudeOptions.Value.ApiEndPoint);
+            client.BaseAddress = new Uri(anthropicOptions.Value.ApiEndpoint);
         });
 
         return services;

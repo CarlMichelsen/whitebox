@@ -11,6 +11,7 @@ namespace Interface.Dto.Llm.Anthropic.Response;
 [JsonDerivedType(typeof(AnthropicContentBlockStop), "content_block_stop")]
 [JsonDerivedType(typeof(AnthropicMessageDelta), "message_delta")]
 [JsonDerivedType(typeof(AnthropicMessageStop), "message_stop")]
+[JsonDerivedType(typeof(AnthropicError), "error")]
 public abstract class BaseAnthropicEvent
 {
     [JsonPropertyName("type")]

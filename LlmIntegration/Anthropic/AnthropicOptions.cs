@@ -8,5 +8,5 @@ public class AnthropicOptions
     
     public required string AnthropicVersion { get; init; }
     
-    public required string ApiEndPoint { get; init; }
+    public required string ApiEndpoint { get; init; }
 }

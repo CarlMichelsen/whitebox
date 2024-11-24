@@ -16,7 +16,7 @@ public class AnthropicIntegrationTests
         var collection = new ServiceCollection();
         var configuration = TestConfiguration.GetTestConfiguration();
 
-        collection.RegisterClaudeDependencies(configuration, "WhiteBox Test");
+        collection.RegisterAnthropicDependencies(configuration, "WhiteBox Test");
         
         this.serviceProvider = collection.BuildServiceProvider();
     }
