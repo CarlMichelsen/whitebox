@@ -8,7 +8,7 @@ namespace Interface.Llm;
 /// <summary>
 /// A static class that contains models for each LlmProvider.
 /// </summary>
-public static partial class LlmModels
+public static class LlmModels
 {
     public static AnthropicModelGroup Anthropic { get; } = new();
     

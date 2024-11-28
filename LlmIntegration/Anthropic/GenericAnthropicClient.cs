@@ -13,11 +13,14 @@ public class GenericAnthropicClient(
     
     public async Task<LlmResponse> Prompt(LlmPrompt prompt)
     {
-        throw new NotImplementedException();
+        var anthropicPrompt = AnthropicGenericMapper.Map(prompt);
+        var anthropicResponse = await anthropicClient.Prompt(anthropicPrompt);
+        return AnthropicGenericMapper.Map(anthropicResponse);
     }
 
     public IAsyncEnumerable<LlmStreamChunk> StreamPrompt(LlmPrompt prompt)
     {
+        var mapper = new AnthropicGenericStreamMapper();
         throw new NotImplementedException();
     }
 }

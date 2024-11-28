@@ -6,13 +6,16 @@ using Interface.Llm.Dto.Generic.Response.Stream;
 
 namespace LLMIntegration.OpenAi;
 
-public class GenericOpenAiClient : IGenericLlmClient
+public class GenericOpenAiClient(
+    IOpenAiClient openAiClient) : IGenericLlmClient
 {
     public LlmProvider Provider => LlmProvider.OpenAi;
     
     public async Task<LlmResponse> Prompt(LlmPrompt prompt)
     {
-        throw new NotImplementedException();
+        var openAiPrompt = OpenAiGenericMapper.Map(prompt);
+        var openAiResponse = await openAiClient.Prompt(openAiPrompt);
+        return OpenAiGenericMapper.Map(openAiResponse);
     }
 
     public IAsyncEnumerable<LlmStreamChunk> StreamPrompt(LlmPrompt prompt)

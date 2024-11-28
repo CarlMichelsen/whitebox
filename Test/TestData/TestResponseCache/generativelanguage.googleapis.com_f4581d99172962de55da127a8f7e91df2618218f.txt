@@ -1,0 +1,40 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "A scroll of chakra, windswept and bold,\nA ninja's heart, a story untold.\nThrough trials faced, and battles won,\nA rising sun, beneath the moon.\n\nFrom hidden leaf, a spirit burns,\nWith dreams of power, and noble turns.\nA fox's rage, a destined fate,\nA bond of friendship, a helping mate.\n\nWith jutsus swift, and blades so keen,\nA legacy forged, a warrior's scene.\nThrough shadowed lands, and perilous quest,\nA path of honor, put to the test.\n\nFor in the fight, a strength is found,\nIn every fall, a spirit profound.\nA hero's tale, in every scroll,\nNaruto's journey, taking its toll.\n"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "safetyRatings": [
+        {
+          "category": "HARM_CATEGORY_HATE_SPEECH",
+          "probability": "NEGLIGIBLE"
+        },
+        {
+          "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+          "probability": "NEGLIGIBLE"
+        },
+        {
+          "category": "HARM_CATEGORY_HARASSMENT",
+          "probability": "NEGLIGIBLE"
+        },
+        {
+          "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+          "probability": "NEGLIGIBLE"
+        }
+      ],
+      "avgLogprobs": -0.59089414084829939
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 21,
+    "candidatesTokenCount": 164,
+    "totalTokenCount": 185
+  },
+  "modelVersion": "gemini-1.5-flash-8b-001"
+}

@@ -1,0 +1,34 @@
+{
+  "id": "chatcmpl-AYZWZF1ECny9XgKhh2LGrzhRlILg9",
+  "object": "chat.completion",
+  "created": 1732803071,
+  "model": "gpt-4o-mini-2024-07-18",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "In the hidden village where dreams take flight,  \nNinjas train hard, day and night.  \nWith chakra flowing, a spirit so bold,  \nTales of courage and friendship unfold.  \n\nNaruto dreams of the Hokage’s crown,  \nWith determination, he will never back down.  \nSasuke seeks power, a path dark and deep,  \nWhile Sakura’s strength grows, her promise to keep.  \n\nThrough trials and battles, they forge their way,  \nIn bonds of friendship, they find light each day.  \nWith Rasengan’s spin and Sharingan's gaze,  \nThey’ll face any challenge, set paths ablaze.  \n\nSo here’s to the ninjas, both fierce and true,  \nIn the Land of the Leaf, they’ll always push through.  \nWith a heart full of hope, they’ll rise from the fray,  \nFor together, they shine in the brightest of ways! Uwu!",
+        "refusal": null
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 44,
+    "completion_tokens": 191,
+    "total_tokens": 235,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "system_fingerprint": "fp_0705bf87c0"
+}

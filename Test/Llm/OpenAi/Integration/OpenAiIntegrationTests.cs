@@ -53,8 +53,8 @@ public class OpenAiIntegrationTests
         // Assert
         Assert.NotNull(response);
         Assert.NotEmpty(response.Choices);
-        Assert.Equal("assistant", response.Choices.First().Message.Role);
-        Assert.False(string.IsNullOrWhiteSpace(response.Choices.First().Message.Content));
+        Assert.Equal("assistant", response.Choices.First().ResponseMessage.Role);
+        Assert.False(string.IsNullOrWhiteSpace(response.Choices.First().ResponseMessage.Content));
     }
 
     [Fact]
