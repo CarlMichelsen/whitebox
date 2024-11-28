@@ -4,6 +4,7 @@ using Interface.Llm.Dto.Google;
 using Interface.Llm.Dto.Google.Response.Stream;
 using LLMIntegration.Google;
 using Microsoft.Extensions.DependencyInjection;
+using Test.Fake;
 
 namespace Test.Llm.Google.Integration;
 
@@ -16,7 +17,8 @@ public class GoogleIntegrationTests
         var collection = new ServiceCollection();
         var configuration = TestConfiguration.GetTestConfiguration();
 
-        collection.RegisterGoogleDependencies(configuration, "WhiteBox Test");
+        collection.RegisterGoogleDependencies(configuration, "WhiteBox Test")
+            .AddHttpMessageHandler(() => new TestReplayHttpDelegatingHandler());
         
         this.serviceProvider = collection.BuildServiceProvider();
     }

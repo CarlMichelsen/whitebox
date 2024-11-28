@@ -1,0 +1,34 @@
+{
+  "id": "chatcmpl-AYXQt01XTnEkfGS3mwKvQYUV96HYU",
+  "object": "chat.completion",
+  "created": 1732795031,
+  "model": "gpt-4o-mini-2024-07-18",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Hello! I'm a friendly AI here to assist you with information, answer your questions, and have engaging conversations. My knowledge goes up until October 2023, so I can help with a wide range of topics, from science and technology to history and pop culture. How can I brighten your day today? UwU",
+        "refusal": null
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 27,
+    "completion_tokens": 63,
+    "total_tokens": 90,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "system_fingerprint": "fp_0705bf87c0"
+}

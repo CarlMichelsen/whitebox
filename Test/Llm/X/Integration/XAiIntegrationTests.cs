@@ -4,6 +4,7 @@ using Interface.Llm.Dto.OpenAi;
 using Interface.Llm.Dto.OpenAi.Response.Stream;
 using LLMIntegration.X;
 using Microsoft.Extensions.DependencyInjection;
+using Test.Fake;
 
 namespace Test.Llm.X.Integration;
 
@@ -16,7 +17,8 @@ public class XAiIntegrationTests
         var collection = new ServiceCollection();
         var configuration = TestConfiguration.GetTestConfiguration();
 
-        collection.RegisterXAiDependencies(configuration, "WhiteBox Test");
+        collection.RegisterXAiDependencies(configuration, "WhiteBox Test")
+            .AddHttpMessageHandler(() => new TestReplayHttpDelegatingHandler());
         
         this.serviceProvider = collection.BuildServiceProvider();
     }
