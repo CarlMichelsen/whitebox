@@ -1,12 +1,11 @@
-﻿using Interface.Llm;
-using Interface.Llm.Client;
-using Interface.Llm.Dto.Generic;
-using Interface.Llm.Dto.Generic.Response;
-using Interface.Llm.Dto.Generic.Response.Stream;
-using LLMIntegration.Anthropic;
-using LLMIntegration.Exception;
+﻿using LLMIntegration.Anthropic;
+using LLMIntegration.Client;
+using LLMIntegration.Generic.Dto;
+using LLMIntegration.Generic.Dto.Response;
+using LLMIntegration.Generic.Dto.Response.Stream;
 using LLMIntegration.Google;
 using LLMIntegration.OpenAi;
+using LLMIntegration.Util;
 using LLMIntegration.Validation;
 using LLMIntegration.X;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,7 +34,8 @@ public class GenericLlmClient(
         var validationResult = await this.validator.ValidateAsync(prompt);
         if (!validationResult.IsValid)
         {
-            throw new LlmValidationException(validationResult);
+            yield return new LlmStreamError { Error = string.Join('\n', validationResult.Errors) };
+            yield break;
         }
         
         var client = this.Create(prompt.Model.Provider);
@@ -53,7 +53,7 @@ public class GenericLlmClient(
             LlmProvider.Google => serviceProvider.GetRequiredService<GenericGoogleClient>(),
             LlmProvider.OpenAi => serviceProvider.GetRequiredService<GenericOpenAiClient>(),
             LlmProvider.X => serviceProvider.GetRequiredService<GenericXAiClient>(),
-            _ => throw new NotSupportedException("Unsupported LlmProvider"),
+            _ => throw new NotSupportedException("Unsupported Generic LlmProvider"),
         };
     }
 }

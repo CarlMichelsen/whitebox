@@ -1,6 +1,6 @@
-﻿using Interface.Llm.Dto.Generic;
-using Interface.Llm.Dto.Generic.Response;
-using Interface.Llm.Dto.Generic.Response.Stream;
+﻿using LLMIntegration.Generic.Dto;
+using LLMIntegration.Generic.Dto.Response;
+using LLMIntegration.Generic.Dto.Response.Stream;
 
 namespace LLMIntegration.Util;
 

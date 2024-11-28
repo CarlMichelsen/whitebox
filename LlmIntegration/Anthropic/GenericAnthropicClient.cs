@@ -1,8 +1,7 @@
-﻿using Interface.Llm;
-using Interface.Llm.Client;
-using Interface.Llm.Dto.Generic;
-using Interface.Llm.Dto.Generic.Response;
-using Interface.Llm.Dto.Generic.Response.Stream;
+﻿using LLMIntegration.Client;
+using LLMIntegration.Generic.Dto;
+using LLMIntegration.Generic.Dto.Response;
+using LLMIntegration.Generic.Dto.Response.Stream;
 using LLMIntegration.Util;
 
 namespace LLMIntegration.Anthropic;

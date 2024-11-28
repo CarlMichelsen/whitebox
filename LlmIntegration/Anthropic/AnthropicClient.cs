@@ -1,9 +1,9 @@
 ﻿using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
-using Interface.Llm.Client;
-using Interface.Llm.Dto.Anthropic;
-using Interface.Llm.Dto.Anthropic.Response;
+using LLMIntegration.Anthropic.Dto;
+using LLMIntegration.Anthropic.Dto.Response;
+using LLMIntegration.Client;
 using LLMIntegration.Util;
 
 namespace LLMIntegration.Anthropic;

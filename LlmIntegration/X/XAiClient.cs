@@ -1,8 +1,8 @@
-﻿using Interface.Llm.Client;
-using Interface.Llm.Dto.OpenAi;
-using Interface.Llm.Dto.OpenAi.Response;
-using Interface.Llm.Dto.OpenAi.Response.Stream;
+﻿using LLMIntegration.Client;
 using LLMIntegration.OpenAi;
+using LLMIntegration.OpenAi.Dto;
+using LLMIntegration.OpenAi.Dto.Response;
+using LLMIntegration.OpenAi.Dto.Response.Stream;
 
 namespace LLMIntegration.X;
 

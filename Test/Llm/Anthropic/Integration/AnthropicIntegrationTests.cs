@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
-using Interface.Llm;
-using Interface.Llm.Client;
-using Interface.Llm.Dto.Anthropic;
-using Interface.Llm.Dto.Anthropic.Response;
 using LLMIntegration.Anthropic;
+using LLMIntegration.Anthropic.Dto;
+using LLMIntegration.Anthropic.Dto.Response;
+using LLMIntegration.Client;
+using LLMIntegration.Util;
 using Microsoft.Extensions.DependencyInjection;
 using Test.Fake;
 

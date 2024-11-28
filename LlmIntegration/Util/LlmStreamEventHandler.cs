@@ -1,5 +1,4 @@
-﻿using Interface.Llm;
-using Interface.Llm.Dto.Generic.Response.Stream;
+﻿using LLMIntegration.Generic.Dto.Response.Stream;
 
 namespace LLMIntegration.Util;
 

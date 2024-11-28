@@ -8,12 +8,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Serilog.AspNetCore" Version="8.0.2" />
-        <PackageReference Include="Serilog.Settings.Configuration" Version="8.0.2" />
-        <PackageReference Include="Serilog.Sinks.Seq" Version="8.0.0" />
+        <PackageReference Include="Serilog.AspNetCore" Version="9.0.0-dev-02301" />
+        <PackageReference Include="Serilog.Settings.Configuration" Version="9.0.0-dev-02304" />
+        <PackageReference Include="Serilog.Sinks.Seq" Version="9.0.0-dev-00310" />
         
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.8"/>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="7.1.0"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -25,20 +25,6 @@
     <ItemGroup>
       <ProjectReference Include="..\Application\Application.csproj" />
       <ProjectReference Include="..\Interface\Interface.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <_ContentIncludedByDefault Remove="wwwroot\assets\index-BAWiObM5.css" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\index-BEVw208n.css" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\index-BJHyKvUs.css" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\index-BJvkCqLh.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\index-C4bb7ANs.css" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\index-c9Fzk1DC.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\index-CnNu57yR.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\index-CUyIEoJP.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\index-CZNWIL8W.css" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\index-DD8EbAZ2.js" />
-      <_ContentIncludedByDefault Remove="wwwroot\assets\index-DNi3UhGV.js" />
     </ItemGroup>
 
     <ItemGroup>

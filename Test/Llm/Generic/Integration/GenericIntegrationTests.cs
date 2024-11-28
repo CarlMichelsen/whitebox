@@ -1,7 +1,7 @@
-﻿using Interface.Llm;
-using Interface.Llm.Dto.Generic;
-using Interface.Llm.Dto.Generic.Response.Stream;
-using LLMIntegration.Generic;
+﻿using LLMIntegration.Generic;
+using LLMIntegration.Generic.Dto;
+using LLMIntegration.Generic.Dto.Response.Stream;
+using LLMIntegration.Util;
 using Microsoft.Extensions.DependencyInjection;
 using Test.Fake;
 

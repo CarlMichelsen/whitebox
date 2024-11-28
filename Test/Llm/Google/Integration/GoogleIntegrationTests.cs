@@ -1,8 +1,8 @@
-﻿using Interface.Llm;
-using Interface.Llm.Client;
-using Interface.Llm.Dto.Google;
-using Interface.Llm.Dto.Google.Response.Stream;
+﻿using LLMIntegration.Client;
 using LLMIntegration.Google;
+using LLMIntegration.Google.Dto;
+using LLMIntegration.Google.Dto.Response.Stream;
+using LLMIntegration.Util;
 using Microsoft.Extensions.DependencyInjection;
 using Test.Fake;
 

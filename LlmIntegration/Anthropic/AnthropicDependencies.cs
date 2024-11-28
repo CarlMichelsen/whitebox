@@ -1,4 +1,4 @@
-﻿using Interface.Llm.Client;
+﻿using LLMIntegration.Client;
 using LLMIntegration.Util;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

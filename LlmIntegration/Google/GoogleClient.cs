@@ -1,10 +1,10 @@
 ﻿using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
-using Interface.Llm.Client;
-using Interface.Llm.Dto.Google;
-using Interface.Llm.Dto.Google.Response;
-using Interface.Llm.Dto.Google.Response.Stream;
+using LLMIntegration.Client;
+using LLMIntegration.Google.Dto;
+using LLMIntegration.Google.Dto.Response;
+using LLMIntegration.Google.Dto.Response.Stream;
 using LLMIntegration.Util;
 using Microsoft.Extensions.Options;
 

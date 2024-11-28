@@ -1,7 +1,7 @@
-﻿using Interface.Llm.Dto.Generic;
-using Interface.Llm.Dto.Generic.Response;
-using Interface.Llm.Dto.OpenAi;
-using Interface.Llm.Dto.OpenAi.Response;
+﻿using LLMIntegration.Generic.Dto;
+using LLMIntegration.Generic.Dto.Response;
+using LLMIntegration.OpenAi.Dto;
+using LLMIntegration.OpenAi.Dto.Response;
 
 namespace LLMIntegration.OpenAi;
 

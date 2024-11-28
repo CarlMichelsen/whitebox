@@ -1,7 +1,7 @@
-﻿using Interface.Llm.Dto.Generic;
-using Interface.Llm.Dto.Generic.Response;
-using Interface.Llm.Dto.Google;
-using Interface.Llm.Dto.Google.Response;
+﻿using LLMIntegration.Generic.Dto;
+using LLMIntegration.Generic.Dto.Response;
+using LLMIntegration.Google.Dto;
+using LLMIntegration.Google.Dto.Response;
 
 namespace LLMIntegration.Google;
 

@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Interface.Llm.Dto.Generic;
+using LLMIntegration.Generic.Dto;
 
 namespace LLMIntegration.Validation;
 
