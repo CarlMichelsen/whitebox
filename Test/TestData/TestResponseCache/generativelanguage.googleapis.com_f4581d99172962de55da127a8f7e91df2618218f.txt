@@ -4,7 +4,7 @@
       "content": {
         "parts": [
           {
-            "text": "A scroll of chakra, windswept and bold,\nA ninja's heart, a story untold.\nThrough trials faced, and battles won,\nA rising sun, beneath the moon.\n\nFrom hidden leaf, a spirit burns,\nWith dreams of power, and noble turns.\nA fox's rage, a destined fate,\nA bond of friendship, a helping mate.\n\nWith jutsus swift, and blades so keen,\nA legacy forged, a warrior's scene.\nThrough shadowed lands, and perilous quest,\nA path of honor, put to the test.\n\nFor in the fight, a strength is found,\nIn every fall, a spirit profound.\nA hero's tale, in every scroll,\nNaruto's journey, taking its toll.\n"
+            "text": "A flash of red, a whispered name,\nNaruto Uzumaki, sealed with flame.\nA nine-tailed beast, a village's fear,\nBut in his heart, a burning cheer.\n\nNo jutsu grand, no lineage deep,\nJust will to fight, and dreams to keep.\nThrough trials harsh, and battles won,\nA ninja's path, beneath the sun.\n\nWith friends by side, a bond so true,\nTheir strength combined, for me and you.\nFrom hidden leaf, to distant shore,\nA tale of hope, forevermore.\n\nHis spirit strong, his eyes so bright,\nA hero's quest, in darkest night.\nFor peace and love, he strives so hard,\nA shinobi's heart, a noble guard.\n"
           }
         ],
         "role": "model"
@@ -28,13 +28,13 @@
           "probability": "NEGLIGIBLE"
         }
       ],
-      "avgLogprobs": -0.59089414084829939
+      "avgLogprobs": -0.43326265266142694
     }
   ],
   "usageMetadata": {
     "promptTokenCount": 21,
-    "candidatesTokenCount": 164,
-    "totalTokenCount": 185
+    "candidatesTokenCount": 166,
+    "totalTokenCount": 187
   },
   "modelVersion": "gemini-1.5-flash-8b-001"
 }

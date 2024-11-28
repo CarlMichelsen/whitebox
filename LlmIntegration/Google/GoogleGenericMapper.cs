@@ -43,7 +43,7 @@ public static class GoogleGenericMapper
     {
         return new LlmUsage(
             InputTokens: usage.PromptTokenCount,
-            OutputTokens: usage.CandidatesTokenCount);
+            OutputTokens: usage.CandidatesTokenCount ?? 0);
     }
 
     private static GoogleContent Map(LlmMessage message)

@@ -8,4 +8,5 @@ public record OpenAiChunk(
     [property: JsonPropertyName("created")] long Created,
     [property: JsonPropertyName("model")] string Model,
     [property: JsonPropertyName("system_fingerprint")] string SystemFingerprint,
-    [property: JsonPropertyName("choices")] List<OpenAiChunkChoice> Choices);
+    [property: JsonPropertyName("choices")] List<OpenAiChunkChoice> Choices,
+    [property: JsonPropertyName("usage")] OpenAiUsage? Usage);

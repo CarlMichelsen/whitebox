@@ -3,6 +3,7 @@ using Interface.Llm.Client;
 using Interface.Llm.Dto.Generic;
 using Interface.Llm.Dto.Generic.Response;
 using Interface.Llm.Dto.Generic.Response.Stream;
+using LLMIntegration.Util;
 
 namespace LLMIntegration.Google;
 
@@ -19,8 +20,11 @@ public class GenericGoogleClient(
         return GoogleGenericMapper.Map(googleResponse, responseId);
     }
 
-    public IAsyncEnumerable<LlmStreamChunk> StreamPrompt(LlmPrompt prompt)
+    public IAsyncEnumerable<LlmStreamEvent> StreamPrompt(LlmPrompt prompt)
     {
-        throw new NotImplementedException();
+        var googlePrompt = GoogleGenericMapper.Map(prompt);
+        return LlmStreamEventHandler.CreateAsyncEnumerable(
+            googleClient.StreamPrompt(googlePrompt),
+            new GoogleGenericStreamMapper());
     }
 }

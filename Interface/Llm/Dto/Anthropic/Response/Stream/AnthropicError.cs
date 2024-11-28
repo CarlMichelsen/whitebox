@@ -7,5 +7,5 @@ public class AnthropicError : BaseAnthropicEvent
     public override string Type => "error";
     
     [JsonPropertyName("error")]
-    public required int Error { get; init; }
+    public required AnthropicErrorContainer Error { get; init; }
 }

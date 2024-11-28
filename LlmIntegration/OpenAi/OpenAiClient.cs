@@ -27,7 +27,7 @@ public class OpenAiClient(
 
     public async IAsyncEnumerable<OpenAiChunk> StreamPrompt(OpenAiPrompt prompt)
     {
-        var jsonData = JsonSerializer.Serialize(prompt with { Stream = true });
+        var jsonData = JsonSerializer.Serialize(prompt with { Stream = true, StreamOptions = new OpenAiStreamOptions(true) });
         var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
         var request = new HttpRequestMessage(HttpMethod.Post, Path)
         {

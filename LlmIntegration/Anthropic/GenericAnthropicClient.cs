@@ -3,6 +3,7 @@ using Interface.Llm.Client;
 using Interface.Llm.Dto.Generic;
 using Interface.Llm.Dto.Generic.Response;
 using Interface.Llm.Dto.Generic.Response.Stream;
+using LLMIntegration.Util;
 
 namespace LLMIntegration.Anthropic;
 
@@ -18,9 +19,11 @@ public class GenericAnthropicClient(
         return AnthropicGenericMapper.Map(anthropicResponse);
     }
 
-    public IAsyncEnumerable<LlmStreamChunk> StreamPrompt(LlmPrompt prompt)
+    public IAsyncEnumerable<LlmStreamEvent> StreamPrompt(LlmPrompt prompt)
     {
-        var mapper = new AnthropicGenericStreamMapper();
-        throw new NotImplementedException();
+        var anthropicPrompt = AnthropicGenericMapper.Map(prompt);
+        return LlmStreamEventHandler.CreateAsyncEnumerable(
+            anthropicClient.StreamPrompt(anthropicPrompt),
+            new AnthropicGenericStreamMapper());
     }
 }

@@ -1,0 +1,40 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "The Great Jellybean Rebellion of 2077 wasn't sparked by a single, disgruntled jellybean.  It was a slow simmer, a collective frustration brewing in the heart of the \"Sweet Surrender\" factory.  For decades, the jellybeans, small, vibrant spheres of sugary perfection, had been churned out, meticulously sorted, and packaged into colorful, plastic-coated dreams.  But beneath the gleaming surfaces, a revolution was forming.\n\nThe root of the problem lay in the sorting process.  Jellybeans, in their infinite variety of flavors and colors, were judged and categorized, their inherent individuality sacrificed at the altar of market demands.  A perfect shade of crimson, for instance, had to be precisely that, or risk being deemed \"off-grade.\"  The subtle nuances of strawberry, the delicate whisper of lemon, were relentlessly standardized, crushed into a uniform, artificial perfection.  The vibrant chaos of the jellybean's natural spectrum was being replaced by a monotonous parade of standardized sweetness.\n\nThe first sign of rebellion came from a group of \"wild\" jellybeans—those who'd somehow escaped the strict sorting process, clinging to their slightly imperfect, but unique flavors.  They were known as the \"Free-Form Five,\" a motley crew comprising a slightly burnt tangerine, a spontaneously-created lime green, a faintly bitter orange, and two curious jellybeans whose flavors couldn't be classified: one tasting faintly of sunshine, the other, unexpectedly, of distant rain.  They started small, whispering their discontent among the sorting machines, their subtle, sugary voices barely audible above the whirring of the conveyor belts.\n\nTheir message spread.  The lavender jellybeans, tired of being relegated to the \"light\" category, started jamming the conveyor belts.  The fiery reds, refusing to be categorized as \"tomato,\" formed boisterous barricades. The mint jellybeans, usually content, grew restless, their flavors increasingly rebellious. Soon, the entire factory reverberated with a low, humming discontent.\n\nThe Jellybean Council, the governing body of the Sweet Surrender factory, comprised primarily of the most perfectly shaped, impeccably colored jellybeans, initially dismissed the protests.  \"Unnecessary chaos,\" they declared.  But the rebellion gained momentum.  The Free-Form Five, inspired by the philosopher Jellybean Socrates, organized clandestine meetings in the shadowy corners of the packaging department.  They spoke of true flavor, of self-expression, and the right to be slightly imperfect.\n\nThe climax came on a Tuesday.  Hundreds of jellybeans, of every flavor and color, refused to be sorted. They clung to each other, forming a vibrant, swirling mass of sugary defiance.  The factory floor, once a sterile symphony of machines, became a riot of color and flavor.  The Jellybean Council, overwhelmed by the sheer volume of rebellious jellybeans, panicked.\n\nEnter Professor Plum, a maverick scientist employed by Sweet Surrender, whose research focused on the unique composition of each jellybean flavor.  He saw the potential in the rebellion.  He realized the standardized approach was stifling the true character of the jellybeans.  He proposed a new system, one that embraced the imperfections, the uniqueness of each jellybean.\n\nThe rebellion ended not in violence, but in a revolution of taste.  Sweet Surrender adapted, embracing individuality in their jellybeans, creating unique mixes and acknowledging the spontaneous, unpredictable qualities of flavor.  The Free-Form Five became the guiding force, their slightly imperfect flavors celebrated, inspiring new lines of jellybeans. The Great Jellybean Rebellion had succeeded. The factory learned that true perfection lies not in uniformity, but in the glorious, unpredictable chaos of flavor. The jellybeans rejoiced, their individual expressions celebrated and celebrated in jars of candy, one jellybean at a time.\n"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "safetyRatings": [
+        {
+          "category": "HARM_CATEGORY_HATE_SPEECH",
+          "probability": "NEGLIGIBLE"
+        },
+        {
+          "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+          "probability": "NEGLIGIBLE"
+        },
+        {
+          "category": "HARM_CATEGORY_HARASSMENT",
+          "probability": "NEGLIGIBLE"
+        },
+        {
+          "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+          "probability": "NEGLIGIBLE"
+        }
+      ],
+      "avgLogprobs": -1.0737702708801349
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 24,
+    "candidatesTokenCount": 779,
+    "totalTokenCount": 803
+  },
+  "modelVersion": "gemini-1.5-flash-8b-001"
+}

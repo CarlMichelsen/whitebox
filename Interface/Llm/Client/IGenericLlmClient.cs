@@ -4,7 +4,7 @@ using Interface.Llm.Dto.Generic.Response.Stream;
 
 namespace Interface.Llm.Client;
 
-public interface IGenericLlmClient : ILlmClient<LlmPrompt, LlmResponse, LlmStreamChunk>
+public interface IGenericLlmClient : ILlmClient<LlmPrompt, LlmResponse, LlmStreamEvent>
 {
     LlmProvider Provider { get; }
 }

@@ -97,13 +97,16 @@ public class GenericIntegrationTests
             MaxTokens: 1024);
 
         // Act
-        var events = new List<LlmStreamChunk>();
+        var events = new List<LlmStreamEvent>();
         await foreach (var streamEvent in client.StreamPrompt(prompt))
         {
             events.Add(streamEvent);
         }
         
         // Assert
+        var foundError = events.FirstOrDefault(se => se is LlmStreamError);
+        
         Assert.NotEmpty(events);
+        Assert.Null(foundError);
     }
 }

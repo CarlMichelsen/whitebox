@@ -30,7 +30,7 @@ public class GenericLlmClient(
         return await client.Prompt(prompt);
     }
 
-    public async IAsyncEnumerable<LlmStreamChunk> StreamPrompt(LlmPrompt prompt)
+    public async IAsyncEnumerable<LlmStreamEvent> StreamPrompt(LlmPrompt prompt)
     {
         var validationResult = await this.validator.ValidateAsync(prompt);
         if (!validationResult.IsValid)

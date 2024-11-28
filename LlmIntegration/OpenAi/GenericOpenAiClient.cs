@@ -3,6 +3,7 @@ using Interface.Llm.Client;
 using Interface.Llm.Dto.Generic;
 using Interface.Llm.Dto.Generic.Response;
 using Interface.Llm.Dto.Generic.Response.Stream;
+using LLMIntegration.Util;
 
 namespace LLMIntegration.OpenAi;
 
@@ -18,8 +19,11 @@ public class GenericOpenAiClient(
         return OpenAiGenericMapper.Map(openAiResponse);
     }
 
-    public IAsyncEnumerable<LlmStreamChunk> StreamPrompt(LlmPrompt prompt)
+    public IAsyncEnumerable<LlmStreamEvent> StreamPrompt(LlmPrompt prompt)
     {
-        throw new NotImplementedException();
+        var openAiPrompt = OpenAiGenericMapper.Map(prompt);
+        return LlmStreamEventHandler.CreateAsyncEnumerable(
+            openAiClient.StreamPrompt(openAiPrompt),
+            new OpenAiGenericStreamMapper());
     }
 }

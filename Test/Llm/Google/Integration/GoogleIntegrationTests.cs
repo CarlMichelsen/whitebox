@@ -44,7 +44,7 @@ public class GoogleIntegrationTests
                 new GoogleContent(
                     Role: "user",
                     Parts: [
-                        new GooglePart(Text: "Do a flip!"),
+                        new GooglePart(Text: "Write a long story about jellybeans!"),
                     ]),
             ]);
 
