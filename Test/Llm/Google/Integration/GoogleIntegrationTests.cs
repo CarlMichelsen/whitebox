@@ -1,5 +1,7 @@
-﻿using System.Text.Json;
-using Interface.Dto.Llm.Google;
+﻿using Interface.Llm;
+using Interface.Llm.Client;
+using Interface.Llm.Dto.Google;
+using Interface.Llm.Dto.Google.Response.Stream;
 using LLMIntegration.Google;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -23,9 +25,9 @@ public class GoogleIntegrationTests
     public async Task CanPrompt()
     {
         // Arrange
-        var client = this.serviceProvider.GetRequiredService<GoogleClient>();
+        var client = this.serviceProvider.GetRequiredService<IGoogleClient>();
         var prompt = new GooglePrompt(
-            Model: "gemini-1.5-flash",
+            Model: LlmModels.Google.Flash15Dash8B.ModelIdentifier,
             Contents: [
                 new GoogleContent(
                     Role: "user",
@@ -61,9 +63,9 @@ public class GoogleIntegrationTests
     public async Task CanStreamPrompt()
     {
         // Arrange
-        var client = this.serviceProvider.GetRequiredService<GoogleClient>();
+        var client = this.serviceProvider.GetRequiredService<IGoogleClient>();
         var prompt = new GooglePrompt(
-            Model: "gemini-1.5-flash",
+            Model: LlmModels.Google.Flash15Dash8B.ModelIdentifier,
             Contents: [
                 new GoogleContent(
                     Role: "user",
@@ -83,13 +85,13 @@ public class GoogleIntegrationTests
             ]);
 
         // Act
-        var events = new List<object>();
+        var events = new List<GoogleStreamChunk>();
         await foreach (var streamEvent in client.StreamPrompt(prompt))
         {
-            Console.WriteLine(JsonSerializer.Serialize(streamEvent));
             events.Add(streamEvent);
         }
 
         // Assert
+        Assert.NotEmpty(events);
     }
 }

@@ -1,6 +1,7 @@
-﻿using System.Text.Json;
-using Interface.Dto.Llm.OpenAi;
-using Interface.Dto.Llm.OpenAi.Response.Stream;
+﻿using Interface.Llm;
+using Interface.Llm.Client;
+using Interface.Llm.Dto.OpenAi;
+using Interface.Llm.Dto.OpenAi.Response.Stream;
 using LLMIntegration.OpenAi;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -24,9 +25,9 @@ public class OpenAiIntegrationTests
     public async Task CanPrompt()
     {
         // Arrange
-        var client = this.serviceProvider.GetRequiredService<OpenAiClient>();
+        var client = this.serviceProvider.GetRequiredService<IOpenAiClient>();
         var prompt = new OpenAiPrompt(
-            Model: "gpt-4o",
+            Model: LlmModels.OpenAi.Gpt4OMini.ModelIdentifier,
             Messages: [
                 new OpenAiMessage(
                     Role: "system",
@@ -58,9 +59,9 @@ public class OpenAiIntegrationTests
     public async Task CanStreamPrompt()
     {
         // Arrange
-        var client = this.serviceProvider.GetRequiredService<OpenAiClient>();
+        var client = this.serviceProvider.GetRequiredService<IOpenAiClient>();
         var prompt = new OpenAiPrompt(
-            Model: "gpt-4o",
+            Model: LlmModels.OpenAi.Gpt4OMini.ModelIdentifier,
             Messages: [
                 new OpenAiMessage(
                     Role: "system",

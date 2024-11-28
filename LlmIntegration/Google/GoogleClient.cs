@@ -1,10 +1,11 @@
 ﻿using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
-using Interface.Client;
-using Interface.Dto.Llm.Google;
-using Interface.Dto.Llm.Google.Response;
-using Interface.Dto.Llm.Google.Response.Stream;
+using Interface.Llm.Client;
+using Interface.Llm.Dto.Google;
+using Interface.Llm.Dto.Google.Response;
+using Interface.Llm.Dto.Google.Response.Stream;
+using LLMIntegration.Util;
 using Microsoft.Extensions.Options;
 
 namespace LLMIntegration.Google;
@@ -12,7 +13,7 @@ namespace LLMIntegration.Google;
 // https://ai.google.dev/gemini-api/docs/text-generation?lang=rest
 public class GoogleClient(
     HttpClient httpClient,
-    IOptions<GoogleOptions> googleOptions) : ILlmClient<GooglePrompt, GoogleResponse, GoogleStreamChunk>
+    IOptions<GoogleOptions> googleOptions) : IGoogleClient
 {
     public async Task<GoogleResponse> Prompt(GooglePrompt prompt)
     {
@@ -33,6 +34,7 @@ public class GoogleClient(
         {
             Content = content,
         };
+        httpClient.DefaultRequestHeaders.Add(LlmConstants.LlmIsStreamHeaderName, "true");
         var res = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
         
         await using var responseStream = await res.Content.ReadAsStreamAsync();
@@ -53,7 +55,6 @@ public class GoogleClient(
             }
             
             var streamLineData = line[(split + 1)..].Trim();
-            Console.WriteLine(line);
             yield return JsonSerializer.Deserialize<GoogleStreamChunk>(streamLineData)!;
         }
     }

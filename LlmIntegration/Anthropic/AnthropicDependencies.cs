@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Interface.Llm.Client;
+using LLMIntegration.Util;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -7,12 +8,15 @@ namespace LLMIntegration.Anthropic;
 
 public static class AnthropicDependencies
 {
-    public static ServiceCollection RegisterAnthropicDependencies(this ServiceCollection services, IConfigurationRoot configuration, string userAgent)
+    public static IHttpClientBuilder RegisterAnthropicDependencies(
+        this ServiceCollection services,
+        IConfigurationRoot configuration,
+        string userAgent)
     {
         services
             .Configure<AnthropicOptions>(configuration.GetSection(AnthropicOptions.SectionName));
         
-        services.AddHttpClient<AnthropicClient>((sp, client) =>
+        return services.AddHttpClient<IAnthropicClient, AnthropicClient>((sp, client) =>
         {
             var anthropicOptions = sp.GetRequiredService<IOptions<AnthropicOptions>>();
             var apiKey = ApiKeyUtil.GetRandomKey(anthropicOptions.Value.ApiKeys);
@@ -22,7 +26,5 @@ public static class AnthropicDependencies
             client.DefaultRequestHeaders.UserAgent.ParseAdd(userAgent);
             client.BaseAddress = new Uri(anthropicOptions.Value.ApiEndpoint);
         });
-
-        return services;
     }
 }

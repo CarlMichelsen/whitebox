@@ -1,16 +1,17 @@
 ﻿using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
-using Interface.Client;
-using Interface.Dto.Llm.OpenAi;
-using Interface.Dto.Llm.OpenAi.Response;
-using Interface.Dto.Llm.OpenAi.Response.Stream;
+using Interface.Llm.Client;
+using Interface.Llm.Dto.OpenAi;
+using Interface.Llm.Dto.OpenAi.Response;
+using Interface.Llm.Dto.OpenAi.Response.Stream;
+using LLMIntegration.Util;
 
 namespace LLMIntegration.OpenAi;
 
 // https://platform.openai.com/docs/api-reference/chat/create
 public class OpenAiClient(
-    HttpClient httpClient) : ILlmClient<OpenAiPrompt, OpenAiResponse, OpenAiChunk>
+    HttpClient httpClient) : IOpenAiClient
 {
     private const string Path = "v1/chat/completions";
     private const string Done = "[DONE]";
@@ -32,6 +33,7 @@ public class OpenAiClient(
         {
             Content = content,
         };
+        httpClient.DefaultRequestHeaders.Add(LlmConstants.LlmIsStreamHeaderName, "true");
         var res = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
         
         await using var responseStream = await res.Content.ReadAsStreamAsync();

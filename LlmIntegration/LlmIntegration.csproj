@@ -11,4 +11,8 @@
       <ProjectReference Include="..\Interface\Interface.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="FluentValidation" Version="11.11.0" />
+    </ItemGroup>
+
 </Project>

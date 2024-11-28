@@ -1,11 +1,11 @@
-﻿using System.Text.Json;
-using Interface.Dto.Llm.OpenAi;
-using Interface.Dto.Llm.OpenAi.Response.Stream;
-using LLMIntegration.OpenAi;
+﻿using Interface.Llm;
+using Interface.Llm.Client;
+using Interface.Llm.Dto.OpenAi;
+using Interface.Llm.Dto.OpenAi.Response.Stream;
 using LLMIntegration.X;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Test.Llm.OpenAi.Integration;
+namespace Test.Llm.X.Integration;
 
 public class XAiIntegrationTests
 {
@@ -25,9 +25,9 @@ public class XAiIntegrationTests
     public async Task CanPrompt()
     {
         // Arrange
-        var client = this.serviceProvider.GetRequiredService<XAiClient>();
+        var client = this.serviceProvider.GetRequiredService<IXAiClient>();
         var prompt = new OpenAiPrompt(
-            Model: "grok-beta",
+            Model: LlmModels.X.GrokBeta.ModelIdentifier,
             Messages: [
                 new OpenAiMessage(
                     Role: "system",
@@ -59,9 +59,9 @@ public class XAiIntegrationTests
     public async Task CanStreamPrompt()
     {
         // Arrange
-        var client = this.serviceProvider.GetRequiredService<XAiClient>();
+        var client = this.serviceProvider.GetRequiredService<IXAiClient>();
         var prompt = new OpenAiPrompt(
-            Model: "grok-beta",
+            Model: LlmModels.X.GrokBeta.ModelIdentifier,
             Messages: [
                 new OpenAiMessage(
                     Role: "system",

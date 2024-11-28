@@ -1,14 +1,14 @@
-﻿using Interface.Client;
-using Interface.Dto.Llm.OpenAi;
-using Interface.Dto.Llm.OpenAi.Response;
-using Interface.Dto.Llm.OpenAi.Response.Stream;
+﻿using Interface.Llm.Client;
+using Interface.Llm.Dto.OpenAi;
+using Interface.Llm.Dto.OpenAi.Response;
+using Interface.Llm.Dto.OpenAi.Response.Stream;
 using LLMIntegration.OpenAi;
 
 namespace LLMIntegration.X;
 
 // https://docs.x.ai/api#making-requests
 public class XAiClient(
-    HttpClient httpClient) : ILlmClient<OpenAiPrompt, OpenAiResponse, OpenAiChunk>
+    HttpClient httpClient) : IXAiClient
 {
     private readonly OpenAiClient openAiClient = new(httpClient);
     

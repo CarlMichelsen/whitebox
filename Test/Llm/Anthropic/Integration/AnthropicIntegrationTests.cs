@@ -1,9 +1,11 @@
 ﻿using System.Reflection;
-using System.Text.Json;
-using Interface.Dto.Llm.Anthropic;
-using Interface.Dto.Llm.Anthropic.Response;
+using Interface.Llm;
+using Interface.Llm.Client;
+using Interface.Llm.Dto.Anthropic;
+using Interface.Llm.Dto.Anthropic.Response;
 using LLMIntegration.Anthropic;
 using Microsoft.Extensions.DependencyInjection;
+using Test.Fake;
 
 namespace Test.Llm.Anthropic.Integration;
 
@@ -16,7 +18,8 @@ public class AnthropicIntegrationTests
         var collection = new ServiceCollection();
         var configuration = TestConfiguration.GetTestConfiguration();
 
-        collection.RegisterAnthropicDependencies(configuration, "WhiteBox Test");
+        collection.RegisterAnthropicDependencies(configuration, "WhiteBox Test")
+            .AddHttpMessageHandler(() => new TestReplayHttpDelegatingHandler());
         
         this.serviceProvider = collection.BuildServiceProvider();
     }
@@ -25,9 +28,9 @@ public class AnthropicIntegrationTests
     public async Task CanPrompt()
     {
         // Arrange
-        var client = this.serviceProvider.GetRequiredService<AnthropicClient>();
+        var client = this.serviceProvider.GetRequiredService<IAnthropicClient>();
         var prompt = new AnthropicPrompt(
-            Model: "claude-3-5-sonnet-20241022",
+            Model: LlmModels.Anthropic.Claude35Haiku.ModelIdentifier,
             MaxTokens: 1024,
             System: "This is a test.",
             Messages: [
@@ -52,9 +55,9 @@ public class AnthropicIntegrationTests
     public async Task CanStreamPrompt()
     {
         // Arrange
-        var client = this.serviceProvider.GetRequiredService<AnthropicClient>();
+        var client = this.serviceProvider.GetRequiredService<IAnthropicClient>();
         var prompt = new AnthropicPrompt(
-            Model: "claude-3-5-sonnet-20241022",
+            Model: LlmModels.Anthropic.Claude35Haiku.ModelIdentifier,
             MaxTokens: 1024,
             System: "This is a test.",
             Messages: [

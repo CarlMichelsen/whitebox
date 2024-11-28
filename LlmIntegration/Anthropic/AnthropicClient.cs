@@ -1,15 +1,16 @@
 ﻿using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
-using Interface.Client;
-using Interface.Dto.Llm.Anthropic;
-using Interface.Dto.Llm.Anthropic.Response;
+using Interface.Llm.Client;
+using Interface.Llm.Dto.Anthropic;
+using Interface.Llm.Dto.Anthropic.Response;
+using LLMIntegration.Util;
 
 namespace LLMIntegration.Anthropic;
 
 // https://docs.anthropic.com/en/api/messages-streaming
 public class AnthropicClient(
-    HttpClient httpClient) : ILlmClient<AnthropicPrompt, AnthropicResponse, BaseAnthropicEvent>
+    HttpClient httpClient) : IAnthropicClient
 {
     private const string Path = "v1/messages";
     
@@ -30,6 +31,7 @@ public class AnthropicClient(
         {
             Content = content,
         };
+        httpClient.DefaultRequestHeaders.Add(LlmConstants.LlmIsStreamHeaderName, "true");
         var res = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
         
         await using var responseStream = await res.Content.ReadAsStreamAsync();
@@ -56,5 +58,7 @@ public class AnthropicClient(
                 yield return JsonSerializer.Deserialize<BaseAnthropicEvent>(streamLineData)!;
             }
         }
+        
+        yield break;
     }
 }
