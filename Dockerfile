@@ -12,7 +12,7 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 
 WORKDIR /src
 
-COPY ["champbot.sln", "./"]
+COPY ["whitebox.sln", "./"]
 
 COPY --from=frontend ["src/dist/", "Api/wwwroot/"]
 
