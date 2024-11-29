@@ -19,8 +19,11 @@ public class UnhandledExceptionMiddleware(
                 e,
                 "Unhandled exception TraceId: {TraceId}",
                 traceId);
-            
-            context.Response.StatusCode = 500;
+
+            if (!context.Response.HasStarted)
+            {
+                context.Response.StatusCode = 500;
+            }
         }
     }
 

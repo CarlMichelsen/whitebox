@@ -18,6 +18,10 @@
         <None Update="appsettings.integrationtest.json">
           <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
+
+        <None Update="appsettings.mock.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
     <ItemGroup>
@@ -30,7 +34,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="TestData\TestResponseCache\" />
+      <Folder Include="TestData\" />
     </ItemGroup>
 
 </Project>

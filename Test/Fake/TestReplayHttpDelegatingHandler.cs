@@ -97,7 +97,7 @@ public class TestReplayHttpDelegatingHandler : DelegatingHandler
         Uri uri,
         string body)
     {
-        var source = Encoding.UTF8.GetBytes(method + isStream.ToString() + uri.ToString() + body);
+        var source = Encoding.UTF8.GetBytes(method + isStream.ToString() + uri.GetLeftPart(UriPartial.Path) + body);
         var hashBytes = SHA1.HashData(source);
         StringBuilder sb = new(uri.Host + "_");
         foreach (var b in hashBytes)

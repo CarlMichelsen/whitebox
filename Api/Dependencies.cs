@@ -31,6 +31,7 @@ public static class Dependencies
         
         // Handler
         builder.Services
+            .AddScoped<IConversationHandler, ConversationHandler>()
             .AddScoped<ISpeechToTextHandler, SpeechToTextHandler>();
         
         // Auth

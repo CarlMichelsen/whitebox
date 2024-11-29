@@ -4,7 +4,7 @@
       "content": {
         "parts": [
           {
-            "text": "A flash of red, a whispered name,\nNaruto Uzumaki, sealed with flame.\nA nine-tailed beast, a village's fear,\nBut in his heart, a burning cheer.\n\nNo jutsu grand, no lineage deep,\nJust will to fight, and dreams to keep.\nThrough trials harsh, and battles won,\nA ninja's path, beneath the sun.\n\nWith friends by side, a bond so true,\nTheir strength combined, for me and you.\nFrom hidden leaf, to distant shore,\nA tale of hope, forevermore.\n\nHis spirit strong, his eyes so bright,\nA hero's quest, in darkest night.\nFor peace and love, he strives so hard,\nA shinobi's heart, a noble guard.\n"
+            "text": "The wind whispers tales of a hidden leaf,\nWhere ninjas train, with secrets deep.\nA young boy, with eyes of fire bright,\nEmbraces the path, both day and night.\n\nThrough trials faced, and battles fought,\nHis spirit burns, a beacon sought.\nWith friends by his side, a bond so true,\nThey stand as one, in colors new.\n\nThe Nine-Tailed Fox, a beast so grand,\nA struggle waged, across the land.\nHokage rise, with wisdom's grace,\nProtecting peace, in time and space.\n\nThrough shadows' dance, and moonlight's glow,\nA destiny waits, to come and flow.\nNaruto's journey, a legend told,\nA hero's heart, stories unfold.\n"
           }
         ],
         "role": "model"
@@ -28,13 +28,13 @@
           "probability": "NEGLIGIBLE"
         }
       ],
-      "avgLogprobs": -0.43326265266142694
+      "avgLogprobs": -0.45906029903527462
     }
   ],
   "usageMetadata": {
     "promptTokenCount": 21,
-    "candidatesTokenCount": 166,
-    "totalTokenCount": 187
+    "candidatesTokenCount": 165,
+    "totalTokenCount": 186
   },
   "modelVersion": "gemini-1.5-flash-8b-001"
 }

@@ -12,5 +12,7 @@ public static class EndpointExtensions
             .RequireAuthorization();
 
         apiGroup.RegisterSpeechEndpoints();
+
+        apiGroup.RegisterConversationEndpoints();
     }
 }

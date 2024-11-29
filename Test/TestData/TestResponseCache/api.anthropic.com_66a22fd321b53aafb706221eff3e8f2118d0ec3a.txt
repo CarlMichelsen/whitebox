@@ -1,5 +1,5 @@
 event: message_start
-data: {"type":"message_start","message":{"id":"msg_017d3eDohyb6zbzMzw2Xa4gD","type":"message","role":"assistant","model":"claude-3-5-haiku-20241022","content":[],"stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":20,"output_tokens":2}}              }
+data: {"type":"message_start","message":{"id":"msg_018kEBtsM3ZinQFaee5mejgt","type":"message","role":"assistant","model":"claude-3-5-haiku-20241022","content":[],"stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":20,"output_tokens":5}}         }
 
 event: content_block_start
 data: {"type":"content_block_start","index":0,"content_block":{"type":"text","text":""}    }
@@ -8,62 +8,41 @@ event: ping
 data: {"type": "ping"}
 
 event: content_block_delta
-data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"Gr"}   }
+data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"Greetings,"}             }
 
 event: content_block_delta
-data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"eetings,"}           }
+data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" fellow intellectual! I trust"}              }
 
 event: content_block_delta
-data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" salutations,"} }
+data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" you are prepared for a sc"}         }
 
 event: content_block_delta
-data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" and a"}       }
+data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"intillating exchange of"} }
 
 event: content_block_delta
-data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" most cor"}        }
+data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" ideas that will undoubtedly elev"}         }
 
 event: content_block_delta
-data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"dial welcome"}      }
+data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"ate our collective cognitive"}            }
 
 event: content_block_delta
-data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"! I am at"}             }
+data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" experience. How may"}    }
 
 event: content_block_delta
-data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" your service,"}      }
+data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" I assist you on"}   }
 
 event: content_block_delta
-data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" prepared to engage"}      }
+data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" this most stimulating of occasions"}   }
 
 event: content_block_delta
-data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" in discourse"}            }
-
-event: content_block_delta
-data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" of the"}     }
-
-event: content_block_delta
-data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" most intellectual and refine"} }
-
-event: content_block_delta
-data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"d caliber. What"}     }
-
-event: content_block_delta
-data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" stimulating topic"}     }
-
-event: content_block_delta
-data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" shall"}        }
-
-event: content_block_delta
-data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" we explore"}        }
-
-event: content_block_delta
-data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":" today?"}       }
+data: {"type":"content_block_delta","index":0,"delta":{"type":"text_delta","text":"?"}              }
 
 event: content_block_stop
-data: {"type":"content_block_stop","index":0   }
+data: {"type":"content_block_stop","index":0         }
 
 event: message_delta
-data: {"type":"message_delta","delta":{"stop_reason":"end_turn","stop_sequence":null},"usage":{"output_tokens":48}  }
+data: {"type":"message_delta","delta":{"stop_reason":"end_turn","stop_sequence":null},"usage":{"output_tokens":51}              }
 
 event: message_stop
-data: {"type":"message_stop"               }
+data: {"type":"message_stop"}
 
