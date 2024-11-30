@@ -7,7 +7,7 @@ public static class TestConfiguration
     private const string RealIntegrationTestConfigFile = "appsettings.integrationtest.json";
     private const string MockIntegrationTestConfigFile = "appsettings.mock.json";
     
-    public static IConfigurationRoot GetTestConfiguration()
+    public static IConfiguration GetTestConfiguration()
     {
         var builder = new ConfigurationBuilder();
         var projectRootPath = GetProjectRootDirectory();

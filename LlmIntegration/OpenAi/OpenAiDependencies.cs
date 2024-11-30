@@ -10,8 +10,8 @@ namespace LLMIntegration.OpenAi;
 public static class OpenAiDependencies
 {
     public static IHttpClientBuilder RegisterOpenAiDependencies(
-        this ServiceCollection services,
-        IConfigurationRoot configuration,
+        this IServiceCollection services,
+        IConfiguration configuration,
         string userAgent)
     {
         services

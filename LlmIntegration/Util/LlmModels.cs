@@ -1,4 +1,5 @@
-﻿using LLMIntegration.Anthropic.Dto.Model;
+﻿using System.Reflection;
+using LLMIntegration.Anthropic.Dto.Model;
 using LLMIntegration.Google.Dto.Model;
 using LLMIntegration.OpenAi.Dto.Model;
 using LLMIntegration.X.Dto.Model;
@@ -17,4 +18,42 @@ public static class LlmModels
     public static OpenAiModelGroup OpenAi { get; } = new();
     
     public static XModelGroup X { get; } = new();
+
+    public static bool TryGetModel(string modelIdentifier, out LlmModel? model)
+    {
+        var allModels = GetModels();
+        var modelIdentifierLower = modelIdentifier.ToLowerInvariant();
+        model = allModels.FirstOrDefault(m => m.ModelIdentifier.ToLowerInvariant() == modelIdentifierLower);
+        return model is not null;
+    }
+
+    public static List<LlmModel> GetModels()
+    {
+        var list = new List<LlmModel>();
+        
+        var modelsClass = typeof(LlmModels);
+        var members = modelsClass.GetMembers(BindingFlags.Public | BindingFlags.Static);
+        foreach (var member in members)
+        {
+            if (member.MemberType != MemberTypes.Property)
+            {
+                continue;
+            }
+
+            var valueInstance = (member as PropertyInfo)!.GetValue(null)!;
+            var valueType = valueInstance.GetType();
+            var properties = valueType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            foreach (var property in properties)
+            {
+                if (property.GetValue(valueInstance) is not LlmModel value)
+                {
+                    continue;
+                }
+                
+                list.Add(value);
+            }
+        }
+
+        return list;
+    }
 }

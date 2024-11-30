@@ -5,6 +5,7 @@ using Application.Configuration.Options;
 using Application.Handler;
 using Interface.Accessor;
 using Interface.Handler;
+using LLMIntegration.Generic;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Serilog;
 
@@ -33,6 +34,12 @@ public static class Dependencies
         builder.Services
             .AddScoped<IConversationHandler, ConversationHandler>()
             .AddScoped<ISpeechToTextHandler, SpeechToTextHandler>();
+        
+        // Large language model integrations
+        builder.Services
+            .RegisterGenericLlmClientDependencies(
+                builder.Configuration, 
+                ApplicationConstants.ApplicationName);
         
         // Auth
         builder.RegisterAuthDependencies();

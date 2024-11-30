@@ -9,8 +9,8 @@ namespace LLMIntegration.Anthropic;
 public static class AnthropicDependencies
 {
     public static IHttpClientBuilder RegisterAnthropicDependencies(
-        this ServiceCollection services,
-        IConfigurationRoot configuration,
+        this IServiceCollection services,
+        IConfiguration configuration,
         string userAgent)
     {
         services

@@ -8,8 +8,8 @@ namespace LLMIntegration.Google;
 public static class GoogleDependencies
 {
     public static IHttpClientBuilder RegisterGoogleDependencies(
-        this ServiceCollection services,
-        IConfigurationRoot configuration,
+        this IServiceCollection services,
+        IConfiguration configuration,
         string userAgent)
     {
         services

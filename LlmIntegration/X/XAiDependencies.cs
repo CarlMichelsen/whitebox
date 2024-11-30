@@ -10,8 +10,8 @@ namespace LLMIntegration.X;
 public static class XAiDependencies
 {
     public static IHttpClientBuilder RegisterXAiDependencies(
-        this ServiceCollection services,
-        IConfigurationRoot configuration,
+        this IServiceCollection services,
+        IConfiguration configuration,
         string userAgent)
     {
         services

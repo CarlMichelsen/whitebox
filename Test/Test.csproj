@@ -33,13 +33,4 @@
       <ProjectReference Include="..\LlmIntegration\LlmIntegration.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="TestData\" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Content Include=".github\workflows\docker-build-and-publish.yml" />
-      <Content Include=".github\workflows\docker-build.yml" />
-    </ItemGroup>
-
 </Project>

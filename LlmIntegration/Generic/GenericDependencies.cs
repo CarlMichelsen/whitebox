@@ -9,9 +9,9 @@ namespace LLMIntegration.Generic;
 
 public static class GenericDependencies
 {
-    public static ServiceCollection RegisterGenericLlmClientDependencies(
-        this ServiceCollection services,
-        IConfigurationRoot configuration,
+    public static IServiceCollection RegisterGenericLlmClientDependencies(
+        this IServiceCollection services,
+        IConfiguration configuration,
         string userAgent,
         Func<DelegatingHandler>? llmClientDelegatingHandler = default)
     {
