@@ -2,6 +2,6 @@
 using LLMIntegration.OpenAi.Dto.Response;
 using LLMIntegration.OpenAi.Dto.Response.Stream;
 
-namespace LLMIntegration.Client;
+namespace LLMIntegration.Interface;
 
-public interface IOpenAiClient : ILlmClient<OpenAiPrompt, OpenAiResponse, OpenAiChunk>;
+public interface IXAiClient : ILlmClient<OpenAiPrompt, OpenAiResponse, OpenAiChunk>;

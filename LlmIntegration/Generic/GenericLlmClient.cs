@@ -1,9 +1,9 @@
 ﻿using LLMIntegration.Anthropic;
-using LLMIntegration.Client;
 using LLMIntegration.Generic.Dto;
 using LLMIntegration.Generic.Dto.Response;
 using LLMIntegration.Generic.Dto.Response.Stream;
 using LLMIntegration.Google;
+using LLMIntegration.Interface;
 using LLMIntegration.OpenAi;
 using LLMIntegration.Util;
 using LLMIntegration.Validation;

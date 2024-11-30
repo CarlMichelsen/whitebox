@@ -1,4 +1,4 @@
-﻿using LLMIntegration.Client;
+﻿using LLMIntegration.Interface;
 using LLMIntegration.OpenAi.Dto;
 using LLMIntegration.OpenAi.Dto.Response.Stream;
 using LLMIntegration.Util;

@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Interface\Interface.csproj" />
+      <ProjectReference Include="..\LlmIntegration\LlmIntegration.csproj" />
     </ItemGroup>
 
     <ItemGroup>

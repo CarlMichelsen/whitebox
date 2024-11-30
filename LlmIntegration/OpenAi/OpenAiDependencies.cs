@@ -1,5 +1,5 @@
 ﻿using System.Net.Http.Headers;
-using LLMIntegration.Client;
+using LLMIntegration.Interface;
 using LLMIntegration.Util;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

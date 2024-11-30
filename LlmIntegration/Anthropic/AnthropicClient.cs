@@ -3,7 +3,7 @@ using System.Text;
 using System.Text.Json;
 using LLMIntegration.Anthropic.Dto;
 using LLMIntegration.Anthropic.Dto.Response;
-using LLMIntegration.Client;
+using LLMIntegration.Interface;
 using LLMIntegration.Util;
 
 namespace LLMIntegration.Anthropic;

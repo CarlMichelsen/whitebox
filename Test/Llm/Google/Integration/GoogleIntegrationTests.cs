@@ -1,7 +1,7 @@
-﻿using LLMIntegration.Client;
-using LLMIntegration.Google;
+﻿using LLMIntegration.Google;
 using LLMIntegration.Google.Dto;
 using LLMIntegration.Google.Dto.Response.Stream;
+using LLMIntegration.Interface;
 using LLMIntegration.Util;
 using Microsoft.Extensions.DependencyInjection;
 using Test.Fake;

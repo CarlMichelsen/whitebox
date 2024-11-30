@@ -1,7 +1,7 @@
-﻿using LLMIntegration.Client;
-using LLMIntegration.Generic.Dto;
+﻿using LLMIntegration.Generic.Dto;
 using LLMIntegration.Generic.Dto.Response;
 using LLMIntegration.Generic.Dto.Response.Stream;
+using LLMIntegration.Interface;
 using LLMIntegration.Util;
 
 namespace LLMIntegration.OpenAi;

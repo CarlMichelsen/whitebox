@@ -2,7 +2,7 @@
 using LLMIntegration.Anthropic;
 using LLMIntegration.Anthropic.Dto;
 using LLMIntegration.Anthropic.Dto.Response;
-using LLMIntegration.Client;
+using LLMIntegration.Interface;
 using LLMIntegration.Util;
 using Microsoft.Extensions.DependencyInjection;
 using Test.Fake;

@@ -30,16 +30,21 @@ public static class Dependencies
         builder.Services
             .AddScoped<IUserContextAccessor, UserContextAccessor>();
         
+        // Cache
+        builder.Services
+            .AddMemoryCache();
+        
         // Handler
         builder.Services
             .AddScoped<IConversationHandler, ConversationHandler>()
+            .AddScoped<IModelHandler, ModelHandler>()
             .AddScoped<ISpeechToTextHandler, SpeechToTextHandler>();
         
         // Large language model integrations
         builder.Services
             .RegisterGenericLlmClientDependencies(
                 builder.Configuration, 
-                ApplicationConstants.ApplicationName);
+                ApplicationConstants.ApplicationUserAgent);
         
         // Auth
         builder.RegisterAuthDependencies();

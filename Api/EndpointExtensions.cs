@@ -14,5 +14,7 @@ public static class EndpointExtensions
         apiGroup.RegisterSpeechEndpoints();
 
         apiGroup.RegisterConversationEndpoints();
+        
+        apiGroup.RegisterModelEndpoints();
     }
 }

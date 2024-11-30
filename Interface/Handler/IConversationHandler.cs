@@ -5,5 +5,5 @@ namespace Interface.Handler;
 
 public interface IConversationHandler
 {
-    Task<IResult> Append(AppendConversationDto appendConversation);
+    Task Append(AppendConversationDto appendConversation);
 }

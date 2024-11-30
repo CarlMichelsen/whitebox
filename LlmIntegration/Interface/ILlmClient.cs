@@ -1,4 +1,4 @@
-﻿namespace LLMIntegration.Client;
+﻿namespace LLMIntegration.Interface;
 
 public interface ILlmClient<in TPrompt, TPromptResponse, out TStreamEvent>
 {

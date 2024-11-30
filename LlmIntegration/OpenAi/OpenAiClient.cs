@@ -1,7 +1,7 @@
 ﻿using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
-using LLMIntegration.Client;
+using LLMIntegration.Interface;
 using LLMIntegration.OpenAi.Dto;
 using LLMIntegration.OpenAi.Dto.Response;
 using LLMIntegration.OpenAi.Dto.Response.Stream;
