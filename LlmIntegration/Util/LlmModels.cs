@@ -22,8 +22,7 @@ public static class LlmModels
     public static bool TryGetModel(string modelIdentifier, out LlmModel? model)
     {
         var allModels = GetModels();
-        var modelIdentifierLower = modelIdentifier.ToLowerInvariant();
-        model = allModels.FirstOrDefault(m => m.ModelIdentifier.ToLowerInvariant() == modelIdentifierLower);
+        model = allModels.FirstOrDefault(m => m.ModelIdentifier == modelIdentifier);
         return model is not null;
     }
 

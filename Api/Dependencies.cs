@@ -3,10 +3,17 @@ using Application.Accessor;
 using Application.Configuration;
 using Application.Configuration.Options;
 using Application.Handler;
+using Application.Repository;
+using Application.Service;
+using Database;
 using Interface.Accessor;
 using Interface.Handler;
+using Interface.Repository;
+using Interface.Service;
 using LLMIntegration.Generic;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 namespace Api;
@@ -34,9 +41,18 @@ public static class Dependencies
         builder.Services
             .AddMemoryCache();
         
+        // Repository
+        builder.Services
+            .AddScoped<IChatConfigurationRepository, ChatConfigurationRepository>();
+        
+        // Service
+        builder.Services
+            .AddScoped<IChatConfigurationService, ChatConfigurationService>();
+        
         // Handler
         builder.Services
             .AddScoped<IConversationHandler, ConversationHandler>()
+            .AddScoped<IChatConfigurationHandler, ChatConfigurationHandler>()
             .AddScoped<IModelHandler, ModelHandler>()
             .AddScoped<ISpeechToTextHandler, SpeechToTextHandler>();
         
@@ -56,6 +72,19 @@ public static class Dependencies
             .Enrich.WithProperty("Environment", GetEnvironmentName(builder))
             .CreateLogger();
         builder.Host.UseSerilog();
+        
+        // Database
+        builder.Services.AddDbContext<ApplicationContext>(options =>
+        {
+            options.UseNpgsql(
+                builder.Configuration.GetConnectionString("DefaultConnection"),
+                (b) => b.MigrationsAssembly("Api"));
+            
+            if (builder.Environment.IsDevelopment())
+            {
+                options.EnableSensitiveDataLogging();
+            }
+        });
         
         if (builder.Environment.IsDevelopment())
         {

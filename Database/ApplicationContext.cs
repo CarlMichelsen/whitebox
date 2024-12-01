@@ -1,3 +1,5 @@
+using Database.Entity;
+using Database.Entity.Id;
 using Microsoft.EntityFrameworkCore;
 
 namespace Database;
@@ -14,9 +16,16 @@ public class ApplicationContext(
 {
     private const string SchemaName = "whitebox";
     
+    public DbSet<UserEntity> User { get; init; }
+    
+    public DbSet<ChatConfigurationEntity> ChatConfiguration { get; init; }
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
         modelBuilder.HasDefaultSchema(SchemaName);
+
+        ChatConfigurationEntity.OnModelCreating(modelBuilder);
+        UserEntity.OnModelCreating(modelBuilder);
     }
 }

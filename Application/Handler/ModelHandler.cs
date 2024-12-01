@@ -1,6 +1,7 @@
-﻿using Interface.Dto.Model;
+﻿using Application.Mapper;
+using Interface.Dto;
+using Interface.Dto.Model;
 using Interface.Handler;
-using LLMIntegration.Util;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace Application.Handler;
@@ -10,18 +11,14 @@ public class ModelHandler(
 {
     private const string ModelCacheKey = "LargeLanguageModels";
     
-    public List<LlmProviderGroupDto> GetModels()
+    public ServiceResponse<List<LlmProviderGroupDto>> GetModels()
     {
         var models = memoryCache.GetOrCreate(
             ModelCacheKey,
             entry =>
             {
                 entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
-                return LlmModels
-                    .GetModels()
-                    .GroupBy(m => m.Provider)
-                    .Select(Map)
-                    .ToList();
+                return AvailableModelsMapper.GetModels();
             });
 
         if (models is null)
@@ -29,27 +26,6 @@ public class ModelHandler(
             throw new NullReferenceException("Did not find llm models.");
         }
         
-        return models;
-    }
-
-    private static string ToProviderString(LlmProvider llmProvider)
-    {
-        return Enum.GetName(llmProvider)!;
-    }
-
-    private static LlmProviderGroupDto Map(IGrouping<LlmProvider, LlmModel> grouping)
-    {
-        return new LlmProviderGroupDto(
-            Provider: ToProviderString(grouping.Key),
-            Models: grouping.Select(Map).ToList());
-    }
-
-    private static LlmModelDto Map(LlmModel llmModel)
-    {
-        return new LlmModelDto(
-            Provider: ToProviderString(llmModel.Provider),
-            ModelName: llmModel.ModelName,
-            ModelDescription: llmModel.ModelDescription,
-            ModelIdentifier: llmModel.ModelIdentifier);
+        return new ServiceResponse<List<LlmProviderGroupDto>>(models);
     }
 }

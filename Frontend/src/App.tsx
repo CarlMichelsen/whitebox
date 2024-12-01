@@ -5,6 +5,7 @@ import {FC, ReactNode, useEffect} from "react";
 import {login, logout} from "./state/auth";
 import LoggedOut from "./components/LoggedOut.tsx";
 import Root from "./components/Root.tsx";
+import LoggedIn from "./components/LoggedIn.tsx";
 
 type AppProps = {
     children: ReactNode;
@@ -19,7 +20,7 @@ const App: FC<AppProps> = ({ children }) => {
             queryKey: ['auth'],
             queryFn: getUser,
             staleTime: 1000 * 60,
-        })
+        });
     
     useEffect(() => {
         if (query.status === "success") {
@@ -32,7 +33,7 @@ const App: FC<AppProps> = ({ children }) => {
     }, [query])
     
     switch (auth.status) {
-        case "loggedIn": return <Root>{children}</Root>;
+        case "loggedIn": return <Root><LoggedIn>{children}</LoggedIn></Root>;
         case "loggedOut": return <Root><LoggedOut /></Root>;
         case "pending": return null;
         default: throw new Error("Invalid auth status");

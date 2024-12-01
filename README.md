@@ -9,5 +9,24 @@ sudo docker run -d --restart always --name development-database \
   postgres:17.0
 ```
 
+## install entity framework cli tool
+```bash
+dotnet tool install --global dotnet-ef
+```
+or
+```bash
+dotnet tool update --global dotnet-ef
+```
+
+## create migration if there are changes to the database
+```bash
+dotnet ef migrations add InitialCreateWhiteBox --project ./Api
+```
+
+## update database with latest migration
+```bash
+dotnet ef database update --project ./Api
+```
+
 # Integration Tests
 Add ```appsettings.integrationtest.json``` to the root of the ```Test``` project to run integration tests.

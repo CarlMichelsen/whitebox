@@ -1,4 +1,5 @@
 using Api;
+using Api.Extensions;
 using Api.Middleware;
 using Application.Configuration;
 
@@ -16,6 +17,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
     app.UseCors(ApplicationConstants.DevelopmentCorsPolicyName);
 }
+else
+{
+    // "Why make trillions, when we can make... billions?" - Dr. Evil
+    await app.Services.EnsureDatabaseUpdated();
+}
 
 app.UseAuthentication();
 
@@ -24,10 +30,6 @@ app.UseAuthorization();
 app.UseStaticFiles(StaticFileOptionsFactory.Create());
 
 app.RegisterEndpoints();
-
-app.MapGet("health", () => Results.Ok());
-
-app.MapFallbackToFile("index.html");
 
 app.Services.GetRequiredService<ILogger<Program>>()
     .LogInformation(
