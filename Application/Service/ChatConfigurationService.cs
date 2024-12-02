@@ -56,7 +56,7 @@ public class ChatConfigurationService(
     {
         try
         {
-            var validator = new SetSelectedModelIdentifierDtoValidator();
+            var validator = new SetSelectedModelDtoValidator();
             var validationResult = await validator.ValidateAsync(request);
             if (!validationResult.IsValid)
             {

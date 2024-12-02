@@ -19,7 +19,7 @@ public class ChatConfigurationRepository(
 
         if (user is null)
         {
-            var confId = new UserChatConfigurationId(Guid.CreateVersion7());
+            var confId = new UserChatConfigurationEntityId(Guid.CreateVersion7());
             
             var chatConfiguration = new ChatConfigurationEntity
             {
@@ -37,6 +37,9 @@ public class ChatConfigurationRepository(
                 AuthenticationId = authenticatedUser.AuthenticationId,
                 ChatConfigurationId = confId,
                 ChatConfiguration = chatConfiguration,
+                Conversations = [],
+                Prompts = [],
+                FirstLoginUtc = DateTime.UtcNow,
             };
             
             chatConfiguration.User = user;

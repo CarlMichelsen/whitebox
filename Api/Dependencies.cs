@@ -47,7 +47,8 @@ public static class Dependencies
         
         // Service
         builder.Services
-            .AddScoped<IChatConfigurationService, ChatConfigurationService>();
+            .AddScoped<IChatConfigurationService, ChatConfigurationService>()
+            .AddScoped<IPromptService, PromptService>();
         
         // Handler
         builder.Services
@@ -78,7 +79,7 @@ public static class Dependencies
         {
             options.UseNpgsql(
                 builder.Configuration.GetConnectionString("DefaultConnection"),
-                (b) => b.MigrationsAssembly("Api"));
+                b => b.MigrationsAssembly("Api"));
             
             if (builder.Environment.IsDevelopment())
             {

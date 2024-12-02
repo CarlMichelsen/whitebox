@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Database.Entity.Id;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Database.Entity;
 
@@ -14,18 +14,26 @@ public class UserEntity
     [MaxLength(128)]
     public required string AuthenticationId { get; init; }
     
-    public required UserChatConfigurationId ChatConfigurationId { get; init; }
+    public required List<PromptEntity> Prompts { get; init; }
     
-    public ChatConfigurationEntity? ChatConfiguration { get; set; }
+    public required List<ConversationEntity> Conversations { get; init; }
     
-    public static void OnModelCreating(ModelBuilder modelBuilder)
+    public required UserChatConfigurationEntityId ChatConfigurationId { get; init; }
+    
+    public ChatConfigurationEntity? ChatConfiguration { get; init; }
+    
+    public required DateTime FirstLoginUtc { get; init; }
+    
+    public static void OnModelCreating(EntityTypeBuilder<UserEntity> entity)
     {
-        modelBuilder.Entity<UserEntity>(entity =>
-        {
-            entity
-                .HasOne(e => e.ChatConfiguration)
-                .WithOne(e => e.User)
-                .HasForeignKey<UserEntity>(e => e.ChatConfigurationId);
-        });
+        entity
+            .HasOne(e => e.ChatConfiguration)
+            .WithOne(e => e.User)
+            .HasForeignKey<UserEntity>(e => e.ChatConfigurationId);
+        
+        entity
+            .HasMany(e => e.Conversations)
+            .WithOne(e => e.Creator)
+            .HasForeignKey(e => e.CreatorId);
     }
 }

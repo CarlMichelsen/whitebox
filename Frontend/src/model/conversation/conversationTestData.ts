@@ -1,15 +1,20 @@
-﻿import {Bot, Conversation, ConversationMessage} from "./conversation.ts";
+﻿import {Conversation, ConversationMessage} from "./conversation.ts";
+import {LlmModel} from "./llmModel.ts";
 
 const createMessage = (id: string, previousMessageId: string|null, isBot: boolean, text: string): ConversationMessage => {
-    const bot: Bot = { botName: "Bot", iconUrl: "" };
+    const bot: LlmModel = {
+        provider: "OpenAi",
+        modelName: "GPT4-O",
+        modelDescription: "Fake description",
+        modelIdentifier: "fake-model-identifier"
+    };
     
     return {
         id,
         previousMessageId,
-        bot: isBot ? bot : null,
-        text,
-        media: [],
-        created: new Date(2024, 10, 19, 11, 1, 0, 0).getTime()
+        aiModel: isBot ? bot : null,
+        content: [{id: "identifier", type:"text", value: text, sortOrder: 1}],
+        createdUtc: new Date(2024, 10, 19, 11, 1, 0, 0).getTime()
     }
 }
 

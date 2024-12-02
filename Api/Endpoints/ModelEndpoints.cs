@@ -14,6 +14,7 @@ public static class ModelEndpoints
         
         modelGroup.MapGet(
             "/",
-            ([FromServices] IModelHandler handler) => handler.GetModels());
+            ([FromServices] IModelHandler handler) => handler.GetModels())
+            .AllowAnonymous();
     }
 }

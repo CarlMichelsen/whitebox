@@ -4,9 +4,9 @@ using LLMIntegration.Util;
 
 namespace Application.Validation.ChatConfiguration;
 
-public class SetSelectedModelIdentifierDtoValidator : AbstractValidator<SetSelectedModelDto>
+public class SetSelectedModelDtoValidator : AbstractValidator<SetSelectedModelDto>
 {
-    public SetSelectedModelIdentifierDtoValidator()
+    public SetSelectedModelDtoValidator()
     {
         this.RuleFor(s => s.ModelIdentifier)
             .NotEmpty()

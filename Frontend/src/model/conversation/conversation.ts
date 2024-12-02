@@ -1,19 +1,18 @@
-﻿export type MessageMedia = {
-    
-}
+﻿import {LlmModel} from "./llmModel.ts";
 
-export type Bot = {
-    botName: string; 
-    iconUrl: string;
+export type MessageContent = {
+    id: string;
+    type: "text";
+    value: string;
+    sortOrder: number;
 }
 
 export type ConversationMessage = {
     id: string;
     previousMessageId: string|null;
-    bot: Bot|null;
-    text: string;
-    media: MessageMedia[];
-    created: number;
+    aiModel: LlmModel|null;
+    content: MessageContent[];
+    createdUtc: number;
 }
 
 export type ConversationSection = {

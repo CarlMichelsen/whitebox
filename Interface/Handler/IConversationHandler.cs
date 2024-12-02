@@ -1,5 +1,4 @@
-﻿using Interface.Dto.Conversation;
-using Microsoft.AspNetCore.Http;
+﻿using Interface.Dto.Conversation.Request;
 
 namespace Interface.Handler;
 

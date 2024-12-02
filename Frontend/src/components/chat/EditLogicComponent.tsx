@@ -46,7 +46,7 @@ const EditLogicComponent: FC = () => {
                 throw new Error("Edit message not found in selected conversation")
             }
             dispatch(setPreviousMessage(input.text))
-            dispatch(setText(editMessage.text))
+            dispatch(setText(editMessage.content.map(c => c.value).join('\n')))
             
             cancelButtonRef.current = document.getElementById("cancel-edit-button") as HTMLButtonElement;
             messageRef.current = document.getElementById("message-"+input.editingMessage) as HTMLDivElement;

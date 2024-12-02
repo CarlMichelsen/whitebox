@@ -1,4 +1,4 @@
-﻿using Interface.Dto.Conversation;
+﻿using Interface.Dto.Conversation.Request;
 using Interface.Handler;
 using Microsoft.AspNetCore.Mvc;
 

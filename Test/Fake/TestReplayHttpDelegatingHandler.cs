@@ -67,7 +67,7 @@ public class TestReplayHttpDelegatingHandler : DelegatingHandler
                 FileMode.Create,
                 FileAccess.Write);
             
-            // TODO: test will fail on first run to write file.
+            // TODO: http-stream tests will fail on first run to write file.
             await response.Content.CopyToAsync(fileStream, cancellationToken);
         }
         else

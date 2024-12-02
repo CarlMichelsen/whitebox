@@ -43,7 +43,7 @@ const UserMessage: FC<UserMessageProps> = ({ branchSelect, branchList, message }
                         alt="edit"/>
                 </button>
                 
-                <pre className="message-text">{message.text}</pre>
+                <pre className="message-text">{message.content.map(c => c.value).join('\n')}</pre>
                 
                 {branchList.length > 1 ? (
                     <div className="absolute px-1 right-0 -bottom-10 h-10 w-32">

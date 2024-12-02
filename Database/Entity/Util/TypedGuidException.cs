@@ -1,3 +1,3 @@
-﻿namespace Database.Entity.Id;
+﻿namespace Database.Entity.Util;
 
 public class TypedGuidException(string message) : System.Exception(message);

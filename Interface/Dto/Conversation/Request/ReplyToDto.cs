@@ -1,4 +1,4 @@
-﻿namespace Interface.Dto.Conversation;
+﻿namespace Interface.Dto.Conversation.Request;
 
 public record ReplyToDto(
     string ConversationId,

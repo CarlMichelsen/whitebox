@@ -12,7 +12,7 @@ type ConversationSectionListItemProps = {
 
 const getBranchList = (conversationSection: ConversationSection) => {
     return Object.values(conversationSection.messages)
-        .sort((a, b) => a.created-b.created)
+        .sort((a, b) => a.createdUtc-b.createdUtc)
         .map(m => m.id);
 }
 
@@ -35,7 +35,7 @@ const ConversationSectionListItem: FC<ConversationSectionListItemProps> = ({ con
     }, [conversationSection.messages]);
     
     const renderSelectedMessage = () => {
-        if (message.bot === null) {
+        if (message.aiModel === null) {
             return <UserMessage branchSelect={branchSelect} branchList={branchList} message={message} />;
         } else {
             return <BotMessage message={message} />;

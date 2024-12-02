@@ -1,12 +1,13 @@
 using System.ComponentModel.DataAnnotations;
 using Database.Entity.Id;
-using Microsoft.EntityFrameworkCore;
+using Database.Entity.Util;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Database.Entity;
 
 public class ChatConfigurationEntity
 {
-    public required UserChatConfigurationId Id { get; init; }
+    public required UserChatConfigurationEntityId Id { get; init; }
     
     public required long UserId { get; init; }
     
@@ -21,18 +22,15 @@ public class ChatConfigurationEntity
     [Range(1, int.MaxValue)]
     public required int MaxTokens { get; init; }
 
-    public static void OnModelCreating(ModelBuilder modelBuilder)
+    public static void OnModelCreating(EntityTypeBuilder<ChatConfigurationEntity> entity)
     {
-        modelBuilder.Entity<ChatConfigurationEntity>(entity =>
-        {
-            entity
-                .Property(e => e.Id)
-                .RegisterTypedIdConversion(guid => new UserChatConfigurationId(guid));
-            
-            entity
-                .HasOne(e => e.User)
-                .WithOne(e => e.ChatConfiguration)
-                .HasForeignKey<ChatConfigurationEntity>(e => e.UserId);
-        });
+        entity
+            .Property(e => e.Id)
+            .RegisterTypedIdConversion(guid => new UserChatConfigurationEntityId(guid));
+        
+        entity
+            .HasOne(e => e.User)
+            .WithOne(e => e.ChatConfiguration)
+            .HasForeignKey<ChatConfigurationEntity>(e => e.UserId);
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Database.Entity.Id;
+﻿namespace Database.Entity.Util;
 
 public class TypedGuid<T>
 {

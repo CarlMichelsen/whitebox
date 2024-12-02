@@ -1,10 +1,10 @@
 ﻿export type LlmProvider = "Anthropic"|"Google"|"OpenAi"|"X";
 
 export type LlmModel = {
-    Provider: LlmProvider,
-    ModelName: string,
-    ModelDescription: string,
-    ModelIdentifier: string
+    provider: LlmProvider,
+    modelName: string,
+    modelDescription: string,
+    modelIdentifier: string
 } 
 
 export type LlmProviderGroup = {
