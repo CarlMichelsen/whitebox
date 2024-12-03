@@ -85,7 +85,7 @@ namespace Api.Migrations
                     b.Property<long>("CreatorId")
                         .HasColumnType("bigint");
 
-                    b.Property<Guid?>("LastAppendedMessageId")
+                    b.Property<Guid>("LastAppendedMessageId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("LastAppendedUtc")
@@ -141,9 +141,8 @@ namespace Api.Migrations
                     b.Property<DateTime>("PromptUtc")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Text")
-                        .HasMaxLength(102400)
-                        .HasColumnType("character varying(102400)");
+                    b.Property<bool>("Stream")
+                        .HasColumnType("boolean");
 
                     b.Property<Guid?>("UsageId")
                         .HasColumnType("uuid");
@@ -168,6 +167,11 @@ namespace Api.Migrations
 
                     b.Property<DateTime>("CompleteUtc")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Completion")
+                        .IsRequired()
+                        .HasMaxLength(102400)
+                        .HasColumnType("character varying(102400)");
 
                     b.Property<int>("InputTokens")
                         .HasColumnType("integer");
@@ -249,7 +253,9 @@ namespace Api.Migrations
 
                     b.HasOne("Database.Entity.MessageEntity", "LastAppendedMessage")
                         .WithMany()
-                        .HasForeignKey("LastAppendedMessageId");
+                        .HasForeignKey("LastAppendedMessageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Creator");
 

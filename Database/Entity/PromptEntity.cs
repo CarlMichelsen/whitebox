@@ -23,8 +23,7 @@ public class PromptEntity
     
     public required DateTime PromptUtc { get; init; }
     
-    [MaxLength(1024 * 100)]
-    public required string? Text { get; set; }
+    public required bool Stream { get; init; }
     
     public static void OnModelCreating(EntityTypeBuilder<PromptEntity> entity)
     {

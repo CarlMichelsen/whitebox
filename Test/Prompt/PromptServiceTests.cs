@@ -1,8 +1,6 @@
 ﻿using Application.Repository;
 using Application.Service;
 using Database;
-using Database.Entity;
-using Domain.User;
 using Interface.Accessor;
 using Interface.Repository;
 using Interface.Service;
@@ -69,12 +67,13 @@ public class PromptServiceTests
         
         // Act
         var promptEntity = await service.Prompt(prompt);
+        await applicationContext.SaveChangesAsync();
 
         // Assert
         Assert.NotNull(promptEntity);
         Assert.NotNull(promptEntity.Usage);
-        Assert.NotNull(promptEntity.Text);
-        Assert.NotEmpty(promptEntity.Text);
+        Assert.NotNull(promptEntity.Usage.Completion);
+        Assert.NotEmpty(promptEntity.Usage.Completion);
         Assert.NotEmpty(promptEntity.PromptJson);
         
         var foundPrompt = await applicationContext.Prompt
@@ -83,8 +82,8 @@ public class PromptServiceTests
         
         Assert.NotNull(foundPrompt);
         Assert.NotNull(foundPrompt.Usage);
-        Assert.NotNull(foundPrompt.Text);
-        Assert.NotEmpty(foundPrompt.Text);
+        Assert.NotNull(foundPrompt.Usage.Completion);
+        Assert.NotEmpty(foundPrompt.Usage.Completion);
         Assert.NotEmpty(foundPrompt.PromptJson);
     }
 }

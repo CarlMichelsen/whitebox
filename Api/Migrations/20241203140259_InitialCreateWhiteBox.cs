@@ -80,7 +80,7 @@ namespace Api.Migrations
                     CreatorId = table.Column<long>(type: "bigint", nullable: false),
                     CreatedUtc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     LastAppendedUtc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    LastAppendedMessageId = table.Column<Guid>(type: "uuid", nullable: true),
+                    LastAppendedMessageId = table.Column<Guid>(type: "uuid", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -133,7 +133,7 @@ namespace Api.Migrations
                     UserId = table.Column<long>(type: "bigint", nullable: false),
                     PromptJson = table.Column<string>(type: "jsonb", maxLength: 204800, nullable: false),
                     PromptUtc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Text = table.Column<string>(type: "character varying(102400)", maxLength: 102400, nullable: true),
+                    Stream = table.Column<bool>(type: "boolean", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -156,6 +156,7 @@ namespace Api.Migrations
                     Provider = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
                     ModelIdentifier = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
                     PromptId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Completion = table.Column<string>(type: "character varying(102400)", maxLength: 102400, nullable: false),
                     InputTokens = table.Column<int>(type: "integer", nullable: false),
                     OutputTokens = table.Column<int>(type: "integer", nullable: false),
                     CompleteUtc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -252,7 +253,8 @@ namespace Api.Migrations
                 column: "LastAppendedMessageId",
                 principalSchema: "whitebox",
                 principalTable: "Message",
-                principalColumn: "Id");
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Message_Prompt_PromptId",

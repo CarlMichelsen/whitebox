@@ -33,7 +33,7 @@ public class PromptService(
             User = user,
             PromptJson = json,
             PromptUtc = DateTime.UtcNow,
-            Text = null,
+            Stream = false,
         };
         applicationContext.Prompt.Add(promptEntity);
 
@@ -50,7 +50,6 @@ public class PromptService(
         
         if (response is null)
         {
-            await applicationContext.SaveChangesAsync();
             return promptEntity;
         }
         
@@ -64,13 +63,11 @@ public class PromptService(
             InputTokens = response.Usage.InputTokens,
             OutputTokens = response.Usage.OutputTokens,
             CompleteUtc = DateTime.UtcNow,
+            Completion = string.Join('\n', response.Parts),
         };
         
-        promptEntity.Text = string.Join('\n', response.Parts);
         promptEntity.UsageId = usage.Id;
         promptEntity.Usage = usage;
-        await applicationContext.SaveChangesAsync();
-        
         return promptEntity;
     }
 
@@ -88,7 +85,7 @@ public class PromptService(
             User = user,
             PromptJson = json,
             PromptUtc = DateTime.UtcNow,
-            Text = null,
+            Stream = true,
         };
         applicationContext.Prompt.Add(promptEntity);
         var sb = new StringBuilder();
@@ -117,7 +114,6 @@ public class PromptService(
 
         if (streamConclusion is null)
         {
-            await applicationContext.SaveChangesAsync();
             return promptEntity;
         }
 
@@ -131,13 +127,11 @@ public class PromptService(
             InputTokens = streamConclusion.Usage.InputTokens,
             OutputTokens = streamConclusion.Usage.OutputTokens,
             CompleteUtc = DateTime.UtcNow,
+            Completion = sb.ToString(),
         };
         
-        promptEntity.Text = sb.ToString();
         promptEntity.UsageId = usage.Id;
         promptEntity.Usage = usage;
-        await applicationContext.SaveChangesAsync();
-
         return promptEntity;
     }
 

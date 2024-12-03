@@ -19,6 +19,9 @@ public class UsageEntity
     
     public required PromptEntity Prompt { get; init; }
     
+    [MaxLength(1024 * 100)]
+    public required string Completion { get; init; }
+    
     public required int InputTokens { get; init; }
     
     public required int OutputTokens { get; init; }

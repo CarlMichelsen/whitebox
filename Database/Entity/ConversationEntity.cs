@@ -20,11 +20,11 @@ public class ConversationEntity
     
     public required DateTime LastAppendedUtc { get; set; }
     
-    public MessageEntityId? LastAppendedMessageId { get; set; }
+    public required MessageEntityId LastAppendedMessageId { get; set; }
     
-    public MessageEntity? LastAppendedMessage
+    public required MessageEntity LastAppendedMessage
     {
-        get => this.lastAppendedMessage;
+        get => this.lastAppendedMessage!;
         set
         {
             if (value != null && value.ConversationId != this.Id)
@@ -33,7 +33,7 @@ public class ConversationEntity
             }
             
             this.lastAppendedMessage = value;
-            this.LastAppendedMessageId = value?.Id;
+            this.LastAppendedMessageId = value!.Id;
         }
     }
     
