@@ -12,7 +12,7 @@ const EditIndicator: FC = () => {
                 id="cancel-edit-button"
                 onClick={() => dispatch(setEditingMessage(null))}
                 className="h-full w-full rounded-t-sm dark:bg-neutral-700 bg-neutral-400 hover:underline dark:hover:bg-neutral-800 hover:bg-neutral-200">
-                stop editing
+                Cancel Edit
             </button>
         </div>
     ) : null;

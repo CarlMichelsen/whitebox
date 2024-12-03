@@ -7,15 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Compile Remove="src\util\helpers\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <EmbeddedResource Remove="src\util\helpers\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Remove="src\util\helpers\**" />
+      <None Include="src\util\helpers\conversationStructureMapper.ts" />
     </ItemGroup>
 
     <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(Configuration)'=='Debug'">

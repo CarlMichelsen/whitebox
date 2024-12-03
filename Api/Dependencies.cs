@@ -43,6 +43,7 @@ public static class Dependencies
         
         // Repository
         builder.Services
+            .AddScoped<IConversationMessageUpsertRepository, ConversationMessageUpsertRepository>()
             .AddScoped<IChatConfigurationRepository, ChatConfigurationRepository>();
         
         // Service

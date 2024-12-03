@@ -30,11 +30,27 @@ public class LlmPromptValidator : AbstractValidator<LlmPrompt>
             .WithMessage("Prompt must contain at least one message.");
         
         this.RuleFor(prompt => prompt.Content.Messages)
+            .Must(StartAndEndWithUserMessage)
+            .WithMessage("Messages must start and end with a user message.");
+        
+        this.RuleFor(prompt => prompt.Content.Messages)
             .Must(HaveAlternatingRoles)
             .WithMessage("Messages must have alternating roles.");
         
         this.RuleForEach(prompt => prompt.Content.Messages)
             .SetValidator(new LlmMessageValidator());
+    }
+
+    private static bool StartAndEndWithUserMessage(List<LlmMessage> messages)
+    {
+        var first = messages.FirstOrDefault();
+        if (first?.Role != LlmRole.User)
+        {
+            return false;
+        }
+        
+        var last = messages.FirstOrDefault();
+        return last?.Role == LlmRole.User;
     }
 
     private static bool HaveAlternatingRoles(List<LlmMessage> messages)
