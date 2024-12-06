@@ -13,7 +13,10 @@ public class UsageEntity
     public required string Provider { get; init; }
 
     [MaxLength(128)]
-    public required string ModelIdentifier { get; init; }
+    public required string InitialModelIdentifier { get; init; }
+    
+    [MaxLength(128)]
+    public required string SpecificModelIdentifier { get; init; }
     
     public required PromptEntityId PromptId { get; init; }
     

@@ -42,7 +42,7 @@ public class UnhandledExceptionMiddleware(
         }
         else
         {
-            var traceId = Guid.NewGuid().ToString();
+            var traceId = Guid.CreateVersion7().ToString();
             context.Response.Headers[ApplicationConstants.TraceIdHeaderName] = traceId;
             logger.LogDebug("Generated Trace ID: {TraceId}", traceId);
         }

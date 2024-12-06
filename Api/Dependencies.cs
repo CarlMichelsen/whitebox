@@ -49,11 +49,13 @@ public static class Dependencies
         // Service
         builder.Services
             .AddScoped<IChatConfigurationService, ChatConfigurationService>()
+            .AddScoped<IConversationResponseStreamService, ConversationResponseStreamService>()
             .AddScoped<IPromptService, PromptService>();
         
         // Handler
         builder.Services
             .AddScoped<IConversationHandler, ConversationHandler>()
+            .AddScoped<IConversationAppendHandler, ConversationAppendHandler>()
             .AddScoped<IChatConfigurationHandler, ChatConfigurationHandler>()
             .AddScoped<IModelHandler, ModelHandler>()
             .AddScoped<ISpeechToTextHandler, SpeechToTextHandler>();

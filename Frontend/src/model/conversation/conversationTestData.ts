@@ -1,7 +1,6 @@
-﻿import {Conversation, ConversationMessage} from "./conversation.ts";
-import {LlmModel} from "./llmModel.ts";
+﻿import {Conversation} from "./conversation.ts";
 
-const createMessage = (id: string, previousMessageId: string|null, isBot: boolean, text: string): ConversationMessage => {
+/*const createMessage = (id: string, previousMessageId: string|null, isBot: boolean, text: string): ConversationMessage => {
     const bot: LlmModel = {
         provider: "OpenAi",
         modelName: "GPT-4o",
@@ -16,11 +15,21 @@ const createMessage = (id: string, previousMessageId: string|null, isBot: boolea
         content: [{id: "identifier", type:"text", value: text, sortOrder: 1}],
         createdUtc: new Date(2024, 10, 19, 11, 1, 0, 0).getTime()
     }
-}
+}*/
 
-export const conversationTestData: Conversation = {
+export const conversationTestData: Conversation|null = null;
+
+
+/* = {
     id: "1",
-    creatorId: "1",
+    creator: {
+        id: "1"
+        authenticationMethod: "1"
+        username: string
+        avatarUrl: string
+        authenticationId: string
+        email: string
+    },
     systemMessage: "Do as you're told please!",
     summary: null,
     sections: [
@@ -69,4 +78,4 @@ export const conversationTestData: Conversation = {
     ],
     lastAltered: new Date(2024, 10, 19, 11, 0, 0, 0).getTime(),
     created: new Date(2024, 10, 14, 11, 0, 0, 0).getTime()
-}
+}*/

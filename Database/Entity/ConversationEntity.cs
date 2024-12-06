@@ -1,4 +1,5 @@
-﻿using Database.Entity.Id;
+﻿using System.ComponentModel.DataAnnotations;
+using Database.Entity.Id;
 using Database.Entity.Util;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,6 +11,9 @@ public class ConversationEntity
     
     public required ConversationEntityId Id { get; init; }
     
+    [MaxLength(1024 * 100)]
+    public required string SystemMessage { get; set; }
+    
     public required long CreatorId { get; init; }
     
     public required UserEntity Creator { get; init; }
@@ -18,7 +22,7 @@ public class ConversationEntity
     
     public required DateTime CreatedUtc { get; init; }
     
-    public required DateTime LastAppendedUtc { get; set; }
+    public required DateTime LastAlteredUtc { get; set; }
     
     public required MessageEntityId? LastAppendedMessageId { get; set; }
     
@@ -36,6 +40,9 @@ public class ConversationEntity
             this.LastAppendedMessageId = value?.Id;
         }
     }
+    
+    [MaxLength(1024)]
+    public string? Summary { get; set; }
     
     public static void OnModelCreating(EntityTypeBuilder<ConversationEntity> entity)
     {

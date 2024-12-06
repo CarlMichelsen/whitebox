@@ -1,4 +1,5 @@
 ﻿import {LlmModel} from "./llmModel.ts";
+import {AuthenticatedUser} from "../user.ts";
 
 export type MessageContent = {
     id: string;
@@ -22,7 +23,7 @@ export type ConversationSection = {
 
 export type Conversation = {
     id: string;
-    creatorId: string;
+    creator: AuthenticatedUser;
     systemMessage: string;
     summary: string|null;
     sections: ConversationSection[];

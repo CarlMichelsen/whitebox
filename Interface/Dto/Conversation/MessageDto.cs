@@ -3,8 +3,8 @@
 namespace Interface.Dto.Conversation;
 
 public record MessageDto(
-    string Id,
-    string PreviousMessageId,
+    Guid Id,
+    Guid? PreviousMessageId,
     LlmModelDto? AiModel,
     List<MessageContentDto> Content,
     long CreatedUtc);

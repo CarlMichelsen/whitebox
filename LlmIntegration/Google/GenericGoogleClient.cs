@@ -15,7 +15,7 @@ public class GenericGoogleClient(
     {
         var googlePrompt = GoogleGenericMapper.Map(prompt);
         var googleResponse = await googleClient.Prompt(googlePrompt);
-        var responseId = Guid.NewGuid().ToString();
+        var responseId = Guid.CreateVersion7().ToString();
         return GoogleGenericMapper.Map(googleResponse, responseId);
     }
 

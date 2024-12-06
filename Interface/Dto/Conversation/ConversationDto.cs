@@ -3,7 +3,10 @@
 namespace Interface.Dto.Conversation;
 
 public record ConversationDto(
-    string Id,
+    Guid Id,
     AuthenticatedUser Creator,
+    string SystemMessage,
+    string? Summary,
+    List<ConversationSectionDto> Sections,
     long CreatedUtc,
-    long LastAppendedUtc);
+    long LastAlteredUtc);

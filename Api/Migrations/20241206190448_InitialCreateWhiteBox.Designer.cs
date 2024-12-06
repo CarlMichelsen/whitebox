@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Api.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20241206150306_InitialCreateWhiteBox")]
+    [Migration("20241206190448_InitialCreateWhiteBox")]
     partial class InitialCreateWhiteBox
     {
         /// <inheritdoc />
@@ -88,11 +88,20 @@ namespace Api.Migrations
                     b.Property<long>("CreatorId")
                         .HasColumnType("bigint");
 
+                    b.Property<DateTime>("LastAlteredUtc")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<Guid?>("LastAppendedMessageId")
                         .HasColumnType("uuid");
 
-                    b.Property<DateTime>("LastAppendedUtc")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<string>("Summary")
+                        .HasMaxLength(1024)
+                        .HasColumnType("character varying(1024)");
+
+                    b.Property<string>("SystemMessage")
+                        .IsRequired()
+                        .HasMaxLength(102400)
+                        .HasColumnType("character varying(102400)");
 
                     b.HasKey("Id");
 
@@ -176,13 +185,13 @@ namespace Api.Migrations
                         .HasMaxLength(102400)
                         .HasColumnType("character varying(102400)");
 
-                    b.Property<int>("InputTokens")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("ModelIdentifier")
+                    b.Property<string>("InitialModelIdentifier")
                         .IsRequired()
                         .HasMaxLength(128)
                         .HasColumnType("character varying(128)");
+
+                    b.Property<int>("InputTokens")
+                        .HasColumnType("integer");
 
                     b.Property<int>("OutputTokens")
                         .HasColumnType("integer");
@@ -191,6 +200,11 @@ namespace Api.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Provider")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)");
+
+                    b.Property<string>("SpecificModelIdentifier")
                         .IsRequired()
                         .HasMaxLength(128)
                         .HasColumnType("character varying(128)");

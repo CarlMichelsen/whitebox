@@ -77,10 +77,12 @@ namespace Api.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    SystemMessage = table.Column<string>(type: "character varying(102400)", maxLength: 102400, nullable: false),
                     CreatorId = table.Column<long>(type: "bigint", nullable: false),
                     CreatedUtc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    LastAppendedUtc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    LastAlteredUtc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     LastAppendedMessageId = table.Column<Guid>(type: "uuid", nullable: true),
+                    Summary = table.Column<string>(type: "character varying(1024)", maxLength: 1024, nullable: true),
                 },
                 constraints: table =>
                 {
@@ -154,7 +156,8 @@ namespace Api.Migrations
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Provider = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
-                    ModelIdentifier = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    InitialModelIdentifier = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
+                    SpecificModelIdentifier = table.Column<string>(type: "character varying(128)", maxLength: 128, nullable: false),
                     PromptId = table.Column<Guid>(type: "uuid", nullable: false),
                     Completion = table.Column<string>(type: "character varying(102400)", maxLength: 102400, nullable: false),
                     InputTokens = table.Column<int>(type: "integer", nullable: false),

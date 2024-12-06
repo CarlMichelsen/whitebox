@@ -12,12 +12,11 @@ namespace Application.Repository;
 public class ConversationMessageUpsertRepository(
     ApplicationContext applicationContext) : IConversationMessageUpsertRepository
 {
-    public async Task<(ConversationEntity Conversation, MessageEntity Message)> AppendUserMessage(
+    public async Task<ConversationEntity> AppendUserMessage(
         long userId,
         AppendConversation appendConversation)
     {
         ConversationEntity? conversation;
-        MessageEntity message;
         if (appendConversation.ReplyTo is null)
         {
             var foundUser = await applicationContext.User.FindAsync(userId);
@@ -28,25 +27,28 @@ public class ConversationMessageUpsertRepository(
             
             conversation = new ConversationEntity
             {
-                Id = new ConversationEntityId(Guid.NewGuid()),
+                Id = new ConversationEntityId(Guid.CreateVersion7()),
+                SystemMessage = string.Empty,
+                Summary = null,
                 Creator = foundUser,
                 CreatorId = foundUser.Id,
                 Messages = [],
                 CreatedUtc = DateTime.UtcNow,
-                LastAppendedUtc = DateTime.UtcNow,
+                LastAlteredUtc = DateTime.UtcNow,
                 LastAppendedMessageId = default,
                 LastAppendedMessage = default,
             };
+            
+            await applicationContext.Conversation.AddAsync(conversation);
+            await applicationContext.SaveChangesAsync();
 
-            message = MessageCreator.CreateMessageFromText(
+            var message = MessageCreator.CreateMessageFromText(
                 conversation,
                 null,
                 appendConversation.Text);
             conversation.Messages.Add(message);
             conversation.LastAppendedMessageId = message.Id;
             conversation.LastAppendedMessage = message;
-
-            applicationContext.Conversation.Add(conversation);
         }
         else
         {
@@ -54,6 +56,11 @@ public class ConversationMessageUpsertRepository(
                 .Where(c => c.CreatorId == userId && c.Id == appendConversation.ReplyTo!.ConversationId)
                 .Include(c => c.Messages)
                     .ThenInclude(messageEntity => messageEntity.Id)
+                .Include(c => c.Messages)
+                    .ThenInclude(messageEntity => messageEntity.Prompt)
+                        .ThenInclude(promptEntity => promptEntity!.Usage)
+                .Include(c => c.Messages)
+                    .ThenInclude(messageEntity => messageEntity.Content)
                 .Include(c => c.LastAppendedMessage)
                 .Include(c => c.Creator)
                 .FirstOrDefaultAsync();
@@ -71,7 +78,7 @@ public class ConversationMessageUpsertRepository(
                 throw new ItemNotFoundException("Did not find message to reply to");
             }
             
-            message = MessageCreator.CreateMessageFromText(
+            var message = MessageCreator.CreateMessageFromText(
                 conversation,
                 null,
                 appendConversation.Text,
@@ -81,6 +88,6 @@ public class ConversationMessageUpsertRepository(
             conversation.LastAppendedMessage = message;
         }
 
-        return (Conversation: conversation, Message: message);
+        return conversation;
     }
 }

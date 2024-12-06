@@ -5,7 +5,7 @@ namespace Interface.Repository;
 
 public interface IConversationMessageUpsertRepository
 {
-    Task<(ConversationEntity Conversation, MessageEntity Message)> AppendUserMessage(
+    Task<ConversationEntity> AppendUserMessage(
         long userId,
         AppendConversation appendConversation);
 }

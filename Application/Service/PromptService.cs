@@ -57,7 +57,8 @@ public class PromptService(
         {
             Id = new UsageEntityId(Guid.CreateVersion7()),
             Provider = Enum.GetName(prompt.Model.Provider)!,
-            ModelIdentifier = prompt.Model.ModelIdentifier,
+            InitialModelIdentifier = prompt.Model.ModelIdentifier,
+            SpecificModelIdentifier = response.ModelIdentifier,
             PromptId = promptEntity.Id,
             Prompt = promptEntity,
             InputTokens = response.Usage.InputTokens,
@@ -121,7 +122,8 @@ public class PromptService(
         {
             Id = new UsageEntityId(Guid.CreateVersion7()),
             Provider = Enum.GetName(prompt.Model.Provider)!,
-            ModelIdentifier = prompt.Model.ModelIdentifier,
+            InitialModelIdentifier = prompt.Model.ModelIdentifier,
+            SpecificModelIdentifier = streamConclusion.ModelIdentifier,
             PromptId = promptEntity.Id,
             Prompt = promptEntity,
             InputTokens = streamConclusion.Usage.InputTokens,

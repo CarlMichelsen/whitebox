@@ -1,8 +1,10 @@
-﻿using Interface.Dto.Conversation.Request;
+﻿using Microsoft.AspNetCore.Http;
 
 namespace Interface.Handler;
 
 public interface IConversationHandler
 {
-    Task Append(AppendConversationDto appendConversation);
+    Task<IResult> GetConversation(Guid conversationId);
+    
+    Task<IResult> GetConversationList();
 }

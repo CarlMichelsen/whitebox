@@ -1,7 +1,7 @@
 ﻿namespace Interface.Dto.Conversation;
 
 public record MessageContentDto(
-    string Id,
+    Guid Id,
     string Type,
     string Value,
     int SortOrder);
