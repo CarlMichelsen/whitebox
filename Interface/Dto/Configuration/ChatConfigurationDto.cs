@@ -7,4 +7,4 @@ public record ChatConfigurationDto(
     string? DefaultSystemMessage,
     LlmModelDto SelectedModel,
     int MaxTokens,
-    List<LlmProviderGroupDto> AvailableModels);
+    List<LlmProviderGroupDto> AvailableProviders);

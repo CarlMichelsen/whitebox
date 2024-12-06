@@ -5,5 +5,5 @@ export type ChatConfiguration = {
     defaultSystemMessage: string|null;
     selectedModel: LlmModel;
     maxTokens: number;
-    availableModels: LlmProviderGroup[];
+    availableProviders: LlmProviderGroup[];
 }

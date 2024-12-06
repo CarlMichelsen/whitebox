@@ -23,7 +23,7 @@ const Dialog: FC<DialogProps> = ({ title, isOpen, onClose, children }) => {
         >
             <dialog
                 onMouseDown={handleDialogClick}
-                className="grid grid-rows-[1.5rem_1fr] bg-white dark:bg-neutral-800 sm:rounded-sm w-full h-[750px] md:w-[750px]"
+                className="grid grid-rows-[1.5rem_1fr] bg-white dark:bg-neutral-800 sm:rounded-sm w-full h-max-[750px] md:w-[750px]"
                 open
             >
                 <div className="grid grid-cols-[1fr_1.5rem]">
@@ -43,7 +43,7 @@ const Dialog: FC<DialogProps> = ({ title, isOpen, onClose, children }) => {
                     </div>
                 </div>
 
-                <div className="mx-2 my-4">
+                <div className="mx-2 my-4 overflow-y-scroll hide-scrollbar">
                     {children}
                 </div>
             </dialog>

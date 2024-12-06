@@ -7,7 +7,7 @@ const Home: FC = () => {
         <PageContent className="min-h-screen">
             <h1 className="text-2xl">Home</h1>
             <br/>
-            <Link to="chat">Chat</Link>
+            <Link to="c">Chat</Link>
         </PageContent>
     );
 }

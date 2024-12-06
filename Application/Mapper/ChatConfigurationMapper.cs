@@ -18,6 +18,6 @@ public static class ChatConfigurationMapper
             DefaultSystemMessage: entity.DefaultSystemMessage,
             SelectedModel: AvailableModelsMapper.Map(model!),
             MaxTokens: entity.MaxTokens,
-            AvailableModels: AvailableModelsMapper.GetModels());
+            AvailableProviders: AvailableModelsMapper.GetProviders());
     }
 }

@@ -1,3 +1,3 @@
 ﻿export type ModalContentProps = {
-    onClose: () => void;
+    closeModal: () => void;
 }

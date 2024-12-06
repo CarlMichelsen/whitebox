@@ -5,7 +5,7 @@ namespace Application.Mapper;
 
 public static class AvailableModelsMapper
 {
-    public static List<LlmProviderGroupDto> GetModels()
+    public static List<LlmProviderGroupDto> GetProviders()
     {
         return LlmModels
             .GetModels()

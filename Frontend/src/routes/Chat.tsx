@@ -6,8 +6,15 @@ import ChatContainer from "../components/chat/conversation/ChatContainer.tsx";
 import ChatInputBox from "../components/chat/input/ChatInputBox.tsx";
 import EditLogicComponent from "../components/chat/EditLogicComponent.tsx";
 import ModelSelectorButton from "../components/chat/ModelSelectorButton.tsx";
+import {useLocation} from "react-router-dom";
 
 const Chat: FC = () => {
+    const location = useLocation();
+    const pathSplit = location.pathname.split('/');
+    const conversationId: string|null = pathSplit[2] ?? null;
+    
+    console.log("path selected conversation", conversationId);
+    
     return (
         <div className="relative h-full grid grid-cols-[auto_1fr]">
             <Sidebar>

@@ -11,15 +11,17 @@ const ModelSelectorButton: FC = () => {
     
     const config: ChatConfiguration|null = input.chatConfiguration;
     
-    return config ? <div className="fixed top-1 right-1 h-8 w-36 grid grid-cols-[2rem_1fr]">
+    return config ? <div className="fixed top-1 right-1 h-8 w-72 grid grid-cols-[1fr_2rem_auto]">
+        <div></div>
         <img
             className="aspect-square p-1"
             draggable={false}
             src={getImageUrl(config.selectedModel.provider, darkMode)}
             alt={config.selectedModel.provider}/>
         <button
-            className="w-full h-full rounded-sm bg-yellow-800 px-1"
-            onClick={() => dispatch(openModal("model-selector"))}>Select Model
+            className="w-full h-full rounded-sm dark:bg-neutral-600 bg-neutral-300 px-2"
+            onClick={() => dispatch(openModal("model-selector"))}>
+            {config.selectedModel.modelName}
         </button>
     </div> : null;
 }

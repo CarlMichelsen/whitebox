@@ -18,7 +18,7 @@ public class ModelHandler(
             entry =>
             {
                 entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
-                return AvailableModelsMapper.GetModels();
+                return AvailableModelsMapper.GetProviders();
             });
 
         if (models is null)

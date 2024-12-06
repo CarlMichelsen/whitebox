@@ -19,7 +19,7 @@ const ModalLogicComponent: FC = () => {
         
         const type: ModalType = modal.type;
         switch (type) {
-            case "model-selector": return <ModelSelectorContent onClose={closeModal} />
+            case "model-selector": return <ModelSelectorContent closeModal={closeModal} />
             default:
                 return null;
         }

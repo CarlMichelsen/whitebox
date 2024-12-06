@@ -43,7 +43,7 @@ const ConversationSectionListItem: FC<ConversationSectionListItemProps> = ({ con
     }
     
     return (
-        <li>
+        <li key={conversationSectionIndex}>
             {renderSelectedMessage()}
         </li>
     )
