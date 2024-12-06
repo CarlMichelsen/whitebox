@@ -1,12 +1,12 @@
 ﻿import {LlmProvider} from "../../model/conversation/llmModel";
-import AnthropicWhite from "../../assets/icons/llm/anthropic_white.svg";
-import AnthropicBlack from "../../assets/icons/llm/anthropic_black.svg";
-import GoogleWhite from "../../assets/icons/llm/google-gemini_white.svg";
-import GoogleBlack from "../../assets/icons/llm/google-gemini_black.svg";
-import OpenAiWhite from "../../assets/icons/llm/openai_white.svg";
-import OpenAiBlack from "../../assets/icons/llm/openai_black.svg";
-import XWhite from "../../assets/icons/llm/x_white.svg";
-import XBlack from "../../assets/icons/llm/x_black.svg";
+import AnthropicWhite from "../../assets/icons/llm/anthropic-white.svg";
+import AnthropicBlack from "../../assets/icons/llm/anthropic-black.svg";
+import GoogleWhite from "../../assets/icons/llm/google-gemini-white.svg";
+import GoogleBlack from "../../assets/icons/llm/google-gemini-black.svg";
+import OpenAiWhite from "../../assets/icons/llm/openai-white.svg";
+import OpenAiBlack from "../../assets/icons/llm/openai-black.svg";
+import XWhite from "../../assets/icons/llm/x-white.svg";
+import XBlack from "../../assets/icons/llm/x-black.svg";
 
 const modelImages: Map<LlmProvider, { white: string, black: string }> = new Map();
 modelImages.set("Anthropic", {

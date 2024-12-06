@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import authReducer from "./auth";
 import sidebarReducer from "./sidebar";
 import inputReducer from "./input";
+import modalReducer from "./modal";
 import conversationReducer from "./conversation";
 
 const customLoggerMiddleware = (storeAPI: { getState: () => RootState }) => (next: (action: any) => any) => (action: any) => {
@@ -20,6 +21,7 @@ export const store = configureStore({
         auth: authReducer,
         sidebar: sidebarReducer,
         input: inputReducer,
+        modal: modalReducer,
         conversation: conversationReducer
     },
     middleware: (getDefaultMiddleware) =>

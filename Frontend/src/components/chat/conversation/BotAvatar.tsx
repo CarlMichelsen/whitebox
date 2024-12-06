@@ -14,7 +14,8 @@ const BotAvatar: FC<BotAvatarProps> = ({ llmModel }) => {
         <div className="relative">
             <p className="absolute -top-4 text-xs w-48">{llmModel.modelName}</p>
             <img
-                className="aspect-square shadow-xl h-8 sm:h-10 bg-none rounded-md sm:rounded-full px-0.5 py-0.5 sm:px-1.5 sm:py-1.5"
+                className="aspect-square shadow-xl h-8 sm:h-10 bg-none rounded-md sm:rounded-lg px-0.5 py-0.5 sm:px-1.5 sm:py-1.5"
+                draggable={false}
                 src={getImageUrl(llmModel.provider, darkMode)}
                 alt={llmModel.modelName}/>
         </div>

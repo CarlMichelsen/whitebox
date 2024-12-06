@@ -5,6 +5,8 @@ import EditWhite from "../../../../assets/icons/edit-white.svg"
 import EditBlack from "../../../../assets/icons/edit-black.svg"
 import CrossWhite from "../../../../assets/icons/cross-white.svg"
 import CrossBlack from "../../../../assets/icons/cross-black.svg"
+import ArrowWhite from "../../../../assets/icons/arrow-white.svg"
+import ArrowBlack from "../../../../assets/icons/arrow-black.svg"
 import {setEditingMessage} from "../../../../state/input";
 
 type UserMessageProps = {
@@ -27,6 +29,7 @@ const UserMessage: FC<UserMessageProps> = ({ branchSelect, branchList, message }
     
     
     const isEditingThisMessage = input.editingMessage === message.id;
+    const isEditingAMessage = !input.editingMessage;
     return (
         <div className={`group flex justify-end ${branchList.length > 1 ? "mb-8" : ""}`}>
             <div
@@ -43,26 +46,36 @@ const UserMessage: FC<UserMessageProps> = ({ branchSelect, branchList, message }
                         alt="edit"/>
                 </button>
                 
-                <div className="shadow-inner px-3 py-2 rounded-md">
+                <div className="shadow-inner px-2 py-1 sm:px-3 sm:py-2 rounded-md">
                     <pre className="message-text">{message.content.map(c => c.value).join('\n')}</pre>
                 </div>
                 
                 {branchList.length > 1 ? (
-                    <div className="absolute px-1 right-0 -bottom-10 h-10 w-36">
+                    <div className="absolute px-1 right-0 -bottom-10 h-10 w-32 grid grid-rows-1 grid-cols-3">
                         <button
-                            disabled={branchId === 1}
+                            disabled={branchId === 1 || !isEditingAMessage}
                             onClick={() => selectBranchId(branchId - 1)}
-                            className="aspect-square m-1 pb-0.5 rounded-md w-8 disabled:text-neutral-500 sm:enabled:hover:bg-neutral-400 sm:enabled:dark:hover:bg-neutral-700">
-                            {"<"}
+                            className="m-1 pb-0.5 rounded-md w-6 sm:enabled:hover:bg-neutral-300 sm:enabled:dark:hover:bg-neutral-800 disabled:opacity-10">
+                            <img
+                                draggable="false"
+                                src={darkMode ? ArrowWhite : ArrowBlack}
+                                className="aspect-square -rotate-90 p-0.5 pr-1"
+                                alt="+"/>
                         </button>
                         
-                        <p className="inline-block px-2">{branchId}/{branchList.length}</p>
+                        <div className="pt-1.5 pr-1.5">
+                            <p className="text-center">{branchId}/{branchList.length}</p>
+                        </div>
                         
                         <button
-                            disabled={branchId === branchList.length}
+                            disabled={branchId === branchList.length || !isEditingAMessage}
                             onClick={() => selectBranchId(branchId + 1)}
-                            className="aspect-square m-1 pb-0.5 rounded-md w-8 disabled:text-neutral-500 sm:enabled:hover:bg-neutral-400 sm:enabled:dark:hover:bg-neutral-700">
-                            {">"}
+                            className="m-1 pb-0.5 rounded-md w-6 sm:enabled:hover:bg-neutral-300 sm:enabled:dark:hover:bg-neutral-800 disabled:opacity-10">
+                            <img
+                                draggable="false"
+                                src={darkMode ? ArrowWhite : ArrowBlack}
+                                className="aspect-square rotate-90 p-0.5 pl-1"
+                                alt="-"/>
                         </button>
                     </div>
                 ) : null}

@@ -4,7 +4,7 @@ import {LlmModel} from "./llmModel.ts";
 const createMessage = (id: string, previousMessageId: string|null, isBot: boolean, text: string): ConversationMessage => {
     const bot: LlmModel = {
         provider: "OpenAi",
-        modelName: "GPT4-O",
+        modelName: "GPT-4o",
         modelDescription: "Fake description",
         modelIdentifier: "fake-model-identifier"
     };

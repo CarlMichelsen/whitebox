@@ -1,4 +1,4 @@
-import {FC} from "react";
+import {FC, useEffect} from "react";
 import LineHeightEditableTextBox from "../../util/LineHeightEditableTextBox.tsx";
 import ChatContentWidth from "../../page/ChatContentWidth.tsx";
 import {useAppDispatch, useAppSelector} from "../../../hooks.ts";
@@ -16,6 +16,7 @@ const ChatInputBox: FC = () => {
     const input = useAppSelector(state => state.input);
     const conversation = useAppSelector(state => state.conversation);
     const dispatch = useAppDispatch()
+    const inputElementId = "chat-input-box";
     
     const handle = async (chunk: ConversationStreamEvent) => {
         if (input.inputState === "ready") {
@@ -67,21 +68,30 @@ const ChatInputBox: FC = () => {
                 throw new Error("this is not supposed to happen");
         }
     }
+
+    useEffect(() => {
+        if (!!input.editingMessage) {
+            const inputElement = document.getElementById(inputElementId) as HTMLInputElement;
+            if (inputElement) {
+                inputElement.focus();
+            }
+        }
+    }, [input.editingMessage]);
     
     return (
         <ChatContentWidth className="fixed bottom-0">
-            <div className="relative mx-2 mb-2 lg:mb-8 lg:mx-4">
+            <div className="relative mx-2 mb-2 lg:mb-8 lg:mx-4 shadow-2xl">
                 <EditIndicator />
                 
                 <LineHeightEditableTextBox
-                    className={`p-3 focus:outline-none rounded-md w-full shadow-2xl border ${getBorderColor()} transition-colors ease-in-out bg-neutral-200 focus:bg-white dark:bg-neutral-900 focus:dark:bg-black`}
+                    className={`p-3 focus:outline-none rounded-md w-full shadow-inner border ${getBorderColor()} transition-colors ease-in-out bg-neutral-100 focus:bg-white dark:bg-neutral-900 focus:dark:bg-black`}
                     disabled={false}
                     rows={input.rows}
                     text={input.text}
                     onChange={text => dispatch(setText(text))}
                     onEnter={onSend}
-                    id="chat-input-box"
-                    name="chat-input-box"
+                    id={inputElementId}
+                    name="chat-box"
                     label="Chat Input"/>
                 
                 <div className="absolute w-8 h-8 z-50 top-2 right-2">

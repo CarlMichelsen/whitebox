@@ -1,5 +1,5 @@
 import {FC, ReactNode} from "react";
-import EditLogicComponent from "./chat/EditLogicComponent.tsx";
+import ModalLogicComponent from "./modal/ModalLogicComponent.tsx";
 
 type RootProps = {
     children: ReactNode;
@@ -10,7 +10,7 @@ const Root: FC<RootProps> = ({children}) => {
         <main
             className="relative overflow-y-hidden min-h-screen">
             {children}
-            <EditLogicComponent />
+            <ModalLogicComponent />
         </main>
     );
 }

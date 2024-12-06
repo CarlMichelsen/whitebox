@@ -22,7 +22,7 @@ const initialState: InputState = {
     inputState: "ready"
 }
 
-export const authSlice = createSlice({
+export const inputSlice = createSlice({
     name: 'input',
     initialState,
     reducers: {
@@ -72,6 +72,6 @@ export const {
     setEditingMessage,
     setPreviousMessage,
     setInputState
-} = authSlice.actions
+} = inputSlice.actions
 
-export default authSlice.reducer
+export default inputSlice.reducer

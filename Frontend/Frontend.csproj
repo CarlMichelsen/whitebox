@@ -6,10 +6,6 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
-    <ItemGroup>
-      <None Include="src\util\helpers\conversationStructureMapper.ts" />
-    </ItemGroup>
-
     <Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(Configuration)'=='Debug'">
         <Exec Command="npm install" />
         <Exec Command="npm run build" />
