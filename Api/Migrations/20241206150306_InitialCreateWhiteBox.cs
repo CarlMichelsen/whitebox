@@ -80,7 +80,7 @@ namespace Api.Migrations
                     CreatorId = table.Column<long>(type: "bigint", nullable: false),
                     CreatedUtc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     LastAppendedUtc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    LastAppendedMessageId = table.Column<Guid>(type: "uuid", nullable: false),
+                    LastAppendedMessageId = table.Column<Guid>(type: "uuid", nullable: true),
                 },
                 constraints: table =>
                 {
@@ -253,8 +253,7 @@ namespace Api.Migrations
                 column: "LastAppendedMessageId",
                 principalSchema: "whitebox",
                 principalTable: "Message",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                principalColumn: "Id");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Message_Prompt_PromptId",

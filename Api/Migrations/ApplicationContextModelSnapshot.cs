@@ -85,7 +85,7 @@ namespace Api.Migrations
                     b.Property<long>("CreatorId")
                         .HasColumnType("bigint");
 
-                    b.Property<Guid>("LastAppendedMessageId")
+                    b.Property<Guid?>("LastAppendedMessageId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("LastAppendedUtc")
@@ -253,9 +253,7 @@ namespace Api.Migrations
 
                     b.HasOne("Database.Entity.MessageEntity", "LastAppendedMessage")
                         .WithMany()
-                        .HasForeignKey("LastAppendedMessageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("LastAppendedMessageId");
 
                     b.Navigation("Creator");
 
