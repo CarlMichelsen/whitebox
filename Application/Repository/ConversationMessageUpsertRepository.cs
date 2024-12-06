@@ -10,7 +10,8 @@ using Microsoft.EntityFrameworkCore;
 namespace Application.Repository;
 
 public class ConversationMessageUpsertRepository(
-    ApplicationContext applicationContext) : IConversationMessageUpsertRepository
+    ApplicationContext applicationContext,
+    IFullConversationReaderRepository fullConversationReaderRepository) : IConversationMessageUpsertRepository
 {
     public async Task<ConversationEntity> AppendUserMessage(
         long userId,
@@ -52,18 +53,8 @@ public class ConversationMessageUpsertRepository(
         }
         else
         {
-            conversation = await applicationContext.Conversation
-                .Where(c => c.CreatorId == userId && c.Id == appendConversation.ReplyTo!.ConversationId)
-                .Include(c => c.Messages)
-                    .ThenInclude(messageEntity => messageEntity.Id)
-                .Include(c => c.Messages)
-                    .ThenInclude(messageEntity => messageEntity.Prompt)
-                        .ThenInclude(promptEntity => promptEntity!.Usage)
-                .Include(c => c.Messages)
-                    .ThenInclude(messageEntity => messageEntity.Content)
-                .Include(c => c.LastAppendedMessage)
-                .Include(c => c.Creator)
-                .FirstOrDefaultAsync();
+            conversation = await fullConversationReaderRepository
+                .GetConversation(userId, appendConversation.ReplyTo.ConversationId);
 
             if (conversation is null)
             {

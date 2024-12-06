@@ -2,7 +2,7 @@
 
 namespace Interface.Handler;
 
-public interface IConversationAppendHandler
+public interface IConversationStreamHandler
 {
     Task Append(AppendConversationDto appendConversation);
 }

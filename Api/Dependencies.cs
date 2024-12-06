@@ -43,19 +43,21 @@ public static class Dependencies
         
         // Repository
         builder.Services
+            .AddScoped<IFullConversationReaderRepository, FullConversationReaderRepository>()
             .AddScoped<IConversationMessageUpsertRepository, ConversationMessageUpsertRepository>()
             .AddScoped<IChatConfigurationRepository, ChatConfigurationRepository>();
         
         // Service
         builder.Services
             .AddScoped<IChatConfigurationService, ChatConfigurationService>()
-            .AddScoped<IConversationResponseStreamService, ConversationResponseStreamService>()
+            .AddScoped<IConversationService, ConversationService>()
+            .AddScoped<IConversationStreamService, ConversationStreamService>()
             .AddScoped<IPromptService, PromptService>();
         
         // Handler
         builder.Services
             .AddScoped<IConversationHandler, ConversationHandler>()
-            .AddScoped<IConversationAppendHandler, ConversationAppendHandler>()
+            .AddScoped<IConversationStreamHandler, ConversationStreamHandler>()
             .AddScoped<IChatConfigurationHandler, ChatConfigurationHandler>()
             .AddScoped<IModelHandler, ModelHandler>()
             .AddScoped<ISpeechToTextHandler, SpeechToTextHandler>();

@@ -10,10 +10,10 @@ using Microsoft.Extensions.Logging;
 
 namespace Application.Handler;
 
-public class ConversationAppendHandler(
-    ILogger<ConversationAppendHandler> logger,
+public class ConversationStreamHandler(
+    ILogger<ConversationStreamHandler> logger,
     IHttpContextAccessor httpContextAccessor,
-    IConversationResponseStreamService conversationResponseStreamService) : IConversationAppendHandler
+    IConversationStreamService conversationStreamService) : IConversationStreamHandler
 {
     public async Task Append(AppendConversationDto appendConversation)
     {
@@ -21,7 +21,7 @@ public class ConversationAppendHandler(
         {
             logger.LogInformation("Append {AppendConversation}", appendConversation);
             var appendModel = Map(appendConversation);
-            await foreach (var streamEvent in conversationResponseStreamService.GetConversationResponse(appendModel))
+            await foreach (var streamEvent in conversationStreamService.GetConversationResponse(appendModel))
             {
                 var json = JsonSerializer.Serialize<object>(streamEvent);
                 logger.LogInformation("Write {Json}", json);

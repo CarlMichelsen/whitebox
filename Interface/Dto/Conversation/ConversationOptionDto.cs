@@ -1,6 +1,6 @@
 ﻿namespace Interface.Dto.Conversation;
 
 public record ConversationOptionDto(
-    string Id,
+    Guid Id,
     string Title,
     long LastAltered);

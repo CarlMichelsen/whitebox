@@ -3,7 +3,7 @@ using Interface.Dto.Conversation.Response.Stream;
 
 namespace Interface.Service;
 
-public interface IConversationResponseStreamService
+public interface IConversationStreamService
 {
     IAsyncEnumerable<BaseStreamResponseDto> GetConversationResponse(AppendConversation appendConversation);
 }

@@ -17,7 +17,7 @@ public static class ConversationEndpoints
         
         conversationGroup.MapPost(
             "/",
-            async ([FromServices] IConversationAppendHandler handler, [FromBody] AppendConversationDto appendConversation) =>
+            async ([FromServices] IConversationStreamHandler handler, [FromBody] AppendConversationDto appendConversation) =>
                 await handler.Append(appendConversation));
         
         conversationGroup.MapGet(

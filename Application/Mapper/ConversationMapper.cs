@@ -18,8 +18,8 @@ public static class ConversationMapper
             SystemMessage: conversationEntity.SystemMessage,
             Summary: conversationEntity.Summary,
             Sections: GetSections(conversationEntity),
-            CreatedUtc: GetUnixTimeSeconds(conversationEntity.CreatedUtc),
-            LastAlteredUtc: GetUnixTimeSeconds(conversationEntity.LastAlteredUtc));
+            CreatedUtc: TimeMapper.GetUnixTimeSeconds(conversationEntity.CreatedUtc),
+            LastAlteredUtc: TimeMapper.GetUnixTimeSeconds(conversationEntity.LastAlteredUtc));
     }
     
     public static MessageDto Map(MessageEntity messageEntity)
@@ -41,7 +41,7 @@ public static class ConversationMapper
             PreviousMessageId: messageEntity.PreviousMessageId?.Value,
             AiModel: model,
             Content: messageEntity.Content.Select(Map).ToList(),
-            CreatedUtc: GetUnixTimeSeconds(messageEntity.CreatedUtc));
+            CreatedUtc: TimeMapper.GetUnixTimeSeconds(messageEntity.CreatedUtc));
     }
 
     private static List<ConversationSectionDto> GetSections(ConversationEntity conversationEntity)
@@ -140,11 +140,5 @@ public static class ConversationMapper
             section.SelectedMessageId = lastSelectedMessageId;
             lastSelectedMessageId = section.Messages[lastSelectedMessageId!].PreviousMessageId;
         }
-    }
-
-    private static long GetUnixTimeSeconds(DateTime dateTime)
-    {
-        var dateTimeOffset = new DateTimeOffset(dateTime);
-        return dateTimeOffset.ToUnixTimeSeconds();
     }
 }

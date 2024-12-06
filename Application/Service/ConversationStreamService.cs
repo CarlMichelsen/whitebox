@@ -8,10 +8,10 @@ using Interface.Service;
 
 namespace Application.Service;
 
-public class ConversationResponseStreamService(
+public class ConversationStreamService(
     ApplicationContext applicationContext,
     IUserContextAccessor contextAccessor,
-    IConversationMessageUpsertRepository conversationMessageUpsertRepository) : IConversationResponseStreamService
+    IConversationMessageUpsertRepository conversationMessageUpsertRepository) : IConversationStreamService
 {
     public async IAsyncEnumerable<BaseStreamResponseDto> GetConversationResponse(
         AppendConversation appendConversation)
