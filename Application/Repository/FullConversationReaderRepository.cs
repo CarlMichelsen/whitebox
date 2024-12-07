@@ -11,6 +11,7 @@ public class FullConversationReaderRepository(ApplicationContext applicationCont
     public async Task<ConversationEntity?> GetConversation(long userId, ConversationEntityId conversationId)
     {
         return await applicationContext.Conversation
+            .AsSplitQuery()
             .Where(c => c!.CreatorId == userId && c.Id == conversationId)
             .Include(c => c.Messages)
                 .ThenInclude(messageEntity => messageEntity.Prompt)

@@ -100,8 +100,7 @@ public static class ConversationMapper
     {
         var messageIds = current.Messages.Keys.ToList();
         var nextSectionMessages = conversationEntity.Messages
-            .Where(m => m.PreviousMessageId is not null)
-            .Where(m => !messageIds.Contains(m.PreviousMessageId!))
+            .Where(m => messageIds.Contains(m.PreviousMessageId!))
             .ToList();
 
         if (nextSectionMessages.Count == 0)
