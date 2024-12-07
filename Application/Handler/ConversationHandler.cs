@@ -17,6 +17,7 @@ public class ConversationHandler(
     {
         try
         {
+            // TODO: move cache logic to service and cache result for future use.
             var cachedConversation = await cacheService.Get<ConversationDto>(conversationId.ToString());
             if (cachedConversation is not null)
             {

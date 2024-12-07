@@ -9,4 +9,7 @@ public class AssistantMessageEventDto : BaseStreamResponseDto
     
     [JsonPropertyName("messageId")]
     public required Guid MessageId { get; init; }
+    
+    [JsonPropertyName("replyToMessageId")]
+    public required Guid ReplyToMessageId { get; init; }
 }

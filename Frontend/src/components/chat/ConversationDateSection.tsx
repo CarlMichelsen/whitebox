@@ -24,18 +24,15 @@ const ConversationDateSection: FC<ConversationDateSectionProps> = ({ section, op
             <h3 className="pl-1">
                 {sectionTitleMap[section]}
             </h3>
-            
-            <hr />
-            
             <ol className="space-y-0.5 py-1">
                 {options.map(o => (
-                    <li className="ml-1" key={o.id}>
+                    <li key={o.id}>
                         <ConversationCard option={o}/>
                     </li>
                 ))}
             </ol>
         </>
-    );
+    )
 }
 
 export default ConversationDateSection;

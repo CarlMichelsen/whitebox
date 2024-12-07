@@ -30,6 +30,7 @@ const ModelSelectorContent: FC<ModalContentProps> = ( { closeModal }) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
             {config.availableProviders.map(p => (
                 <LargeLanguageModelProviderSelector
+                    key={p.provider}
                     providerGroup={p}
                     selectedModel={config.selectedModel}
                     modelClicked={selectModel}/>

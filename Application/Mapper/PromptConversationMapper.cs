@@ -40,8 +40,8 @@ public static class PromptConversationMapper
             Messages: messages.Select(Map).ToList(),
             SystemMessage: conversationSystemMessage);
 
-        var maxTokens = chatConfiguration.MaxTokens > model!.MaxCompletionTokens
-            ? model.MaxCompletionTokens
+        var maxTokens = chatConfiguration.MaxTokens >= model!.MaxCompletionTokens
+            ? model.MaxCompletionTokens - 1
             : chatConfiguration.MaxTokens;
         return new LlmPrompt(
             Model: model!,

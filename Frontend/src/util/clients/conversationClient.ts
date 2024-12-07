@@ -1,7 +1,7 @@
 ﻿import {BaseClient} from "../baseClient.ts";
 import {hostUrl} from "../endpoints.ts";
 import {AppendConversation} from "../../model/conversation/dto/appendConversation.ts";
-import {ConversationStreamEvent} from "../../model/conversation/dto/conversationStream.ts";
+import {StreamEvent} from "../../model/conversation/dto/conversationStream.ts";
 import {ConversationOption} from "../../model/sidebar/conversationOption.ts";
 import {Conversation} from "../../model/conversation/conversation.ts";
 
@@ -13,8 +13,8 @@ export class ConversationClient extends BaseClient
 
     public async appendConversation(
         appendConversation: AppendConversation,
-        handler: (chunk: ConversationStreamEvent) => Promise<void>) {
-        return await this.requestStream<ConversationStreamEvent>(
+        handler: (chunk: StreamEvent) => Promise<void>) {
+        return await this.requestStream<StreamEvent>(
             "POST",
             this.conversationPath,
             handler,

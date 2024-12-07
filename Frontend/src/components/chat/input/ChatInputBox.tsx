@@ -1,58 +1,23 @@
-import {FC, useEffect} from "react";
+import {FC, useEffect, useRef} from "react";
 import LineHeightEditableTextBox from "../../util/LineHeightEditableTextBox.tsx";
 import ChatContentWidth from "../../page/ChatContentWidth.tsx";
 import {useAppDispatch, useAppSelector} from "../../../hooks.ts";
-import {setInputState, setText} from "../../../state/input";
+import {setText} from "../../../state/input";
 import MicrophoneButton from "./MicrophoneButton.tsx";
 import EditIndicator from "./EditIndicator.tsx";
-import {findPreviousMessage, getLatestSelectedMessage} from "../../../util/conversationUtil.ts";
-import {ConversationMessage} from "../../../model/conversation/conversation.ts";
-import {ConversationClient} from "../../../util/clients/conversationClient.ts";
-import {ConversationStreamEvent} from "../../../model/conversation/dto/conversationStream.ts";
-import {AppendConversation, ReplyTo} from "../../../model/conversation/dto/appendConversation.ts";
-import {handleStreamEvent} from "../../../state/conversation";
+import ConversationResponseLogicComponent, {
+    ConversationResponseLogicComponentProps
+} from "../ConversationResponseLogicComponent.tsx";
 
 const ChatInputBox: FC = () => {
     const input = useAppSelector(state => state.input);
-    const conversation = useAppSelector(state => state.conversation);
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
+    const logicComponentRef = useRef<ConversationResponseLogicComponentProps>(null);
     const inputElementId = "chat-input-box";
     
-    const handle = async (chunk: ConversationStreamEvent) => {
-        if (input.inputState === "ready") {
-            dispatch(setInputState("receiving"));
-        }
-
-        dispatch(handleStreamEvent(chunk));
-    }
-    
     const onSend = async (text: string) => {
-        if (input.inputState === "ready" && text.length > 1) {
-            let replyToMessage: ConversationMessage | null = null;
-            if (input.editingMessage !== null && conversation.selectedConversation !== null) {
-                replyToMessage = input.editingMessage
-                    ? findPreviousMessage(conversation.selectedConversation, input.editingMessage)
-                    : null
-            } else {
-                replyToMessage = conversation.selectedConversation
-                    ? getLatestSelectedMessage(conversation.selectedConversation)
-                    : null;
-            }
-            
-            const client = new ConversationClient();
-            const replyToObject: ReplyTo|null = !!replyToMessage
-                ? { conversationId: conversation.selectedConversation!.id, replyToMessageId: replyToMessage.id }
-                : null;
-            
-            const appendConversation: AppendConversation = {
-                replyTo: replyToObject,
-                text,
-            }
-            const appendPromise = client.appendConversation(appendConversation, handle)
-            dispatch(setInputState("sending"))
-
-            await appendPromise;
-            dispatch(setInputState("ready"));
+        if (logicComponentRef.current) {
+            await logicComponentRef.current.onSend(text);
         }
     }
     
@@ -98,6 +63,8 @@ const ChatInputBox: FC = () => {
                     <MicrophoneButton onClick={() => alert("Work in progress")} enabled={false} />
                 </div>
             </div>
+
+            <ConversationResponseLogicComponent ref={logicComponentRef} />
         </ChatContentWidth>
     );
 }

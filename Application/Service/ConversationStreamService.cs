@@ -51,6 +51,7 @@ public class ConversationStreamService(
         await handler(new AssistantMessageEventDto
         {
             MessageId = assistantMessageId.Value,
+            ReplyToMessageId = conversation.LastAppendedMessage!.Id.Value,
         });
         
         var prompt = PromptConversationMapper
@@ -114,6 +115,9 @@ public class ConversationStreamService(
         
         conversation.LastAlteredUtc = DateTime.UtcNow;
         await applicationContext.SaveChangesAsync();
-        await cacheService.Remove(conversation.Id.Value.ToString());
+        await cacheService.Set(
+            conversation.Id.Value.ToString(),
+            ConversationMapper.Map(conversation, user),
+            TimeSpan.FromHours(2));
     }
 }
