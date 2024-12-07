@@ -24,6 +24,7 @@ public static class ConversationMapper
     
     public static MessageDto Map(MessageEntity messageEntity)
     {
+        UsageDto? usage = null;
         LlmModelDto? model = null;
 
         if (messageEntity.Prompt?.Usage is not null)
@@ -33,6 +34,12 @@ public static class ConversationMapper
                     out var foundModel))
             {
                 model = AvailableModelsMapper.Map(foundModel!);
+                usage = new UsageDto(
+                    Id: messageEntity.Prompt.Usage.Id.Value,
+                    InputTokens: messageEntity.Prompt.Usage.InputTokens,
+                    OutputTokens: messageEntity.Prompt.Usage.OutputTokens,
+                    InitialModelIdentifier: messageEntity.Prompt.Usage.InitialModelIdentifier,
+                    SpecificModelIdentifier: messageEntity.Prompt.Usage.SpecificModelIdentifier);
             }
         }
         
@@ -41,6 +48,7 @@ public static class ConversationMapper
             PreviousMessageId: messageEntity.PreviousMessageId?.Value,
             AiModel: model,
             Content: messageEntity.Content.Select(Map).ToList(),
+            Usage: usage,
             CreatedUtc: TimeMapper.GetUnixTimeSeconds(messageEntity.CreatedUtc));
     }
 

@@ -50,6 +50,7 @@ public static class Dependencies
         // Service
         builder.Services
             .AddScoped<IChatConfigurationService, ChatConfigurationService>()
+            .AddScoped<ICacheService, CacheService>()
             .AddScoped<IConversationService, ConversationService>()
             .AddScoped<IConversationStreamService, ConversationStreamService>()
             .AddScoped<IPromptService, PromptService>();

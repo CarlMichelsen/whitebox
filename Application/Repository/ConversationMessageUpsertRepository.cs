@@ -15,6 +15,7 @@ public class ConversationMessageUpsertRepository(
 {
     public async Task<ConversationEntity> AppendUserMessage(
         long userId,
+        ChatConfigurationEntity chatConfiguration,
         AppendConversation appendConversation)
     {
         ConversationEntity? conversation;
@@ -29,7 +30,7 @@ public class ConversationMessageUpsertRepository(
             conversation = new ConversationEntity
             {
                 Id = new ConversationEntityId(Guid.CreateVersion7()),
-                SystemMessage = string.Empty,
+                SystemMessage = chatConfiguration.DefaultSystemMessage ?? string.Empty,
                 Summary = null,
                 Creator = foundUser,
                 CreatorId = foundUser.Id,
@@ -80,5 +81,49 @@ public class ConversationMessageUpsertRepository(
         }
 
         return conversation;
+    }
+
+    public void ReplyToLatestMessage(
+        ConversationEntity conversation,
+        MessageEntityId promptMessageEntityId,
+        PromptEntity promptEntity)
+    {
+        if (promptEntity.Usage is null)
+        {
+            throw new IncompletePromptEntityException("Prompt is incomplete");
+        }
+        
+        var message = new MessageEntity
+        {
+            Id = promptMessageEntityId,
+            ConversationId = conversation.Id,
+            Conversation = conversation,
+            PromptId = promptEntity.Id,
+            Prompt = promptEntity,
+            PreviousMessageId = conversation.LastAppendedMessageId,
+            PreviousMessage = conversation.LastAppendedMessage,
+            NextMessages = [],
+            Content = [],
+            CreatedUtc = DateTime.UtcNow,
+        };
+
+        var content = new ContentEntity
+        {
+            Id = new ContentEntityId(Guid.CreateVersion7()),
+            MessageId = message.Id,
+            Message = message,
+            Type = ContentType.Text,
+            Value = promptEntity.Usage.Completion,
+            SortOrder = 10,
+        };
+        
+        message.Content.Add(content);
+        
+        conversation.Messages.Add(message);
+        conversation.LastAppendedMessage?.NextMessages.Add(message);
+        
+        conversation.LastAppendedMessageId = message.Id;
+        conversation.LastAppendedMessage = message;
+        conversation.LastAlteredUtc = DateTime.UtcNow;
     }
 }

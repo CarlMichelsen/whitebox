@@ -89,24 +89,29 @@ public class PromptService(
             Stream = true,
         };
         applicationContext.Prompt.Add(promptEntity);
+        await applicationContext.SaveChangesAsync();
         var sb = new StringBuilder();
         
         try
         {
             await foreach (var streamEvent in genericLlmClient.StreamPrompt(prompt))
             {
+                await handler(streamEvent);
+                
                 switch (streamEvent)
                 {
                     case LlmStreamContentDelta contentDelta:
-                        sb.Append(contentDelta.Delta);
+                        sb.Append(contentDelta.Delta.Content);
                         break;
                     case LlmStreamConclusion conclusion:
                         streamConclusion = conclusion;
                         break;
                 }
-
-                await handler(streamEvent);
             }
+        }
+        catch (JsonException e)
+        {
+            logger.LogCritical(e, "Failed to parse json stream event Source:\n{Source}", e.Source);
         }
         catch (Exception e)
         {
@@ -132,8 +137,12 @@ public class PromptService(
             Completion = sb.ToString(),
         };
         
+        applicationContext.Usage.Add(usage);
+        
         promptEntity.UsageId = usage.Id;
         promptEntity.Usage = usage;
+        await applicationContext.SaveChangesAsync();
+        
         return promptEntity;
     }
 

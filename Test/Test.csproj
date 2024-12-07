@@ -36,4 +36,8 @@
       <ProjectReference Include="..\LlmIntegration\LlmIntegration.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="TestData\" />
+    </ItemGroup>
+
 </Project>

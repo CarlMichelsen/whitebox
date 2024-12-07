@@ -8,10 +8,19 @@ export type MessageContent = {
     sortOrder: number;
 }
 
+export type MessageUsage = {
+    id: string;
+    inputTokens: number;
+    outputTokens: number;
+    initialModelIdentifier: string;
+    specificModelIdentifier: string;
+}
+
 export type ConversationMessage = {
     id: string;
     previousMessageId: string|null;
     aiModel: LlmModel|null;
+    usage: MessageUsage|null;
     content: MessageContent[];
     createdUtc: number;
 }

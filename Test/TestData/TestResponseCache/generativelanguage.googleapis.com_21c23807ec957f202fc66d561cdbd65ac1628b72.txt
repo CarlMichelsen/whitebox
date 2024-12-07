@@ -4,7 +4,7 @@
       "content": {
         "parts": [
           {
-            "text": "The wind whispers tales of a hidden leaf,\nWhere ninjas train, with secrets deep.\nA young boy, with eyes of fire bright,\nEmbraces the path, both day and night.\n\nThrough trials faced, and battles fought,\nHis spirit burns, a beacon sought.\nWith friends by his side, a bond so true,\nThey stand as one, in colors new.\n\nThe Nine-Tailed Fox, a beast so grand,\nA struggle waged, across the land.\nHokage rise, with wisdom's grace,\nProtecting peace, in time and space.\n\nThrough shadows' dance, and moonlight's glow,\nA destiny waits, to come and flow.\nNaruto's journey, a legend told,\nA hero's heart, stories unfold.\n"
+            "text": "The wind whispers tales of a hidden leaf,\nWhere young ninjas train, with strength and belief.\nA young prodigy, with eyes of the storm,\nNaruto Uzumaki, a destined form.\n\nThrough trials and tribulations, he'll rise,\nWith a burning heart, and a thousand cries.\nFor Hokage's title, he'll strive and fight,\nAgainst shadows and darkness, with all his might.\n\nA fox's spirit, within him burns bright,\nA bond of friendship, a guiding light.\nSasuke's fury, Sakura's soft grace,\nTogether they journey, across time and space.\n\nWith Rasengan's roar and jutsu so grand,\nThey protect their village, throughout the land.\nAgainst the villains, their power they wield,\nPeace and harmony, a future revealed.\n\nSo raise your hands high, and let the battle begin,\nFor in the heart of courage, true victory win!\nNaruto Uzumaki, a legend untold,\nA warrior's spirit, a story unfolds.\n"
           }
         ],
         "role": "model"
@@ -28,13 +28,13 @@
           "probability": "NEGLIGIBLE"
         }
       ],
-      "avgLogprobs": -0.45906029903527462
+      "avgLogprobs": -0.57370243676647337
     }
   ],
   "usageMetadata": {
     "promptTokenCount": 21,
-    "candidatesTokenCount": 165,
-    "totalTokenCount": 186
+    "candidatesTokenCount": 221,
+    "totalTokenCount": 242
   },
   "modelVersion": "gemini-1.5-flash-8b-001"
 }

@@ -27,8 +27,11 @@ public class OpenAiClient(
 
     public async IAsyncEnumerable<OpenAiChunk> StreamPrompt(OpenAiPrompt prompt)
     {
-        var jsonData = JsonSerializer.Serialize(prompt with { Stream = true, StreamOptions = new OpenAiStreamOptions(true) });
-        var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
+        var streamPrompt = prompt with { Stream = true, StreamOptions = new OpenAiStreamOptions(true) };
+        var content = new StringContent(
+            JsonSerializer.Serialize(streamPrompt),
+            Encoding.UTF8,
+            "application/json");
         var request = new HttpRequestMessage(HttpMethod.Post, Path)
         {
             Content = content,
@@ -45,6 +48,12 @@ public class OpenAiClient(
             if (line == null)
             {
                 continue;
+            }
+
+            if (line == "{" || line.StartsWith("\"error\""))
+            {
+                var fullResponse = line + await streamReader.ReadToEndAsync();
+                yield break;
             }
             
             var split = line.IndexOf(':');

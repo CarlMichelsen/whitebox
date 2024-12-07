@@ -5,5 +5,7 @@ namespace Interface.Service;
 
 public interface IConversationStreamService
 {
-    IAsyncEnumerable<BaseStreamResponseDto> GetConversationResponse(AppendConversation appendConversation);
+    Task GetConversationResponse(
+        AppendConversation appendConversation,
+        Func<BaseStreamResponseDto, Task> handler);
 }

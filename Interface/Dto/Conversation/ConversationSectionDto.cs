@@ -1,5 +1,7 @@
-﻿namespace Interface.Dto.Conversation;
+﻿using System.Text.Json.Serialization;
+
+namespace Interface.Dto.Conversation;
 
 public record ConversationSectionDto(
-    Guid? SelectedMessageId,
-    Dictionary<Guid, MessageDto> Messages);
+    [property: JsonPropertyName("selectedMessageId")] Guid? SelectedMessageId,
+    [property: JsonPropertyName("messages")] Dictionary<Guid, MessageDto> Messages);

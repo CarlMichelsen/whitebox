@@ -1,7 +1,9 @@
-﻿namespace Interface.Dto.Conversation;
+﻿using System.Text.Json.Serialization;
+
+namespace Interface.Dto.Conversation;
 
 public record MessageContentDto(
-    Guid Id,
-    string Type,
-    string Value,
-    int SortOrder);
+    [property: JsonPropertyName("id")] Guid Id,
+    [property: JsonPropertyName("type")] string Type,
+    [property: JsonPropertyName("value")] string Value,
+    [property: JsonPropertyName("sortOrder")] int SortOrder);

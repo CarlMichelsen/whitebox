@@ -20,13 +20,15 @@ public class ConversationStreamHandler(
         try
         {
             logger.LogInformation("Append {AppendConversation}", appendConversation);
+            await httpContextAccessor.HttpContext!.Response.WriteAsync(JsonSerializer.Serialize(new PingEventDto()) + '\n');
+            
             var appendModel = Map(appendConversation);
-            await foreach (var streamEvent in conversationStreamService.GetConversationResponse(appendModel))
+            await conversationStreamService.GetConversationResponse(appendModel, async streamEvent =>
             {
-                var json = JsonSerializer.Serialize<object>(streamEvent);
+                var json = JsonSerializer.Serialize(streamEvent);
                 logger.LogInformation("Write {Json}", json);
                 await httpContextAccessor.HttpContext!.Response.WriteAsync(json + '\n');
-            }
+            });
         }
         catch (Exception e)
         {
@@ -35,7 +37,7 @@ public class ConversationStreamHandler(
             {
                 Error = "Exception",
             };
-            var json = JsonSerializer.Serialize<object>(err);
+            var json = JsonSerializer.Serialize(err);
             await httpContextAccessor.HttpContext!.Response.WriteAsync(json);
         }
     }

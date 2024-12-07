@@ -1,6 +1,8 @@
-﻿namespace Interface.Dto.Conversation;
+﻿using System.Text.Json.Serialization;
+
+namespace Interface.Dto.Conversation;
 
 public record ConversationOptionDto(
-    Guid Id,
-    string Title,
-    long LastAltered);
+    [property: JsonPropertyName("id")] Guid Id,
+    [property: JsonPropertyName("title")] string Title,
+    [property: JsonPropertyName("lastAltered")] long LastAltered);

@@ -56,7 +56,7 @@ public class GoogleGenericStreamMapper : ILlmStreamMapper<GoogleStreamChunk>
     public LlmStreamEvent ConcludeStream()
     {
         this.streamDataCollector.SetRole(LlmRole.Assistant);
-        this.streamDataCollector.SetResponseId(Guid.NewGuid().ToString());
+        this.streamDataCollector.SetResponseId(Guid.CreateVersion7().ToString());
         return this.streamDataCollector.ConcludeStream();
     }
 }
