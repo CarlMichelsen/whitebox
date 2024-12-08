@@ -12,16 +12,15 @@ export type ConversationEventType =
 
 export type StreamEvent = {
     type: ConversationEventType;
+    conversationId: string;
 }
 
 export type ConversationEvent = Omit<StreamEvent, 'type'> & {
     type: ConversationEventType[0];
-    conversationId: string;
 }
 
 export type SetSummaryEvent = Omit<StreamEvent, 'type'> & {
     type: ConversationEventType[1];
-    conversationId: string;
     summary: string;
 }
 

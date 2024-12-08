@@ -11,7 +11,6 @@ using Interface.Handler;
 using Interface.Repository;
 using Interface.Service;
 using LLMIntegration.Generic;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -85,7 +84,8 @@ public static class Dependencies
         {
             options.UseNpgsql(
                 builder.Configuration.GetConnectionString("DefaultConnection"),
-                b => b.MigrationsAssembly("Api"));
+                b => b.MigrationsAssembly("Api"))
+                .UseSnakeCaseNamingConvention();
             
             if (builder.Environment.IsDevelopment())
             {

@@ -74,4 +74,4 @@ export const {
     setInputState
 } = inputSlice.actions
 
-export default inputSlice.reducer
+export default inputSlice.reducer;

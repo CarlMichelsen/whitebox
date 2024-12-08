@@ -13,7 +13,7 @@ const initialState: ModalState = {
     title: null,
 }
 
-export const modalSlice = createSlice({
+const modalSlice = createSlice({
     name: 'modal',
     initialState,
     reducers: {

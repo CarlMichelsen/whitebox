@@ -31,7 +31,6 @@ public class ApplicationContext(
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder);
         modelBuilder.HasDefaultSchema(SchemaName);
 
         modelBuilder.Entity<ChatConfigurationEntity>(ChatConfigurationEntity.OnModelCreating);
@@ -43,5 +42,7 @@ public class ApplicationContext(
         
         modelBuilder.Entity<PromptEntity>(PromptEntity.OnModelCreating);
         modelBuilder.Entity<UsageEntity>(UsageEntity.OnModelCreating);
+        
+        base.OnModelCreating(modelBuilder);
     }
 }

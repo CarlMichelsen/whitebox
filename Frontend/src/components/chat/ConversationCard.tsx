@@ -28,8 +28,8 @@ const ConversationCard: FC<ConversationCardProps> = ({ option }) => {
     
     return (
         <div className={`grid grid-cols-[1fr_auto] ${selected ? "dark:bg-neutral-800 bg-neutral-300 grid-cols-[1fr_auto]" : "grid-cols-1"}`} id={"option-"+option.id}>
-            <button onClick={onClick} className="block text-left rounded-sm hover:underline ml-1">
-                {option.title}
+            <button onClick={onClick} className="block text-left rounded-sm hover:underline ml-1 overflow-ellipsis">
+                {option.summary}
             </button>
 
             {selected ? (

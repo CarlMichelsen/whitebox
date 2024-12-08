@@ -37,12 +37,13 @@ export const getLatestSelectedMessage = (c: Conversation): ConversationMessage|n
     let message: ConversationMessage|null = null;
 
     for (let i = c.sections.length-1; i > 0; i--) {
-        const section: ConversationSection|null = c.sections[i] ?? null;
-        if (section?.selectedMessageId === null) {
+        const section: ConversationSection = c.sections[i]!;
+        if (section.selectedMessageId === null) {
             continue;
         }
         
         message = section.messages[section.selectedMessageId] ?? null;
+        break;
     }
     
     return message;

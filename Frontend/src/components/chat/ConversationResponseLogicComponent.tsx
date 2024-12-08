@@ -6,13 +6,19 @@ import {AppendConversation, ReplyTo} from "../../model/conversation/dto/appendCo
 import {setInputState} from "../../state/input";
 import {useAppDispatch, useAppSelector} from "../../hooks.ts";
 import {
+    AssistantMessageDeltaEvent,
+    AssistantMessageEvent, AssistantUsageEvent,
     ConversationEvent,
     SetSummaryEvent,
-    StreamEvent
+    StreamEvent, UserMessageEvent
 } from "../../model/conversation/dto/conversationStream.ts";
-import {selectConversation} from "../../state/conversation";
-import {addConversation} from "../../state/sidebar";
-import {ConversationOption} from "../../model/sidebar/conversationOption.ts";
+import {
+    handleAssistantMessage, handleAssistantMessageDelta,
+    handleAssistantUsage,
+    handleUserMessage,
+    selectConversation
+} from "../../state/conversation";
+import {alteredNow, upsertSummary} from "../../state/sidebar";
 
 export type ConversationResponseLogicComponentProps = {
     onSend: (text: string) => Promise<void>;
@@ -29,10 +35,14 @@ const ConversationResponseLogicComponent = forwardRef<ConversationResponseLogicC
             dispatch(setInputState("receiving"));
         }
         
-        console.warn(chunk)
         switch (chunk.type) {
             case "Conversation":
                 const conversationEvent = chunk as ConversationEvent;
+                if (conversationEvent.conversationId === conversation.selectedConversation?.id) {
+                    dispatch(alteredNow(conversationEvent.conversationId))
+                    break;
+                }
+                
                 const client = new ConversationClient();
                 const conversationResponse = await client
                     .getConversation(conversationEvent.conversationId)
@@ -44,12 +54,7 @@ const ConversationResponseLogicComponent = forwardRef<ConversationResponseLogicC
 
             case "SetSummary":
                 const setSummaryEvent = chunk as SetSummaryEvent;
-                const conversationOption: ConversationOption = {
-                    id: setSummaryEvent.conversationId,
-                    title: setSummaryEvent.summary,
-                    lastAltered: new Date().getTime()
-                }
-                dispatch(addConversation(conversationOption))
+                dispatch(upsertSummary(setSummaryEvent))
                 break;
 
             case "Error":
@@ -61,21 +66,23 @@ const ConversationResponseLogicComponent = forwardRef<ConversationResponseLogicC
                 break;
 
             case "AssistantMessage":
-                //const assistantMessage = chunk as AssistantMessageEvent;
-                
-                console.log("Handling AssistantMessageEvent", chunk);
+                const assistantMessage = chunk as AssistantMessageEvent;
+                dispatch(handleAssistantMessage(assistantMessage));
                 break;
 
             case "AssistantMessageDelta":
-                console.log("Handling AssistantMessageDeltaEvent", chunk);
+                const assistantMessageDelta = chunk as AssistantMessageDeltaEvent;
+                dispatch(handleAssistantMessageDelta(assistantMessageDelta));
                 break;
 
             case "AssistantUsage":
-                console.log("Handling AssistantUsageEvent", chunk);
+                const assistantUsage = chunk as AssistantUsageEvent;
+                dispatch(handleAssistantUsage(assistantUsage));
                 break;
 
             case "UserMessage":
-                console.log("Handling UserMessageEvent", chunk);
+                const userMessage = chunk as UserMessageEvent;
+                dispatch(handleUserMessage(userMessage));
                 break;
 
             default:

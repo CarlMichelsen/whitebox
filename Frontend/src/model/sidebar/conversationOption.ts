@@ -6,36 +6,16 @@ export type SortableConversationOption = {
 
 export type ConversationOption = {
     id: string;
-    title: string;
+    summary: string;
     lastAltered: number;
 }
 
-export type TimeSpans = {
-    startOfToday: Date;
-    endOfToday: Date;
-
-    startOfYesterday: Date;
-    endOfYesterday: Date;
-
-    startOfThisWeek: Date;
-    endOfThisWeek: Date;
-
-    startOfThisMonth: Date;
-    endOfThisMonth: Date;
-
-    startOfLastMonth: Date;
-    endOfLastMonth: Date;
-    
-    startOfThisYear: Date;
-    endOfThisYear: Date;
+export type NamedTimeSpan = {
+    title: string;
+    start: number;
+    end: number;
 }
 
-export type ConversationOptionStructure = {
-    today: ConversationOption[];
-    yesterday: ConversationOption[];
-    thisWeek: ConversationOption[];
-    thisMonth: ConversationOption[];
-    lastMonth: ConversationOption[];
-    thisYear: ConversationOption[];
-    olderThanAYear: ConversationOption[];
+export type ConversationOptionSection = NamedTimeSpan & {
+    options: ConversationOption[];
 }

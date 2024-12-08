@@ -26,224 +26,283 @@ namespace Api.Migrations
             modelBuilder.Entity("Database.Entity.ChatConfigurationEntity", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<string>("DefaultSystemMessage")
                         .HasMaxLength(102400)
-                        .HasColumnType("character varying(102400)");
+                        .HasColumnType("character varying(102400)")
+                        .HasColumnName("default_system_message");
 
                     b.Property<int>("MaxTokens")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("max_tokens");
 
                     b.Property<string>("SelectedModelIdentifier")
                         .IsRequired()
                         .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("selected_model_identifier");
 
                     b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("user_id");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_chat_configuration");
 
-                    b.ToTable("ChatConfiguration", "whitebox");
+                    b.ToTable("chat_configuration", "whitebox");
                 });
 
             modelBuilder.Entity("Database.Entity.ContentEntity", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<Guid>("MessageId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("message_id");
 
                     b.Property<int>("SortOrder")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("sort_order");
 
                     b.Property<int>("Type")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("type");
 
                     b.Property<string>("Value")
                         .IsRequired()
                         .HasMaxLength(102400)
-                        .HasColumnType("character varying(102400)");
+                        .HasColumnType("character varying(102400)")
+                        .HasColumnName("value");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_content");
 
-                    b.HasIndex("MessageId");
+                    b.HasIndex("MessageId")
+                        .HasDatabaseName("ix_content_message_id");
 
-                    b.ToTable("Content", "whitebox");
+                    b.ToTable("content", "whitebox");
                 });
 
             modelBuilder.Entity("Database.Entity.ConversationEntity", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<DateTime>("CreatedUtc")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_utc");
 
                     b.Property<long>("CreatorId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("creator_id");
 
                     b.Property<DateTime>("LastAlteredUtc")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("last_altered_utc");
 
                     b.Property<Guid?>("LastAppendedMessageId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("last_appended_message_id");
 
                     b.Property<string>("Summary")
                         .HasMaxLength(1024)
-                        .HasColumnType("character varying(1024)");
+                        .HasColumnType("character varying(1024)")
+                        .HasColumnName("summary");
 
                     b.Property<string>("SystemMessage")
                         .IsRequired()
                         .HasMaxLength(102400)
-                        .HasColumnType("character varying(102400)");
+                        .HasColumnType("character varying(102400)")
+                        .HasColumnName("system_message");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_conversation");
 
-                    b.HasIndex("CreatorId");
+                    b.HasIndex("CreatorId")
+                        .HasDatabaseName("ix_conversation_creator_id");
 
-                    b.HasIndex("LastAppendedMessageId");
+                    b.HasIndex("LastAppendedMessageId")
+                        .HasDatabaseName("ix_conversation_last_appended_message_id");
 
-                    b.ToTable("Conversation", "whitebox");
+                    b.ToTable("conversation", "whitebox");
                 });
 
             modelBuilder.Entity("Database.Entity.MessageEntity", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<Guid>("ConversationId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("conversation_id");
 
                     b.Property<DateTime>("CreatedUtc")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_utc");
 
                     b.Property<Guid?>("PreviousMessageId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("previous_message_id");
 
                     b.Property<Guid?>("PromptId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("prompt_id");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_message");
 
-                    b.HasIndex("ConversationId");
+                    b.HasIndex("ConversationId")
+                        .HasDatabaseName("ix_message_conversation_id");
 
-                    b.HasIndex("PreviousMessageId");
+                    b.HasIndex("PreviousMessageId")
+                        .HasDatabaseName("ix_message_previous_message_id");
 
-                    b.HasIndex("PromptId");
+                    b.HasIndex("PromptId")
+                        .HasDatabaseName("ix_message_prompt_id");
 
-                    b.ToTable("Message", "whitebox");
+                    b.ToTable("message", "whitebox");
                 });
 
             modelBuilder.Entity("Database.Entity.PromptEntity", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<string>("PromptJson")
                         .IsRequired()
                         .HasMaxLength(204800)
-                        .HasColumnType("jsonb");
+                        .HasColumnType("jsonb")
+                        .HasColumnName("prompt_json");
 
                     b.Property<DateTime>("PromptUtc")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("prompt_utc");
 
                     b.Property<bool>("Stream")
-                        .HasColumnType("boolean");
+                        .HasColumnType("boolean")
+                        .HasColumnName("stream");
 
                     b.Property<Guid?>("UsageId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("usage_id");
 
                     b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("user_id");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_prompt");
 
                     b.HasIndex("UsageId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasDatabaseName("ix_prompt_usage_id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("ix_prompt_user_id");
 
-                    b.ToTable("Prompt", "whitebox");
+                    b.ToTable("prompt", "whitebox");
                 });
 
             modelBuilder.Entity("Database.Entity.UsageEntity", b =>
                 {
                     b.Property<Guid>("Id")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<DateTime>("CompleteUtc")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("complete_utc");
 
                     b.Property<string>("Completion")
                         .IsRequired()
                         .HasMaxLength(102400)
-                        .HasColumnType("character varying(102400)");
+                        .HasColumnType("character varying(102400)")
+                        .HasColumnName("completion");
 
                     b.Property<string>("InitialModelIdentifier")
                         .IsRequired()
                         .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
+                        .HasColumnType("character varying(128)")
+                        .HasColumnName("initial_model_identifier");
 
                     b.Property<int>("InputTokens")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("input_tokens");
 
                     b.Property<int>("OutputTokens")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("output_tokens");
 
                     b.Property<Guid>("PromptId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("prompt_id");
 
                     b.Property<string>("Provider")
                         .IsRequired()
                         .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
+                        .HasColumnType("character varying(128)")
+                        .HasColumnName("provider");
 
                     b.Property<string>("SpecificModelIdentifier")
                         .IsRequired()
                         .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
+                        .HasColumnType("character varying(128)")
+                        .HasColumnName("specific_model_identifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_usage");
 
                     b.HasIndex("PromptId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasDatabaseName("ix_usage_prompt_id");
 
-                    b.ToTable("Usage", "whitebox");
+                    b.ToTable("usage", "whitebox");
                 });
 
             modelBuilder.Entity("Database.Entity.UserEntity", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<string>("AuthenticationId")
                         .IsRequired()
                         .HasMaxLength(128)
-                        .HasColumnType("character varying(128)");
+                        .HasColumnType("character varying(128)")
+                        .HasColumnName("authentication_id");
 
                     b.Property<string>("AuthenticationMethod")
                         .IsRequired()
                         .HasMaxLength(512)
-                        .HasColumnType("character varying(512)");
+                        .HasColumnType("character varying(512)")
+                        .HasColumnName("authentication_method");
 
                     b.Property<Guid>("ChatConfigurationId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("chat_configuration_id");
 
                     b.Property<DateTime>("FirstLoginUtc")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("first_login_utc");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_user");
 
                     b.HasIndex("ChatConfigurationId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasDatabaseName("ix_user_chat_configuration_id");
 
-                    b.ToTable("User", "whitebox");
+                    b.ToTable("user", "whitebox");
                 });
 
             modelBuilder.Entity("Database.Entity.ContentEntity", b =>
@@ -252,7 +311,8 @@ namespace Api.Migrations
                         .WithMany("Content")
                         .HasForeignKey("MessageId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_content_message_message_id");
 
                     b.Navigation("Message");
                 });
@@ -263,11 +323,13 @@ namespace Api.Migrations
                         .WithMany("Conversations")
                         .HasForeignKey("CreatorId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_conversation_user_creator_id");
 
                     b.HasOne("Database.Entity.MessageEntity", "LastAppendedMessage")
                         .WithMany()
-                        .HasForeignKey("LastAppendedMessageId");
+                        .HasForeignKey("LastAppendedMessageId")
+                        .HasConstraintName("fk_conversation_message_last_appended_message_id");
 
                     b.Navigation("Creator");
 
@@ -280,15 +342,18 @@ namespace Api.Migrations
                         .WithMany("Messages")
                         .HasForeignKey("ConversationId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_message_conversation_conversation_id");
 
                     b.HasOne("Database.Entity.MessageEntity", "PreviousMessage")
                         .WithMany("NextMessages")
-                        .HasForeignKey("PreviousMessageId");
+                        .HasForeignKey("PreviousMessageId")
+                        .HasConstraintName("fk_message_message_previous_message_id");
 
                     b.HasOne("Database.Entity.PromptEntity", "Prompt")
                         .WithMany()
-                        .HasForeignKey("PromptId");
+                        .HasForeignKey("PromptId")
+                        .HasConstraintName("fk_message_prompt_prompt_id");
 
                     b.Navigation("Conversation");
 
@@ -301,13 +366,15 @@ namespace Api.Migrations
                 {
                     b.HasOne("Database.Entity.UsageEntity", "Usage")
                         .WithOne()
-                        .HasForeignKey("Database.Entity.PromptEntity", "UsageId");
+                        .HasForeignKey("Database.Entity.PromptEntity", "UsageId")
+                        .HasConstraintName("fk_prompt_usage_usage_id");
 
                     b.HasOne("Database.Entity.UserEntity", "User")
                         .WithMany("Prompts")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_prompt_user_user_id");
 
                     b.Navigation("Usage");
 
@@ -320,7 +387,8 @@ namespace Api.Migrations
                         .WithOne()
                         .HasForeignKey("Database.Entity.UsageEntity", "PromptId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_usage_prompt_prompt_id");
 
                     b.Navigation("Prompt");
                 });
@@ -331,7 +399,8 @@ namespace Api.Migrations
                         .WithOne("User")
                         .HasForeignKey("Database.Entity.UserEntity", "ChatConfigurationId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("fk_user_chat_configuration_chat_configuration_id");
 
                     b.Navigation("ChatConfiguration");
                 });

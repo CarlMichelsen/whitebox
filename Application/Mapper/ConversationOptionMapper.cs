@@ -9,7 +9,7 @@ public static class ConversationOptionMapper
     {
         return new ConversationOptionDto(
             Id: conversationEntity.Id.Value,
-            Title: conversationEntity.Summary ?? "New Conversation",
+            Summary: conversationEntity.Summary ?? "New Conversation",
             LastAltered: TimeMapper.GetUnixTimeSeconds(conversationEntity.LastAlteredUtc));
     }
 }

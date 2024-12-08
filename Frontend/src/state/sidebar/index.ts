@@ -1,24 +1,25 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import {ConversationOption, ConversationOptionStructure} from "../../model/sidebar/conversationOption.ts";
 import {
-    addConversationOption,
-    mapConversationOptionsToConversationStructure, removeConversationOption, editAndReAddOption
-} from "../../util/helpers/conversationStructureMapper.ts";
+    ConversationOption,
+    ConversationOptionSection,
+} from "../../model/sidebar/conversationOption.ts";
+import {SetSummaryEvent} from "../../model/conversation/dto/conversationStream.ts";
+import {distinctAdd, optionsToSections, removeOption, setAlteredNow} from "./optionsToSections.ts";
 
 // Define a type for the slice state
 type SidebarState = {
     isOpen: boolean;
-    conversationStructure: ConversationOptionStructure|null;
+    conversationSections: ConversationOptionSection[]|null;
     search: string|null;
 }
 
 const initialState: SidebarState = {
     isOpen: window.screen.width > 600,
-    conversationStructure: null,
+    conversationSections: null,
     search: null,
 }
 
-export const sidebarSlice = createSlice({
+const sidebarSlice = createSlice({
     name: 'sidebar',
     initialState,
     reducers: {
@@ -34,22 +35,50 @@ export const sidebarSlice = createSlice({
             state.search = action.payload;
         },
         setConversations: (state, action: PayloadAction<ConversationOption[]>) => {
-            state.conversationStructure = mapConversationOptionsToConversationStructure(action.payload);
+            state.conversationSections = optionsToSections(action.payload);
         },
-        addConversation: (state, action: PayloadAction<ConversationOption>) => {
-            if (state.conversationStructure === null) {
+        removeConversation: (state, action: PayloadAction<string>) => {
+            if (state.conversationSections === null) {
                 return;
             }
             
-            state.conversationStructure = addConversationOption(state.conversationStructure, action.payload);
+            removeOption(state.conversationSections, action.payload);
         },
-        removeConversation: (state, action: PayloadAction<string>) => {
-            if (state.conversationStructure === null) {
+        upsertSummary: (state, action: PayloadAction<SetSummaryEvent>) => {
+            if (state.conversationSections === null) {
                 return;
             }
 
-            removeConversationOption(state.conversationStructure, action.payload);
+            const conversationOption: ConversationOption = {
+                id: action.payload.conversationId,
+                summary: action.payload.summary,
+                lastAltered: new Date().getTime()
+            }
+            distinctAdd(state.conversationSections, conversationOption);
         },
+        alteredNow: (state, action: PayloadAction<string>) => {
+            if (state.conversationSections === null) {
+                return;
+            }
+
+            setAlteredNow(state.conversationSections, action.payload)
+        }
+    },
+})
+
+export const {
+    setOpen,
+    setSearch,
+    setConversations,
+    removeConversation,
+    upsertSummary,
+    alteredNow,
+} = sidebarSlice.actions
+
+export default sidebarSlice.reducer
+
+/*
+,
         notifyAltered: (state, action: PayloadAction<string>) => {
             if (state.conversationStructure === null) {
                 return;
@@ -75,17 +104,4 @@ export const sidebarSlice = createSlice({
                     option.lastAltered = new Date().getTime();
                 });
         },
-    },
-})
-
-export const {
-    setOpen,
-    setSearch,
-    setConversations,
-    addConversation,
-    removeConversation,
-    notifyAltered,
-    updateTitle
-} = sidebarSlice.actions
-
-export default sidebarSlice.reducer
+ */

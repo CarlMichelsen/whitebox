@@ -10,9 +10,8 @@ const customLoggerMiddleware = (storeAPI: { getState: () => RootState }) => (nex
         return next(action);
     }
     
-    console.log('Dispatching:', action);
-    const result = next(action); // Let the action continue to the next middleware or reducer
-    console.log('Next State:', storeAPI.getState());
+    const result = next(action);
+    console.log(action, '->', storeAPI.getState());
     return result;
 };
 

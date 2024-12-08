@@ -15,4 +15,7 @@ public abstract class BaseStreamResponseDto
 {
     [JsonPropertyName("type")]
     public abstract string Type { get; }
+    
+    [JsonPropertyName("conversationId")]
+    public required Guid ConversationId { get; init; }
 }

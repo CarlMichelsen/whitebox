@@ -1,7 +1,5 @@
-﻿using System.Text.Json;
-using Application.Mapper;
+﻿using Application.Mapper;
 using Database;
-using Database.Entity;
 using Database.Entity.Id;
 using Domain.Conversation.Action;
 using Interface.Accessor;
@@ -44,12 +42,14 @@ public class ConversationStreamService(
 
         await handler(new UserMessageEventDto
         {
+            ConversationId = conversation.Id.Value,
             Message = ConversationMapper.Map(conversation.LastAppendedMessage!),
         });
         
         var assistantMessageId = new MessageEntityId(Guid.CreateVersion7());
         await handler(new AssistantMessageEventDto
         {
+            ConversationId = conversation.Id.Value,
             MessageId = assistantMessageId.Value,
             ReplyToMessageId = conversation.LastAppendedMessage!.Id.Value,
         });
@@ -64,6 +64,7 @@ public class ConversationStreamService(
                 case LlmStreamContentDelta delta:
                     await handler(new AssistantMessageDeltaEventDto
                     {
+                        ConversationId = conversation.Id.Value,
                         MessageId = assistantMessageId.Value,
                         ContentDelta = delta.Delta.Content,
                     });
@@ -71,6 +72,7 @@ public class ConversationStreamService(
                 case LlmStreamError error:
                     await handler(new ErrorEventDto
                     {
+                        ConversationId = conversation.Id.Value,
                         Error = error.Error,
                     });
                     break;
@@ -81,6 +83,7 @@ public class ConversationStreamService(
         {
             await handler(new AssistantUsageEventDto
             {
+                ConversationId = conversation.Id.Value,
                 MessageId = assistantMessageId.Value,
                 Usage = new UsageDto(
                     Id: newPromptEntity.Usage.Id.Value,
@@ -94,6 +97,7 @@ public class ConversationStreamService(
         {
             await handler(new ErrorEventDto
             {
+                ConversationId = conversation.Id.Value,
                 Error = "Prompt did not conclude properly",
             });
             return;
