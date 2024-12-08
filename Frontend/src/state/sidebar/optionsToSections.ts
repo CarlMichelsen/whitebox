@@ -38,7 +38,7 @@ const getTimeSpans = (): NamedTimeSpan[] => {
         },
         {
             title: "This Week",
-            start: endOfYesterday.getTime(),
+            start: startOfThisWeek.getTime(),
             end: endOfThisWeek.getTime(),
         },
         {
@@ -87,7 +87,7 @@ export const optionsToSections = (options: ConversationOption[]): ConversationOp
         }
 
         consumableOptionsList = consumableOptionsList
-            .filter(o => optionsToConsume.indexOf(o.id) !== -1);
+            .filter(o => optionsToConsume.indexOf(o.id) === -1);
     }
     
     return optionSections;

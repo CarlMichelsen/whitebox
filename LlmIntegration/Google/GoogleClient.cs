@@ -54,7 +54,7 @@ public class GoogleClient(
                 continue;
             }
             
-            var streamLineData = line[(split + 1)..].Trim();
+            var streamLineData = line[(split + 1)..];
             yield return JsonSerializer.Deserialize<GoogleStreamChunk>(streamLineData)!;
         }
     }

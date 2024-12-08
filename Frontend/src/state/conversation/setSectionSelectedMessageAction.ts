@@ -1,4 +1,5 @@
 ﻿import { ConversationState } from "./index";
+import {ConversationMessage} from "../../model/conversation/conversation.ts";
 
 export const setSectionSelectedMessageAction = (state: ConversationState, action: { sectionIndex: number, messageId: string }) => {
     if (state.selectedConversation === null) {
@@ -22,16 +23,19 @@ export const setSectionSelectedMessageAction = (state: ConversationState, action
             section.selectedMessageId = null;
             continue;
         }
-
-        let sectionMessageId: string|null = null;
+        
+        let max = -1;
+        let newestMsg: ConversationMessage|null = null;
         for (const msgId in section.messages) {
             const msg = section.messages[msgId]
             if (msg.previousMessageId === prevSection.selectedMessageId) {
-                sectionMessageId = msg.id;
-                break;
+                if (msg.createdUtc > max) {
+                    max = msg.createdUtc;
+                    newestMsg = msg;
+                }
             }
         }
-
-        section.selectedMessageId = sectionMessageId;
+        
+        section.selectedMessageId = newestMsg?.id ?? null;
     }
 }

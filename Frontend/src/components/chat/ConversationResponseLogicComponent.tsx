@@ -31,9 +31,7 @@ const ConversationResponseLogicComponent = forwardRef<ConversationResponseLogicC
     const dispatch = useAppDispatch();
 
     const handle = async (chunk: StreamEvent) => {
-        if (input.inputState === "ready") {
-            dispatch(setInputState("receiving"));
-        }
+        dispatch(setInputState("receiving"));
         
         switch (chunk.type) {
             case "Conversation":
@@ -113,8 +111,8 @@ const ConversationResponseLogicComponent = forwardRef<ConversationResponseLogicC
                 replyTo: replyToObject,
                 text,
             }
-            console.error(appendConversation)
-            const appendPromise = client.appendConversation(appendConversation, handle)
+            
+            const appendPromise = client.appendConversation(appendConversation, handle);
             dispatch(setInputState("sending"))
 
             await appendPromise;

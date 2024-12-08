@@ -52,7 +52,7 @@ public class AnthropicClient(
             }
             
             var streamLineType = line[..split];
-            var streamLineData = line[(split + 1)..].Trim();
+            var streamLineData = line[(split + 1)..];
             if (streamLineType == "data")
             {
                 yield return JsonSerializer.Deserialize<BaseAnthropicEvent>(streamLineData)!;

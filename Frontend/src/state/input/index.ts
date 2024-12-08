@@ -3,6 +3,8 @@ import {countOccurrences} from "../../util/helpers/textRows.ts";
 import {ChatConfiguration} from "../../model/chatConfiguration/chatConfiguration.ts";
 import {LlmModel} from "../../model/conversation/llmModel.ts";
 
+export type InputStatus = "ready"|"sending"|"receiving";
+
 // Define a type for the slice state
 type InputState = {
     text: string;
@@ -10,7 +12,7 @@ type InputState = {
     previousMessage: string|null;
     editingMessage: string|null;
     chatConfiguration: ChatConfiguration|null;
-    inputState: "ready"|"sending"|"receiving";
+    inputState: InputStatus;
 }
 
 const initialState: InputState = {
@@ -26,9 +28,12 @@ export const inputSlice = createSlice({
     name: 'input',
     initialState,
     reducers: {
-        setInputState: (state, action: PayloadAction<InputState["inputState"]>) => {
-            state.inputState = action.payload;
+        setInputState: (state, action: PayloadAction<InputStatus>) => {
+            if (state.inputState === action.payload) {
+                return;
+            }
             
+            state.inputState = action.payload;
             if (action.payload === "receiving") {
                 state.previousMessage = action.payload;
                 state.editingMessage = null;

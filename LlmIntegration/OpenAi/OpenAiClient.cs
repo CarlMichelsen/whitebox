@@ -62,7 +62,7 @@ public class OpenAiClient(
                 continue;
             }
             
-            var streamLineData = line[(split + 1)..].Trim();
+            var streamLineData = line[(split + 2)..];
             if (streamLineData == Done)
             {
                 yield break;
