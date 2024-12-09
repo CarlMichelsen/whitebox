@@ -28,7 +28,6 @@ public class ConversationStreamHandler(
             await conversationStreamService.GetConversationResponse(appendModel, async streamEvent =>
             {
                 var json = JsonSerializer.Serialize(streamEvent);
-                logger.LogInformation("Write {Json}", json);
                 await httpContextAccessor.HttpContext!.Response.WriteAsync(json + '\n');
             });
         }

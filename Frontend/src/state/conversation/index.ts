@@ -15,38 +15,66 @@ import {handleAssistantUsageAction} from "./handleAssistantUsageAction.ts";
 // Define a type for the slice state
 export type ConversationState = {
     selectedConversation: Conversation|null;
+    attached: boolean;
 }
 
 const initialState: ConversationState = {
     selectedConversation: conversationTestData,
+    attached: true,
+}
+
+const toBottom = () => {
+    window.scroll({
+        top: document.body.scrollHeight,
+        behavior: 'instant'
+    });
 }
 
 const conversationSlice = createSlice({
     name: 'conversation',
     initialState,
     reducers: {
+        setAttached: (state, action: PayloadAction<boolean>) => {
+            state.attached = action.payload;
+        },
         selectConversation: (state, action: PayloadAction<Conversation|null>) => {
             state.selectedConversation = action.payload;
+            if (state.attached) {
+                toBottom();
+            }
         },
         setSectionSelectedMessage: (state, action: PayloadAction<{ sectionIndex: number, messageId: string }>) => {
             setSectionSelectedMessageAction(state, action.payload);
         },
         handleAssistantMessage: (state, action: PayloadAction<AssistantMessageEvent>) => {
             handleAssistantMessageAction(state, action.payload);
+            if (state.attached) {
+                toBottom();
+            }
         },
         handleAssistantMessageDelta: (state, action: PayloadAction<AssistantMessageDeltaEvent>) => {
             handleAssistantMessageDeltaAction(state, action.payload);
+            if (state.attached) {
+                toBottom();
+            }
         },
         handleAssistantUsage: (state, action: PayloadAction<AssistantUsageEvent>) => {
             handleAssistantUsageAction(state, action.payload);
+            if (state.attached) {
+                toBottom();
+            }
         },
         handleUserMessage: (state, action: PayloadAction<UserMessageEvent>) => {
             handleUserMessageAction(state, action.payload);
+            if (state.attached) {
+                toBottom();
+            }
         }
     },
 })
 
 export const {
+    setAttached,
     selectConversation,
     setSectionSelectedMessage,
     handleAssistantMessage,

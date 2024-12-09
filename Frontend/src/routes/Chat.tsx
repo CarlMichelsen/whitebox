@@ -6,7 +6,6 @@ import ChatContainer from "../components/chat/conversation/ChatContainer.tsx";
 import ChatInputBox from "../components/chat/input/ChatInputBox.tsx";
 import EditLogicComponent from "../components/chat/EditLogicComponent.tsx";
 import ModelSelectorButton from "../components/chat/ModelSelectorButton.tsx";
-import {useLocation} from "react-router-dom";
 import {ChatConfigurationClient} from "../util/clients/chatConfigurationClient.ts";
 import {useQuery} from "react-query";
 import {ConversationClient} from "../util/clients/conversationClient.ts";
@@ -16,12 +15,7 @@ import {setConversations} from "../state/sidebar";
 
 const Chat: FC = () => {
     const dispatch = useAppDispatch()
-    const location = useLocation();
-    const pathSplit = location.pathname.split('/');
-    const conversationId: string|null = pathSplit[2] ?? null;
     
-    console.log("path selected conversation", conversationId);
-
     const getConversationOptions = async () => {
         const client = new ConversationClient();
         const conversationOptionsResponse = await client.getConversationOptions();

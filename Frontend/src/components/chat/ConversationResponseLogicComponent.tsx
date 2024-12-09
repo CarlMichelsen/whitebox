@@ -16,7 +16,7 @@ import {
     handleAssistantMessage, handleAssistantMessageDelta,
     handleAssistantUsage,
     handleUserMessage,
-    selectConversation
+    selectConversation, setAttached
 } from "../../state/conversation";
 import {alteredNow, upsertSummary} from "../../state/sidebar";
 
@@ -123,6 +123,7 @@ const ConversationResponseLogicComponent = forwardRef<ConversationResponseLogicC
             
             const appendPromise = client.appendConversation(appendConversation, handle);
             dispatch(setInputState("sending"));
+            dispatch(setAttached(true));
 
             await appendPromise;
             dispatch(setInputState("ready"));

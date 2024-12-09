@@ -4,6 +4,7 @@ import ToggleSidebarButton from "./ToggleSidebarButton.tsx";
 import SidebarBottomBox from "./SidebarBottomBox.tsx";
 import SearchBox from "../util/SearchBox.tsx";
 import {selectConversation} from "../../state/conversation";
+import {useNavigate} from "react-router-dom";
 
 type SidebarProps = {
     children: ReactNode;
@@ -12,6 +13,15 @@ type SidebarProps = {
 const Sidebar: FC<SidebarProps> = ({ children }) => {
     const dispatch = useAppDispatch()
     const sidebar = useAppSelector(store => store.sidebar)
+    const navigate = useNavigate();
+
+    const setCPath = (id: string|null) => {
+        if (id) {
+            navigate(`/c/${id}`, { replace: true });
+        } else {
+            navigate('/c', { replace: true });
+        }
+    };
     
     const sidebarClasses = (): string => {
         if (sidebar.isOpen) {
@@ -43,7 +53,10 @@ const Sidebar: FC<SidebarProps> = ({ children }) => {
                 <div className="grid grid-cols-[1fr_auto] gap-1">
                     <button
                         className="m-1 bg-blue-400 dark:bg-blue-800 hover:font-bold rounded-sm w-full"
-                        onClick={() => dispatch(selectConversation(null))}>New Conversation</button>
+                        onClick={() => {
+                            dispatch(selectConversation(null));
+                            setCPath(null)
+                        }}>New Conversation</button>
                     <ToggleSidebarButton />
                 </div>
                 

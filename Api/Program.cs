@@ -27,6 +27,8 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
+app.UseResponseCompression();
+
 app.UseStaticFiles(StaticFileOptionsFactory.Create());
 
 app.RegisterEndpoints();

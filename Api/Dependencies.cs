@@ -1,3 +1,4 @@
+using System.IO.Compression;
 using Api.Middleware;
 using Application.Accessor;
 using Application.Configuration;
@@ -12,6 +13,7 @@ using Interface.Repository;
 using Interface.Service;
 using LLMIntegration.Generic;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -70,6 +72,18 @@ public static class Dependencies
         
         // Auth
         builder.RegisterAuthDependencies();
+        
+        // Compression
+        builder.Services.Configure<GzipCompressionProviderOptions>(options =>
+        {
+            options.Level = CompressionLevel.SmallestSize;
+        });
+        builder.Services.AddResponseCompression(options =>
+        {
+            options.EnableForHttps = true;
+            options.Providers.Add<BrotliCompressionProvider>();
+            options.Providers.Add<GzipCompressionProvider>();
+        });
         
         // Configure Serilog from "appsettings.(env).json
         Log.Logger = new LoggerConfiguration()

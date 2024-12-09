@@ -82,7 +82,7 @@ export const optionsToSections = (options: ConversationOption[]): ConversationOp
             const isInSection = inTimeSpan(option.lastAltered, section);
             if (isInSection) {
                 optionsToConsume.push(option.id);
-                section.options.unshift(option);
+                section.options.push(option);
             }
         }
 
