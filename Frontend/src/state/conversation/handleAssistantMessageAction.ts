@@ -2,6 +2,7 @@
 import {AssistantMessageEvent} from "../../model/conversation/dto/conversationStream";
 import {appendMessage} from "./shared.ts";
 import {ConversationMessage} from "../../model/conversation/conversation.ts";
+import {setSectionSelectedMessageAction} from "./setSectionSelectedMessageAction.ts";
 
 export const handleAssistantMessageAction = (state: ConversationState, payload: AssistantMessageEvent): void => {
     if (state.selectedConversation?.id !== payload.conversationId) {
@@ -17,5 +18,6 @@ export const handleAssistantMessageAction = (state: ConversationState, payload: 
         createdUtc: new Date().getTime(),
     } satisfies ConversationMessage;
 
-    appendMessage(state.selectedConversation, initialAssistantMessage);
+    const sectionIndex = appendMessage(state.selectedConversation, initialAssistantMessage);
+    setSectionSelectedMessageAction(state, { sectionIndex, messageId: initialAssistantMessage.id });
 }

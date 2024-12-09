@@ -30,11 +30,21 @@ public class ConversationStreamService(
         
         var conversation = await conversationMessageUpsertRepository
             .AppendUserMessage(user.Id, chatConfig, appendConversation);
+        var cacheKey = ConversationMapper.CacheKeyFactory(user, conversation.Id);
 
         await cacheService.Set(
-            conversation.Id.Value.ToString(),
+            cacheKey,
             ConversationMapper.Map(conversation, user), 
             TimeSpan.FromMinutes(2));
+
+        if (string.IsNullOrWhiteSpace(conversation.Summary))
+        {
+            await handler(new SetSummaryEventDto
+            {
+                ConversationId = conversation.Id.Value,
+                Summary = "New Conversation",
+            });
+        }
 
         await handler(new ConversationEventDto
         {
@@ -134,7 +144,7 @@ public class ConversationStreamService(
         conversation.LastAlteredUtc = DateTime.UtcNow;
         await applicationContext.SaveChangesAsync();
         await cacheService.Set(
-            conversation.Id.Value.ToString(),
+            cacheKey,
             ConversationMapper.Map(conversation, user),
             TimeSpan.FromHours(2));
     }

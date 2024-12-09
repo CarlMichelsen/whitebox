@@ -35,7 +35,6 @@ export const inputSlice = createSlice({
             
             state.inputState = action.payload;
             if (action.payload === "receiving") {
-                state.previousMessage = action.payload;
                 state.editingMessage = null;
                 state.text = "";
                 state.rows = 1;

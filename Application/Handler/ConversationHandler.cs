@@ -10,20 +10,12 @@ namespace Application.Handler;
 
 public class ConversationHandler(
     ILogger<ConversationHandler> logger,
-    ICacheService cacheService,
     IConversationService conversationService) : IConversationHandler
 {
     public async Task<IResult> GetConversation(Guid conversationId)
     {
         try
         {
-            // TODO: move cache logic to service and cache result for future use.
-            var cachedConversation = await cacheService.Get<ConversationDto>(conversationId.ToString());
-            if (cachedConversation is not null)
-            {
-                return Results.Ok(new ServiceResponse<ConversationDto>(cachedConversation));
-            }
-            
             var conversationEntityId = new ConversationEntityId(conversationId);
             var conversationResponse = await conversationService.GetConversation(conversationEntityId);
             return Results.Ok(conversationResponse);

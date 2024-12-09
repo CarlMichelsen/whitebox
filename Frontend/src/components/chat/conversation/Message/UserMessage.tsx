@@ -8,6 +8,7 @@ import CrossBlack from "../../../../assets/icons/cross-black.svg"
 import ArrowWhite from "../../../../assets/icons/arrow-white.svg"
 import ArrowBlack from "../../../../assets/icons/arrow-black.svg"
 import {setEditingMessage} from "../../../../state/input";
+import {marked} from "marked";
 
 type UserMessageProps = {
     branchSelect: (messageId: string) => void;
@@ -30,6 +31,7 @@ const UserMessage: FC<UserMessageProps> = ({ branchSelect, branchList, message }
     
     const isEditingThisMessage = input.editingMessage === message.id;
     const isEditingAMessage = !input.editingMessage;
+    const text = message.content.map(c => c.value).join('\n');
     return (
         <div className={`group flex justify-end ${branchList.length > 1 ? "mb-8" : ""}`}>
             <div
@@ -47,7 +49,7 @@ const UserMessage: FC<UserMessageProps> = ({ branchSelect, branchList, message }
                 </button>
                 
                 <div className="shadow-inner px-2 py-1 sm:px-3 sm:py-2 rounded-md">
-                    <pre className="message-text">{message.content.map(c => c.value).join('\n')}</pre>
+                    <span dangerouslySetInnerHTML={({__html: marked.parse(text) as string})}></span>
                 </div>
                 
                 {branchList.length > 1 ? (

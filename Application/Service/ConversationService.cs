@@ -13,19 +13,25 @@ namespace Application.Service;
 public class ConversationService(
     IUserContextAccessor contextAccessor,
     ApplicationContext applicationContext,
+    ICacheService cacheService,
     IFullConversationReaderRepository fullConversationReaderRepository) : IConversationService
 {
     public async Task<ServiceResponse<ConversationDto>> GetConversation(ConversationEntityId conversationId)
     {
         var user = contextAccessor.GetUserContext().User;
-        var conv = await fullConversationReaderRepository.GetConversation(user.Id, conversationId);
-        if (conv is null)
+        var cacheKey = ConversationMapper.CacheKeyFactory(user, conversationId);
+        
+        var conversationDto = await cacheService.CacheFactory(cacheKey, TimeSpan.FromHours(1), async () =>
         {
-            return new ServiceResponse<ConversationDto>("Conversation not found");
-        }
+            var conv = await fullConversationReaderRepository.GetConversation(user.Id, conversationId);
+            return conv is null
+                ? null
+                : ConversationMapper.Map(conv, user);
+        });
 
-        var conversationDto = ConversationMapper.Map(conv, user);
-        return new ServiceResponse<ConversationDto>(conversationDto);
+        return conversationDto is null
+            ? new ServiceResponse<ConversationDto>("Conversation not found")
+            : new ServiceResponse<ConversationDto>(conversationDto);
     }
 
     public async Task<ServiceResponse<List<ConversationOptionDto>>> GetConversationList()

@@ -1,4 +1,5 @@
 ﻿using Database.Entity;
+using Database.Entity.Id;
 using Domain.Conversation;
 using Domain.Exception;
 using Domain.User;
@@ -10,6 +11,11 @@ namespace Application.Mapper;
 
 public static class ConversationMapper
 {
+    public static string CacheKeyFactory(AuthenticatedUser user, ConversationEntityId conversationEntityId)
+    {
+        return $"conversation_{user.Id}_{conversationEntityId.Value}";
+    }
+    
     public static ConversationDto Map(ConversationEntity conversationEntity, AuthenticatedUser creator)
     {
         return new ConversationDto(

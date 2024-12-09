@@ -3,7 +3,7 @@ import {ConversationMessage} from "../../model/conversation/conversation.ts";
 import {findPreviousMessage, getLatestSelectedMessage} from "../../util/conversationUtil.ts";
 import {ConversationClient} from "../../util/clients/conversationClient.ts";
 import {AppendConversation, ReplyTo} from "../../model/conversation/dto/appendConversation.ts";
-import {setInputState} from "../../state/input";
+import {setInputState, setText} from "../../state/input";
 import {useAppDispatch, useAppSelector} from "../../hooks.ts";
 import {
     AssistantMessageDeltaEvent,
@@ -57,6 +57,7 @@ const ConversationResponseLogicComponent = forwardRef<ConversationResponseLogicC
 
             case "Error":
                 console.error("Handling ErrorEvent", chunk);
+                dispatch(setText(input.previousMessage ?? ""))
                 break;
 
             case "Ping":
@@ -108,7 +109,7 @@ const ConversationResponseLogicComponent = forwardRef<ConversationResponseLogicC
                 : null;
             
             // Handle editing root message.
-            if (input.editingMessage !== null && conversation.selectedConversation !== null) {
+            if (replyToObject === null && input.editingMessage !== null && conversation.selectedConversation !== null) {
                 replyToObject = {
                     conversationId: conversation.selectedConversation!.id,
                     replyToMessageId: null
@@ -121,7 +122,7 @@ const ConversationResponseLogicComponent = forwardRef<ConversationResponseLogicC
             }
             
             const appendPromise = client.appendConversation(appendConversation, handle);
-            dispatch(setInputState("sending"))
+            dispatch(setInputState("sending"));
 
             await appendPromise;
             dispatch(setInputState("ready"));
