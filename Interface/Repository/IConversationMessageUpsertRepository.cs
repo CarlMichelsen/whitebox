@@ -13,6 +13,9 @@ public interface IConversationMessageUpsertRepository
     
     void ReplyToLatestMessage(
         ConversationEntity conversation,
-        MessageEntityId promptMessageEntityId,
+        MessageEntityId assistantMessageEntityId,
+        ContentEntityId assistantMessageContentId,
+        ContentType contentType,
+        int sortOrder,
         PromptEntity promptEntity);
 }

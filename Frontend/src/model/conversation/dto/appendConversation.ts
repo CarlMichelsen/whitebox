@@ -1,6 +1,6 @@
 ﻿export type ReplyTo = {
     conversationId: string;
-    replyToMessageId: string;
+    replyToMessageId: string|null;
 }
 
 export type AppendConversation = {

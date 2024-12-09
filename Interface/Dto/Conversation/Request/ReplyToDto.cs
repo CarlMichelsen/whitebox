@@ -2,4 +2,4 @@
 
 public record ReplyToDto(
     Guid ConversationId,
-    Guid ReplyToMessageId);
+    Guid? ReplyToMessageId);

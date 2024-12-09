@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using Interface.Dto.Model;
 
 namespace Interface.Dto.Conversation.Response.Stream;
 
@@ -12,4 +13,7 @@ public class AssistantMessageEventDto : BaseStreamResponseDto
     
     [JsonPropertyName("replyToMessageId")]
     public required Guid ReplyToMessageId { get; init; }
+    
+    [JsonPropertyName("model")]
+    public required LlmModelDto Model { get; init; }
 }

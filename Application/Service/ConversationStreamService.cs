@@ -1,5 +1,6 @@
 ﻿using Application.Mapper;
 using Database;
+using Database.Entity;
 using Database.Entity.Id;
 using Domain.Conversation.Action;
 using Interface.Accessor;
@@ -47,15 +48,20 @@ public class ConversationStreamService(
         });
         
         var assistantMessageId = new MessageEntityId(Guid.CreateVersion7());
+        var assistantMessageContentId = new ContentEntityId(Guid.CreateVersion7());
+        const ContentType contentType = ContentType.Text;
+        const int sortOrder = 10;
+        var prompt = PromptConversationMapper
+            .CreatePromptFromLatestUserMessage(conversation, chatConfig);
+        
         await handler(new AssistantMessageEventDto
         {
             ConversationId = conversation.Id.Value,
             MessageId = assistantMessageId.Value,
             ReplyToMessageId = conversation.LastAppendedMessage!.Id.Value,
+            Model = AvailableModelsMapper.Map(prompt.Model),
         });
         
-        var prompt = PromptConversationMapper
-            .CreatePromptFromLatestUserMessage(conversation, chatConfig);
         var newPromptEntity = await promptService
             .StreamPrompt(prompt, async streamEvent =>
         {
@@ -66,6 +72,9 @@ public class ConversationStreamService(
                     {
                         ConversationId = conversation.Id.Value,
                         MessageId = assistantMessageId.Value,
+                        ContentId = assistantMessageContentId.Value,
+                        ContentType = ConversationMapper.Map(contentType),
+                        SortOrder = sortOrder,
                         ContentDelta = delta.Delta.Content,
                     });
                     break;
@@ -103,8 +112,13 @@ public class ConversationStreamService(
             return;
         }
         
-        conversationMessageUpsertRepository
-            .ReplyToLatestMessage(conversation, assistantMessageId, newPromptEntity);
+        conversationMessageUpsertRepository.ReplyToLatestMessage(
+            conversation,
+            assistantMessageId,
+            assistantMessageContentId,
+            contentType,
+            sortOrder,
+            newPromptEntity);
 
         if (string.IsNullOrWhiteSpace(conversation.Summary))
         {

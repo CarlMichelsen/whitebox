@@ -1,8 +1,10 @@
-﻿namespace LLMIntegration.Util;
+﻿using System.Text.Json.Serialization;
+
+namespace LLMIntegration.Util;
 
 public record LlmModel(
-    LlmProvider Provider,
-    string ModelName,
-    string ModelDescription,
-    string ModelIdentifier,
-    int MaxCompletionTokens = 2048);
+    [property: JsonPropertyName("provider")] LlmProvider Provider,
+    [property: JsonPropertyName("modelName")] string ModelName,
+    [property: JsonPropertyName("modelDescription")] string ModelDescription,
+    [property: JsonPropertyName("modelIdentifier")] string ModelIdentifier,
+    [property: JsonPropertyName("maxCompletionTokens")] int MaxCompletionTokens = 2048);

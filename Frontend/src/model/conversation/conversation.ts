@@ -3,7 +3,7 @@ import {AuthenticatedUser} from "../user.ts";
 
 export type MessageContent = {
     id: string;
-    type: "text";
+    type: "text"|string;
     value: string;
     sortOrder: number;
 }

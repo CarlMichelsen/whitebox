@@ -1,5 +1,7 @@
-﻿namespace LLMIntegration.Generic.Dto;
+﻿using System.Text.Json.Serialization;
+
+namespace LLMIntegration.Generic.Dto;
 
 public record LlmMessage(
-    LlmRole Role,
-    List<LlmPart> Parts);
+    [property: JsonPropertyName("role")] LlmRole Role,
+    [property: JsonPropertyName("parts")] List<LlmPart> Parts);

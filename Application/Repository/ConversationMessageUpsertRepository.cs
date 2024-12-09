@@ -62,12 +62,16 @@ public class ConversationMessageUpsertRepository(
                 throw new ItemNotFoundException("Did not find conversation to reply to");
             }
 
-            var replyToMessage = conversation.Messages
-                .FirstOrDefault(m => m.Id == appendConversation.ReplyTo.ReplyToMessageId);
-
-            if (replyToMessage is null)
+            MessageEntity? replyToMessage = null;
+            if (appendConversation.ReplyTo.ReplyToMessageId is not null)
             {
-                throw new ItemNotFoundException("Did not find message to reply to");
+                replyToMessage = conversation.Messages
+                    .FirstOrDefault(m => m.Id == appendConversation.ReplyTo.ReplyToMessageId);
+                
+                if (replyToMessage is null)
+                {
+                    throw new ItemNotFoundException("Did not find the message to reply to");
+                }
             }
             
             var message = MessageCreator.CreateMessageFromText(
@@ -86,6 +90,9 @@ public class ConversationMessageUpsertRepository(
     public void ReplyToLatestMessage(
         ConversationEntity conversation,
         MessageEntityId promptMessageEntityId,
+        ContentEntityId assistantMessageContentId,
+        ContentType contentType,
+        int sortOrder,
         PromptEntity promptEntity)
     {
         if (promptEntity.Usage is null)
@@ -109,12 +116,12 @@ public class ConversationMessageUpsertRepository(
 
         var content = new ContentEntity
         {
-            Id = new ContentEntityId(Guid.CreateVersion7()),
+            Id = assistantMessageContentId,
             MessageId = message.Id,
             Message = message,
-            Type = ContentType.Text,
+            Type = contentType,
             Value = promptEntity.Usage.Completion,
-            SortOrder = 10,
+            SortOrder = sortOrder,
         };
         
         message.Content.Add(content);

@@ -1,7 +1,9 @@
-﻿namespace Interface.Dto.Model;
+﻿using System.Text.Json.Serialization;
+
+namespace Interface.Dto.Model;
 
 public record LlmModelDto(
-    string Provider,
-    string ModelName,
-    string ModelDescription,
-    string ModelIdentifier);
+    [property: JsonPropertyName("provider")] string Provider,
+    [property: JsonPropertyName("modelName")] string ModelName,
+    [property: JsonPropertyName("modelDescription")] string ModelDescription,
+    [property: JsonPropertyName("modelIdentifier")] string ModelIdentifier);

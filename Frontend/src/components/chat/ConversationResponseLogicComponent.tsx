@@ -95,7 +95,7 @@ const ConversationResponseLogicComponent = forwardRef<ConversationResponseLogicC
             if (input.editingMessage !== null && conversation.selectedConversation !== null) {
                 replyToMessage = input.editingMessage
                     ? findPreviousMessage(conversation.selectedConversation, input.editingMessage)
-                    : null
+                    : null;
             } else {
                 replyToMessage = conversation.selectedConversation
                     ? getLatestSelectedMessage(conversation.selectedConversation)
@@ -103,10 +103,18 @@ const ConversationResponseLogicComponent = forwardRef<ConversationResponseLogicC
             }
 
             const client = new ConversationClient();
-            const replyToObject: ReplyTo|null = !!replyToMessage
+            let replyToObject: ReplyTo|null = !!replyToMessage
                 ? { conversationId: conversation.selectedConversation!.id, replyToMessageId: replyToMessage.id }
                 : null;
-
+            
+            // Handle editing root message.
+            if (input.editingMessage !== null && conversation.selectedConversation !== null) {
+                replyToObject = {
+                    conversationId: conversation.selectedConversation!.id,
+                    replyToMessageId: null
+                };
+            }
+            
             const appendConversation: AppendConversation = {
                 replyTo: replyToObject,
                 text,

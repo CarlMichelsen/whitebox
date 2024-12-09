@@ -1,5 +1,7 @@
-﻿namespace LLMIntegration.Generic.Dto;
+﻿using System.Text.Json.Serialization;
+
+namespace LLMIntegration.Generic.Dto;
 
 public record LlmPart(
-    PartType Type,
-    string Content);
+    [property: JsonPropertyName("type")] PartType Type,
+    [property: JsonPropertyName("content")] string Content);

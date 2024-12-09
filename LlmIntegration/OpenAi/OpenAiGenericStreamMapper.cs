@@ -38,7 +38,7 @@ public class OpenAiGenericStreamMapper : ILlmStreamMapper<OpenAiChunk>
             this.streamDataCollector.SetFinnishReason(choice.FinishReason);
         }
 
-        if (!string.IsNullOrWhiteSpace(choice.Delta.Content))
+        if (!string.IsNullOrEmpty(choice.Delta.Content))
         {
             return new LlmStreamContentDelta
             {

@@ -1,5 +1,7 @@
-﻿namespace Interface.Dto.Model;
+﻿using System.Text.Json.Serialization;
+
+namespace Interface.Dto.Model;
 
 public record LlmProviderGroupDto(
-    string Provider,
-    List<LlmModelDto> Models);
+    [property: JsonPropertyName("provider")] string Provider,
+    [property: JsonPropertyName("models")] List<LlmModelDto> Models);

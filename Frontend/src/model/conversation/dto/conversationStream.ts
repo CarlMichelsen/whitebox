@@ -1,4 +1,5 @@
 ﻿import {ConversationMessage, MessageUsage} from "../conversation.ts";
+import {LlmModel} from "../llmModel.ts";
 
 export type ConversationEventType =
     "Conversation"
@@ -37,11 +38,15 @@ export type AssistantMessageEvent = Omit<StreamEvent, 'type'> & {
     type: ConversationEventType[4];
     messageId: string;
     replyToMessageId: string;
+    model: LlmModel;
 }
 
 export type AssistantMessageDeltaEvent = Omit<StreamEvent, 'type'> & {
     type: ConversationEventType[5];
     messageId: string;
+    contentId: string;
+    contentType: string;
+    sortOrder: number;
     contentDelta: string;
 }
 

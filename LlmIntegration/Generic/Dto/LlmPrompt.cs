@@ -1,8 +1,9 @@
-﻿using LLMIntegration.Util;
+﻿using System.Text.Json.Serialization;
+using LLMIntegration.Util;
 
 namespace LLMIntegration.Generic.Dto;
 
 public record LlmPrompt(
-    LlmModel Model,
-    LlmContent Content,
-    int MaxTokens);
+    [property: JsonPropertyName("model")] LlmModel Model,
+    [property: JsonPropertyName("content")] LlmContent Content,
+    [property: JsonPropertyName("maxTokens")] int MaxTokens);

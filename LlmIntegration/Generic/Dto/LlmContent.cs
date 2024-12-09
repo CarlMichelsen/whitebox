@@ -1,5 +1,7 @@
-﻿namespace LLMIntegration.Generic.Dto;
+﻿using System.Text.Json.Serialization;
+
+namespace LLMIntegration.Generic.Dto;
 
 public record LlmContent(
-    List<LlmMessage> Messages,
-    string? SystemMessage = default);
+    [property: JsonPropertyName("messages")] List<LlmMessage> Messages,
+    [property: JsonPropertyName("systemMessage")] string? SystemMessage = default);

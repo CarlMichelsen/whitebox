@@ -50,9 +50,12 @@ public class ConversationStreamHandler(
         ReplyTo? replyTo = null;
         if (appendConversationDto.ReplyTo is not null)
         {
+            var replyToMessageId = appendConversationDto.ReplyTo.ReplyToMessageId is null
+                ? null
+                : new MessageEntityId((Guid)appendConversationDto.ReplyTo.ReplyToMessageId);
             replyTo = new ReplyTo(
                 new ConversationEntityId(appendConversationDto.ReplyTo.ConversationId),
-                new MessageEntityId(appendConversationDto.ReplyTo.ReplyToMessageId));
+                replyToMessageId);
         }
         
         return new AppendConversation(

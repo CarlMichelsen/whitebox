@@ -52,6 +52,11 @@ public static class ConversationMapper
             CreatedUtc: TimeMapper.GetUnixTimeSeconds(messageEntity.CreatedUtc));
     }
 
+    public static string Map(ContentType contentType)
+    {
+        return Enum.GetName(contentType)!.ToLower();
+    }
+
     private static List<ConversationSectionDto> GetSections(ConversationEntity conversationEntity)
     {
         var rootMessages = conversationEntity.Messages
@@ -89,7 +94,7 @@ public static class ConversationMapper
     {
         return new MessageContentDto(
             Id: contentEntity.Id.Value,
-            Type: Enum.GetName(contentEntity.Type)!,
+            Type: Map(contentEntity.Type),
             Value: contentEntity.Value,
             SortOrder: contentEntity.SortOrder);
     }
