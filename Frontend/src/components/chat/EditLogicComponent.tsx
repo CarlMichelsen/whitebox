@@ -73,7 +73,7 @@ const EditLogicComponent: FC = () => {
         <svg
             className={input.editingMessage === null ? "hidden" : "block"}
             style={{
-                position: 'absolute',
+                position: 'fixed',
                 top: 0,
                 left: 0,
                 width: '100%',

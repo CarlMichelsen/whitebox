@@ -9,29 +9,37 @@ public static class PromptConversationMapper
 {
     public static LlmPrompt CreatePromptFromLatestUserMessage(
         ConversationEntity conversation,
-        ChatConfigurationEntity chatConfiguration)
+        string modelIdentifier,
+        int maxTokens,
+        bool useLatest = false)
     {
-        var latestUserMessage = conversation.LastAppendedMessage!.PromptId is not null
+        var branchMessage = conversation.LastAppendedMessage!.PromptId is not null
             ? conversation.Messages.FirstOrDefault(m => m.Id == conversation.LastAppendedMessage.PreviousMessageId!)
             : conversation.LastAppendedMessage;
 
-        if (latestUserMessage is null)
+        if (useLatest)
+        {
+            branchMessage = conversation.LastAppendedMessage;
+        }
+
+        if (branchMessage is null)
         {
             throw new IncompleteConversationEntityException(
                 "No user-message found to reply to when mapping llm-prompt");
         }
         
-        var messageChain = CreateMessageLinkedList(conversation, latestUserMessage);
+        var messageChain = CreateMessageLinkedList(conversation, branchMessage);
 
-        return CreateLlmPrompt(messageChain, chatConfiguration, conversation.SystemMessage);
+        return CreateLlmPrompt(messageChain, modelIdentifier, maxTokens, conversation.SystemMessage);
     }
 
     private static LlmPrompt CreateLlmPrompt(
         LinkedList<MessageEntity> messages,
-        ChatConfigurationEntity chatConfiguration,
+        string modelIdentifier,
+        int maxTokens,
         string? conversationSystemMessage)
     {
-        if (!LlmModels.TryGetModel(chatConfiguration.SelectedModelIdentifier, out var model))
+        if (!LlmModels.TryGetModel(modelIdentifier, out var model))
         {
             throw new PromptMapException("ChatConfiguration model does not exist");
         }
@@ -40,13 +48,13 @@ public static class PromptConversationMapper
             Messages: messages.Select(Map).ToList(),
             SystemMessage: conversationSystemMessage);
 
-        var maxTokens = chatConfiguration.MaxTokens >= model!.MaxCompletionTokens
+        var clampedMaxTokens = maxTokens >= model!.MaxCompletionTokens
             ? model.MaxCompletionTokens - 1
-            : chatConfiguration.MaxTokens;
+            : maxTokens;
         return new LlmPrompt(
             Model: model!,
             Content: content,
-            MaxTokens: maxTokens);
+            MaxTokens: clampedMaxTokens);
     }
 
     private static LlmMessage Map(MessageEntity message)

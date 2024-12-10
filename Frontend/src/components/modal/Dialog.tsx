@@ -18,12 +18,12 @@ const Dialog: FC<DialogProps> = ({ title, isOpen, onClose, children }) => {
 
     return createPortal(
         <div
-            className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 flex items-center justify-center z-50 backdrop-blur-sm shadow-inner"
+            className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 flex items-center justify-center z-50 backdrop-blur-sm"
             onMouseDown={onClose}
         >
             <dialog
                 onMouseDown={handleDialogClick}
-                className="grid grid-rows-[1.5rem_1fr] bg-white dark:bg-neutral-800 sm:rounded-sm w-full h-max-[750px] md:w-[750px]"
+                className="grid grid-rows-[1.5rem_1fr] bg-white dark:bg-neutral-800 sm:rounded-sm w-full h-max-[750px] md:w-[750px] shadow-[inset_0_4px_6px_-1px_rgba(0,0,0,0.3)]"
                 open
             >
                 <div className="grid grid-cols-[1fr_1.5rem]">

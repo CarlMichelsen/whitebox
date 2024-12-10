@@ -62,7 +62,7 @@ public class ConversationStreamService(
         const ContentType contentType = ContentType.Text;
         const int sortOrder = 10;
         var prompt = PromptConversationMapper
-            .CreatePromptFromLatestUserMessage(conversation, chatConfig);
+            .CreatePromptFromLatestUserMessage(conversation, chatConfig.SelectedModelIdentifier, chatConfig.MaxTokens);
         
         await handler(new AssistantMessageEventDto
         {
@@ -132,8 +132,10 @@ public class ConversationStreamService(
 
         if (string.IsNullOrWhiteSpace(conversation.Summary))
         {
-            var summary = $"Fake Summary ({Random.Shared.Next(100)})";
-            conversation.Summary = summary;
+            var summaryPrompt = SummaryPromptMapper.SummaryPrompt(conversation);
+            var res = await promptService.Prompt(summaryPrompt);
+            conversation.Summary = res.Usage!.Completion;
+            
             await handler(new SetSummaryEventDto
             {
                 ConversationId = conversation.Id.Value,

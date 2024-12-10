@@ -36,6 +36,7 @@ public class PromptService(
             Stream = false,
         };
         applicationContext.Prompt.Add(promptEntity);
+        await applicationContext.SaveChangesAsync();
 
         LlmResponse? response = default;
 
@@ -64,7 +65,7 @@ public class PromptService(
             InputTokens = response.Usage.InputTokens,
             OutputTokens = response.Usage.OutputTokens,
             CompleteUtc = DateTime.UtcNow,
-            Completion = string.Join('\n', response.Parts),
+            Completion = string.Join('\n', response.Parts.Select(p => p.Content)),
         };
         
         promptEntity.UsageId = usage.Id;
