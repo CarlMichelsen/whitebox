@@ -38,6 +38,7 @@
 
     <ItemGroup>
       <Folder Include="TestData\" />
+      <Folder Include="TestData\TestResponseCache\" />
     </ItemGroup>
 
 </Project>

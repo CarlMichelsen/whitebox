@@ -10,12 +10,26 @@ public static class GoogleGenericMapper
     private const string AssistantString = "model";
     private const string UserString = "user";
     
+    private const string DefaultSystemMessage = "Please do your best to assist me.";
+    private const string AssistantSystemMessageAcknowledgement = "I understand, I will do that.";
+    
     public static GooglePrompt Map(LlmPrompt prompt)
     {
-        // System messages are not supported :(
+        // System messages are not supported I'm gas-lighting the model.
+        List<GoogleContent> messages =
+                [
+                    new(
+                        Role: UserString,
+                        Parts: [new GooglePart(Text: prompt.Content.SystemMessage ?? DefaultSystemMessage)]),
+                    new(
+                            Role: AssistantString,
+                            Parts: [new GooglePart(Text: AssistantSystemMessageAcknowledgement)]),
+                    ..prompt.Content.Messages.Select(Map).ToList()
+                ];
+        
         return new GooglePrompt(
             Model: prompt.Model.ModelIdentifier,
-            Contents: prompt.Content.Messages.Select(Map).ToList());
+            Contents: messages);
     }
     
     public static LlmResponse Map(GoogleResponse response, string responseId)

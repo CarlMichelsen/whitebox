@@ -115,7 +115,6 @@ namespace Api.Migrations
                         .HasColumnName("summary");
 
                     b.Property<string>("SystemMessage")
-                        .IsRequired()
                         .HasMaxLength(102400)
                         .HasColumnType("character varying(102400)")
                         .HasColumnName("system_message");

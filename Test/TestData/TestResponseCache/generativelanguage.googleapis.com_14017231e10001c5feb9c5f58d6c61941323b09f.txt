@@ -1,4 +1,0 @@
-data: {"candidates": [{"content": {"parts": [{"text": "Hello"}],"role": "model"}}],"usageMetadata": {"promptTokenCount": 4,"totalTokenCount": 4},"modelVersion": "gemini-1.5-flash-8b-001"}
-
-data: {"candidates": [{"content": {"parts": [{"text": "! How can I help you today?\n"}],"role": "model"},"finishReason": "STOP","safetyRatings": [{"category": "HARM_CATEGORY_HATE_SPEECH","probability": "NEGLIGIBLE"},{"category": "HARM_CATEGORY_DANGEROUS_CONTENT","probability": "NEGLIGIBLE"},{"category": "HARM_CATEGORY_HARASSMENT","probability": "NEGLIGIBLE"},{"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT","probability": "NEGLIGIBLE"}]}],"usageMetadata": {"promptTokenCount": 4,"candidatesTokenCount": 10,"totalTokenCount": 14},"modelVersion": "gemini-1.5-flash-8b-001"}
-

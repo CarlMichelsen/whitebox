@@ -30,7 +30,7 @@ public class ConversationMessageUpsertRepository(
             conversation = new ConversationEntity
             {
                 Id = new ConversationEntityId(Guid.CreateVersion7()),
-                SystemMessage = chatConfiguration.DefaultSystemMessage ?? string.Empty,
+                SystemMessage = chatConfiguration.DefaultSystemMessage,
                 Summary = null,
                 Creator = foundUser,
                 CreatorId = foundUser.Id,

@@ -33,7 +33,7 @@ export type ConversationSection = {
 export type Conversation = {
     id: string;
     creator: AuthenticatedUser;
-    systemMessage: string;
+    systemMessage: string|null;
     summary: string|null;
     sections: ConversationSection[];
     lastAltered: number;

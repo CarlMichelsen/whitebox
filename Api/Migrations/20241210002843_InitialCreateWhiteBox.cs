@@ -77,12 +77,12 @@ namespace Api.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    system_message = table.Column<string>(type: "character varying(102400)", maxLength: 102400, nullable: false),
+                    summary = table.Column<string>(type: "character varying(1024)", maxLength: 1024, nullable: true),
+                    system_message = table.Column<string>(type: "character varying(102400)", maxLength: 102400, nullable: true),
                     creator_id = table.Column<long>(type: "bigint", nullable: false),
                     created_utc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     last_altered_utc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     last_appended_message_id = table.Column<Guid>(type: "uuid", nullable: true),
-                    summary = table.Column<string>(type: "character varying(1024)", maxLength: 1024, nullable: true),
                 },
                 constraints: table =>
                 {

@@ -11,8 +11,11 @@ public class ConversationEntity
     
     public required ConversationEntityId Id { get; init; }
     
+    [MaxLength(1024)]
+    public required string? Summary { get; set; }
+    
     [MaxLength(1024 * 100)]
-    public required string SystemMessage { get; set; }
+    public required string? SystemMessage { get; set; }
     
     public required long CreatorId { get; init; }
     
@@ -40,9 +43,6 @@ public class ConversationEntity
             this.LastAppendedMessageId = value?.Id;
         }
     }
-    
-    [MaxLength(1024)]
-    public string? Summary { get; set; }
     
     public static void OnModelCreating(EntityTypeBuilder<ConversationEntity> entity)
     {

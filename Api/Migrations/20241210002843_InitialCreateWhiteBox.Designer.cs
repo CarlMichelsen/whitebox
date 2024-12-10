@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Api.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20241208125535_InitialCreateWhiteBox")]
+    [Migration("20241210002843_InitialCreateWhiteBox")]
     partial class InitialCreateWhiteBox
     {
         /// <inheritdoc />
@@ -118,7 +118,6 @@ namespace Api.Migrations
                         .HasColumnName("summary");
 
                     b.Property<string>("SystemMessage")
-                        .IsRequired()
                         .HasMaxLength(102400)
                         .HasColumnType("character varying(102400)")
                         .HasColumnName("system_message");

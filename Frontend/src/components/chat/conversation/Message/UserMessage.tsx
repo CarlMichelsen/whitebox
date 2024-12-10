@@ -8,7 +8,7 @@ import CrossBlack from "../../../../assets/icons/cross-black.svg"
 import ArrowWhite from "../../../../assets/icons/arrow-white.svg"
 import ArrowBlack from "../../../../assets/icons/arrow-black.svg"
 import {setEditingMessage} from "../../../../state/input";
-import {marked} from "marked";
+import {whiteBoxMarked} from "../../../../util/helpers/marked.ts";
 
 type UserMessageProps = {
     branchSelect: (messageId: string) => void;
@@ -49,7 +49,7 @@ const UserMessage: FC<UserMessageProps> = ({ branchSelect, branchList, message }
                 </button>
                 
                 <div className="shadow-inner px-2 py-1 sm:px-3 sm:py-2 rounded-md">
-                    <span dangerouslySetInnerHTML={({__html: marked.parse(text) as string})}></span>
+                    <span dangerouslySetInnerHTML={({__html: whiteBoxMarked.parse(text) as string})}></span>
                 </div>
                 
                 {branchList.length > 1 ? (
