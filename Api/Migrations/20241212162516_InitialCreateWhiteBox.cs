@@ -13,11 +13,11 @@ namespace Api.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "whitebox");
+                name: "white_box");
 
             migrationBuilder.CreateTable(
                 name: "chat_configuration",
-                schema: "whitebox",
+                schema: "white_box",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -33,7 +33,7 @@ namespace Api.Migrations
 
             migrationBuilder.CreateTable(
                 name: "user",
-                schema: "whitebox",
+                schema: "white_box",
                 columns: table => new
                 {
                     id = table.Column<long>(type: "bigint", nullable: false)
@@ -49,7 +49,7 @@ namespace Api.Migrations
                     table.ForeignKey(
                         name: "fk_user_chat_configuration_chat_configuration_id",
                         column: x => x.chat_configuration_id,
-                        principalSchema: "whitebox",
+                        principalSchema: "white_box",
                         principalTable: "chat_configuration",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -57,7 +57,7 @@ namespace Api.Migrations
 
             migrationBuilder.CreateTable(
                 name: "content",
-                schema: "whitebox",
+                schema: "white_box",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -73,7 +73,7 @@ namespace Api.Migrations
 
             migrationBuilder.CreateTable(
                 name: "conversation",
-                schema: "whitebox",
+                schema: "white_box",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -83,6 +83,7 @@ namespace Api.Migrations
                     created_utc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     last_altered_utc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     last_appended_message_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    deleted_at_utc = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                 },
                 constraints: table =>
                 {
@@ -90,7 +91,7 @@ namespace Api.Migrations
                     table.ForeignKey(
                         name: "fk_conversation_user_creator_id",
                         column: x => x.creator_id,
-                        principalSchema: "whitebox",
+                        principalSchema: "white_box",
                         principalTable: "user",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -98,7 +99,7 @@ namespace Api.Migrations
 
             migrationBuilder.CreateTable(
                 name: "message",
-                schema: "whitebox",
+                schema: "white_box",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -106,6 +107,7 @@ namespace Api.Migrations
                     prompt_id = table.Column<Guid>(type: "uuid", nullable: true),
                     previous_message_id = table.Column<Guid>(type: "uuid", nullable: true),
                     created_utc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    deleted_at_utc = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                 },
                 constraints: table =>
                 {
@@ -113,21 +115,21 @@ namespace Api.Migrations
                     table.ForeignKey(
                         name: "fk_message_conversation_conversation_id",
                         column: x => x.conversation_id,
-                        principalSchema: "whitebox",
+                        principalSchema: "white_box",
                         principalTable: "conversation",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_message_message_previous_message_id",
                         column: x => x.previous_message_id,
-                        principalSchema: "whitebox",
+                        principalSchema: "white_box",
                         principalTable: "message",
                         principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "prompt",
-                schema: "whitebox",
+                schema: "white_box",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -143,7 +145,7 @@ namespace Api.Migrations
                     table.ForeignKey(
                         name: "fk_prompt_user_user_id",
                         column: x => x.user_id,
-                        principalSchema: "whitebox",
+                        principalSchema: "white_box",
                         principalTable: "user",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -151,7 +153,7 @@ namespace Api.Migrations
 
             migrationBuilder.CreateTable(
                 name: "usage",
-                schema: "whitebox",
+                schema: "white_box",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -170,7 +172,7 @@ namespace Api.Migrations
                     table.ForeignKey(
                         name: "fk_usage_prompt_prompt_id",
                         column: x => x.prompt_id,
-                        principalSchema: "whitebox",
+                        principalSchema: "white_box",
                         principalTable: "prompt",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -178,101 +180,115 @@ namespace Api.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "ix_content_message_id",
-                schema: "whitebox",
+                schema: "white_box",
                 table: "content",
                 column: "message_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_conversation_creator_id",
-                schema: "whitebox",
+                schema: "white_box",
                 table: "conversation",
                 column: "creator_id");
 
             migrationBuilder.CreateIndex(
+                name: "ix_conversation_deleted_at_utc",
+                schema: "white_box",
+                table: "conversation",
+                column: "deleted_at_utc",
+                filter: "\"conversation\".\"deleted_at_utc\" IS NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_conversation_last_appended_message_id",
-                schema: "whitebox",
+                schema: "white_box",
                 table: "conversation",
                 column: "last_appended_message_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_message_conversation_id",
-                schema: "whitebox",
+                schema: "white_box",
                 table: "message",
                 column: "conversation_id");
 
             migrationBuilder.CreateIndex(
+                name: "ix_message_deleted_at_utc",
+                schema: "white_box",
+                table: "message",
+                column: "deleted_at_utc",
+                filter: "\"message\".\"deleted_at_utc\" IS NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_message_previous_message_id",
-                schema: "whitebox",
+                schema: "white_box",
                 table: "message",
                 column: "previous_message_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_message_prompt_id",
-                schema: "whitebox",
+                schema: "white_box",
                 table: "message",
                 column: "prompt_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_prompt_usage_id",
-                schema: "whitebox",
+                schema: "white_box",
                 table: "prompt",
                 column: "usage_id",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_prompt_user_id",
-                schema: "whitebox",
+                schema: "white_box",
                 table: "prompt",
                 column: "user_id");
 
             migrationBuilder.CreateIndex(
                 name: "ix_usage_prompt_id",
-                schema: "whitebox",
+                schema: "white_box",
                 table: "usage",
                 column: "prompt_id",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_user_chat_configuration_id",
-                schema: "whitebox",
+                schema: "white_box",
                 table: "user",
                 column: "chat_configuration_id",
                 unique: true);
 
             migrationBuilder.AddForeignKey(
                 name: "fk_content_message_message_id",
-                schema: "whitebox",
+                schema: "white_box",
                 table: "content",
                 column: "message_id",
-                principalSchema: "whitebox",
+                principalSchema: "white_box",
                 principalTable: "message",
                 principalColumn: "id",
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "fk_conversation_message_last_appended_message_id",
-                schema: "whitebox",
+                schema: "white_box",
                 table: "conversation",
                 column: "last_appended_message_id",
-                principalSchema: "whitebox",
+                principalSchema: "white_box",
                 principalTable: "message",
                 principalColumn: "id");
 
             migrationBuilder.AddForeignKey(
                 name: "fk_message_prompt_prompt_id",
-                schema: "whitebox",
+                schema: "white_box",
                 table: "message",
                 column: "prompt_id",
-                principalSchema: "whitebox",
+                principalSchema: "white_box",
                 principalTable: "prompt",
                 principalColumn: "id");
 
             migrationBuilder.AddForeignKey(
                 name: "fk_prompt_usage_usage_id",
-                schema: "whitebox",
+                schema: "white_box",
                 table: "prompt",
                 column: "usage_id",
-                principalSchema: "whitebox",
+                principalSchema: "white_box",
                 principalTable: "usage",
                 principalColumn: "id");
         }
@@ -282,46 +298,46 @@ namespace Api.Migrations
         {
             migrationBuilder.DropForeignKey(
                 name: "fk_conversation_message_last_appended_message_id",
-                schema: "whitebox",
+                schema: "white_box",
                 table: "conversation");
 
             migrationBuilder.DropForeignKey(
                 name: "fk_prompt_user_user_id",
-                schema: "whitebox",
+                schema: "white_box",
                 table: "prompt");
 
             migrationBuilder.DropForeignKey(
                 name: "fk_usage_prompt_prompt_id",
-                schema: "whitebox",
+                schema: "white_box",
                 table: "usage");
 
             migrationBuilder.DropTable(
                 name: "content",
-                schema: "whitebox");
+                schema: "white_box");
 
             migrationBuilder.DropTable(
                 name: "message",
-                schema: "whitebox");
+                schema: "white_box");
 
             migrationBuilder.DropTable(
                 name: "conversation",
-                schema: "whitebox");
+                schema: "white_box");
 
             migrationBuilder.DropTable(
                 name: "user",
-                schema: "whitebox");
+                schema: "white_box");
 
             migrationBuilder.DropTable(
                 name: "chat_configuration",
-                schema: "whitebox");
+                schema: "white_box");
 
             migrationBuilder.DropTable(
                 name: "prompt",
-                schema: "whitebox");
+                schema: "white_box");
 
             migrationBuilder.DropTable(
                 name: "usage",
-                schema: "whitebox");
+                schema: "white_box");
         }
     }
 }

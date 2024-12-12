@@ -13,7 +13,7 @@ namespace Database;
 public class ApplicationContext(
     DbContextOptions<ApplicationContext> options) : DbContext(options)
 {
-    private const string SchemaName = "whitebox";
+    public const string SchemaName = "white_box";
     
     public DbSet<ChatConfigurationEntity> ChatConfiguration { get; init; }
     
@@ -29,6 +29,21 @@ public class ApplicationContext(
     
     public DbSet<UsageEntity> Usage { get; init; }
     
+    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        var softDeleteEntries = this.ChangeTracker
+            .Entries<ISoftDeletable>()
+            .Where(e => e.State == EntityState.Deleted);
+        
+        foreach (var entityEntry in softDeleteEntries)
+        {
+            entityEntry.State = EntityState.Modified;
+            entityEntry.Property(nameof(ISoftDeletable.DeletedAtUtc)).CurrentValue = DateTime.UtcNow;
+        }
+
+        return await base.SaveChangesAsync(cancellationToken);
+    }
+    
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema(SchemaName);
@@ -36,8 +51,8 @@ public class ApplicationContext(
         modelBuilder.Entity<ChatConfigurationEntity>(ChatConfigurationEntity.OnModelCreating);
         modelBuilder.Entity<UserEntity>(UserEntity.OnModelCreating);
         
-        modelBuilder.Entity<ConversationEntity>(ConversationEntity.OnModelCreating);
-        modelBuilder.Entity<MessageEntity>(MessageEntity.OnModelCreating);
+        modelBuilder.Entity<ConversationEntity>(entity => ConversationEntity.OnModelCreating(entity, modelBuilder));
+        modelBuilder.Entity<MessageEntity>(entity => MessageEntity.OnModelCreating(entity, modelBuilder));
         modelBuilder.Entity<ContentEntity>(ContentEntity.OnModelCreating);
         
         modelBuilder.Entity<PromptEntity>(PromptEntity.OnModelCreating);

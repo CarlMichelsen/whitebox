@@ -98,7 +98,11 @@ public static class Dependencies
         {
             options.UseNpgsql(
                 builder.Configuration.GetConnectionString("DefaultConnection"),
-                b => b.MigrationsAssembly("Api"))
+                b =>
+                {
+                    b.MigrationsAssembly("Api");
+                    b.MigrationsHistoryTable("__EFMigrationsHistory", ApplicationContext.SchemaName);
+                })
                 .UseSnakeCaseNamingConvention();
             
             if (builder.Environment.IsDevelopment())

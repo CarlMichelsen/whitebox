@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Database.Entity.Id;
 using Database.Entity.Util;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Database.Entity;
 
-public class ConversationEntity
+public class ConversationEntity : ISoftDeletable
 {
     private MessageEntity? lastAppendedMessage;
     
@@ -44,7 +45,9 @@ public class ConversationEntity
         }
     }
     
-    public static void OnModelCreating(EntityTypeBuilder<ConversationEntity> entity)
+    public DateTime? DeletedAtUtc { get; set; }
+    
+    public static void OnModelCreating(EntityTypeBuilder<ConversationEntity> entity, ModelBuilder modelBuilder)
     {
         entity
             .Property(e => e.Id)
@@ -64,5 +67,7 @@ public class ConversationEntity
             .HasOne(e => e.LastAppendedMessage)
             .WithMany()
             .HasForeignKey(e => e.LastAppendedMessageId);
+        
+        entity.MakeSoftDeletable(modelBuilder);
     }
 }

@@ -17,7 +17,7 @@ namespace Api.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasDefaultSchema("whitebox")
+                .HasDefaultSchema("white_box")
                 .HasAnnotation("ProductVersion", "9.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
@@ -51,7 +51,7 @@ namespace Api.Migrations
                     b.HasKey("Id")
                         .HasName("pk_chat_configuration");
 
-                    b.ToTable("chat_configuration", "whitebox");
+                    b.ToTable("chat_configuration", "white_box");
                 });
 
             modelBuilder.Entity("Database.Entity.ContentEntity", b =>
@@ -84,7 +84,7 @@ namespace Api.Migrations
                     b.HasIndex("MessageId")
                         .HasDatabaseName("ix_content_message_id");
 
-                    b.ToTable("content", "whitebox");
+                    b.ToTable("content", "white_box");
                 });
 
             modelBuilder.Entity("Database.Entity.ConversationEntity", b =>
@@ -100,6 +100,10 @@ namespace Api.Migrations
                     b.Property<long>("CreatorId")
                         .HasColumnType("bigint")
                         .HasColumnName("creator_id");
+
+                    b.Property<DateTime?>("DeletedAtUtc")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_at_utc");
 
                     b.Property<DateTime>("LastAlteredUtc")
                         .HasColumnType("timestamp with time zone")
@@ -125,10 +129,14 @@ namespace Api.Migrations
                     b.HasIndex("CreatorId")
                         .HasDatabaseName("ix_conversation_creator_id");
 
+                    b.HasIndex("DeletedAtUtc")
+                        .HasDatabaseName("ix_conversation_deleted_at_utc")
+                        .HasFilter("\"conversation\".\"deleted_at_utc\" IS NULL");
+
                     b.HasIndex("LastAppendedMessageId")
                         .HasDatabaseName("ix_conversation_last_appended_message_id");
 
-                    b.ToTable("conversation", "whitebox");
+                    b.ToTable("conversation", "white_box");
                 });
 
             modelBuilder.Entity("Database.Entity.MessageEntity", b =>
@@ -145,6 +153,10 @@ namespace Api.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_utc");
 
+                    b.Property<DateTime?>("DeletedAtUtc")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deleted_at_utc");
+
                     b.Property<Guid?>("PreviousMessageId")
                         .HasColumnType("uuid")
                         .HasColumnName("previous_message_id");
@@ -159,13 +171,17 @@ namespace Api.Migrations
                     b.HasIndex("ConversationId")
                         .HasDatabaseName("ix_message_conversation_id");
 
+                    b.HasIndex("DeletedAtUtc")
+                        .HasDatabaseName("ix_message_deleted_at_utc")
+                        .HasFilter("\"message\".\"deleted_at_utc\" IS NULL");
+
                     b.HasIndex("PreviousMessageId")
                         .HasDatabaseName("ix_message_previous_message_id");
 
                     b.HasIndex("PromptId")
                         .HasDatabaseName("ix_message_prompt_id");
 
-                    b.ToTable("message", "whitebox");
+                    b.ToTable("message", "white_box");
                 });
 
             modelBuilder.Entity("Database.Entity.PromptEntity", b =>
@@ -206,7 +222,7 @@ namespace Api.Migrations
                     b.HasIndex("UserId")
                         .HasDatabaseName("ix_prompt_user_id");
 
-                    b.ToTable("prompt", "whitebox");
+                    b.ToTable("prompt", "white_box");
                 });
 
             modelBuilder.Entity("Database.Entity.UsageEntity", b =>
@@ -262,7 +278,7 @@ namespace Api.Migrations
                         .IsUnique()
                         .HasDatabaseName("ix_usage_prompt_id");
 
-                    b.ToTable("usage", "whitebox");
+                    b.ToTable("usage", "white_box");
                 });
 
             modelBuilder.Entity("Database.Entity.UserEntity", b =>
@@ -301,7 +317,7 @@ namespace Api.Migrations
                         .IsUnique()
                         .HasDatabaseName("ix_user_chat_configuration_id");
 
-                    b.ToTable("user", "whitebox");
+                    b.ToTable("user", "white_box");
                 });
 
             modelBuilder.Entity("Database.Entity.ContentEntity", b =>
