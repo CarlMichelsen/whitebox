@@ -40,11 +40,6 @@ public class GoogleGenericStreamMapper : ILlmStreamMapper<GoogleStreamChunk>
         }
         
         var text = string.Join(string.Empty, candidate.Content.Parts.Select(p => p.Text));
-        if (string.IsNullOrWhiteSpace(text))
-        {
-            return new LlmStreamPing();
-        }
-        
         return new LlmStreamContentDelta
         {
             Delta = new LlmPart(
