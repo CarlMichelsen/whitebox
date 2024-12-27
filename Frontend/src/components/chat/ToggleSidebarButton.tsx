@@ -1,13 +1,13 @@
 import {FC} from "react";
 import {useAppDispatch, useAppSelector} from "../../hooks.ts";
-import {setOpen} from "../../state/sidebar";
+import {setIsSidebarOpen} from "../../state/sidebar";
 
 const ToggleSidebarButton: FC = () => {
     const sidebar = useAppSelector(store => store.sidebar)
     const dispatch = useAppDispatch()
     
     const onClick = () => {
-        dispatch(setOpen(!sidebar.isOpen));
+        dispatch(setIsSidebarOpen(!sidebar.isOpen));
     }
     
     return (

@@ -8,12 +8,12 @@ import EditIndicator from "./EditIndicator.tsx";
 import ConversationResponseLogicComponent, {
     ConversationResponseLogicComponentProps
 } from "../ConversationResponseLogicComponent.tsx";
+import {DomIdentifiers} from "../../util/domIdentifiers.ts";
 
 const ChatInputBox: FC = () => {
     const input = useAppSelector(state => state.input);
     const dispatch = useAppDispatch();
     const logicComponentRef = useRef<ConversationResponseLogicComponentProps>(null);
-    const inputElementId = "chat-input-box";
     
     const onSend = async (text: string) => {
         if (logicComponentRef.current) {
@@ -36,10 +36,8 @@ const ChatInputBox: FC = () => {
 
     useEffect(() => {
         if (!!input.editingMessage) {
-            const inputElement = document.getElementById(inputElementId) as HTMLInputElement;
-            if (inputElement) {
-                inputElement.focus();
-            }
+            const inputElement = document.getElementById(DomIdentifiers.inputElementId) as HTMLInputElement;
+            inputElement?.focus();
         }
     }, [input.editingMessage]);
     
@@ -55,7 +53,7 @@ const ChatInputBox: FC = () => {
                     text={input.text}
                     onChange={text => dispatch(setText(text))}
                     onEnter={onSend}
-                    id={inputElementId}
+                    id={DomIdentifiers.inputElementId}
                     name="chat-box"
                     label="Chat Input"/>
                 

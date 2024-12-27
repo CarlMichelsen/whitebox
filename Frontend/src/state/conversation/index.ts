@@ -1,5 +1,5 @@
 ﻿import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {Conversation} from "../../model/conversation/conversation.ts";
+import {Conversation, ConversationSection} from "../../model/conversation/conversation.ts";
 import {conversationTestData} from "../../model/conversation/conversationTestData.ts";
 import {setSectionSelectedMessageAction} from "./setSectionSelectedMessageAction.ts";
 import {
@@ -23,11 +23,29 @@ const initialState: ConversationState = {
     attached: true,
 }
 
-const toBottom = () => {
-    window.scroll({
-        top: document.body.scrollHeight,
-        behavior: 'instant'
-    });
+const toLastMessage = (sections: ConversationSection[]) => {
+    let messageId: string|null = null;
+    for (let i = 0; i < sections.length; i++) {
+        const section: ConversationSection = sections[i];
+        if (section.selectedMessageId !== null) {
+            messageId = section.messages[section.selectedMessageId].id;
+        }
+    }
+    
+    if (!messageId) {
+        return;
+    }
+
+    setTimeout(() => {
+        const messageDomId = `message-${messageId}`;
+        const messageDomElement = document.getElementById(messageDomId) as HTMLDivElement;
+        messageDomElement?.scrollIntoView({
+            behavior: 'instant',
+            block: 'end',
+            inline: 'start'
+        });
+        window.scrollBy(0, 100);
+    }, 0);
 }
 
 const conversationSlice = createSlice({
@@ -39,8 +57,9 @@ const conversationSlice = createSlice({
         },
         selectConversation: (state, action: PayloadAction<Conversation|null>) => {
             state.selectedConversation = action.payload;
-            if (state.attached) {
-                toBottom();
+            history.replaceState({}, '', action.payload?.id ? `/c/${action.payload?.id}` : '/c');
+            if (state.attached && action.payload) {
+                toLastMessage(action.payload.sections);
             }
         },
         setSectionSelectedMessage: (state, action: PayloadAction<{ sectionIndex: number, messageId: string }>) => {
@@ -48,26 +67,26 @@ const conversationSlice = createSlice({
         },
         handleAssistantMessage: (state, action: PayloadAction<AssistantMessageEvent>) => {
             handleAssistantMessageAction(state, action.payload);
-            if (state.attached) {
-                toBottom();
+            if (state.attached && state.selectedConversation) {
+                toLastMessage(state.selectedConversation.sections);
             }
         },
         handleAssistantMessageDelta: (state, action: PayloadAction<AssistantMessageDeltaEvent>) => {
             handleAssistantMessageDeltaAction(state, action.payload);
-            if (state.attached) {
-                toBottom();
+            if (state.attached && state.selectedConversation) {
+                toLastMessage(state.selectedConversation.sections);
             }
         },
         handleAssistantUsage: (state, action: PayloadAction<AssistantUsageEvent>) => {
             handleAssistantUsageAction(state, action.payload);
-            if (state.attached) {
-                toBottom();
+            if (state.attached && state.selectedConversation) {
+                toLastMessage(state.selectedConversation.sections);
             }
         },
         handleUserMessage: (state, action: PayloadAction<UserMessageEvent>) => {
             handleUserMessageAction(state, action.payload);
-            if (state.attached) {
-                toBottom();
+            if (state.attached && state.selectedConversation) {
+                toLastMessage(state.selectedConversation.sections);
             }
         }
     },

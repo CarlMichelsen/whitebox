@@ -5,7 +5,9 @@ import {useAppDispatch, useAppSelector, useDarkMode} from "../../hooks.ts";
 import {ConversationOption} from "../../model/sidebar/conversationOption.ts";
 import {ConversationClient} from "../../util/clients/conversationClient.ts";
 import {selectConversation} from "../../state/conversation";
-import {useNavigate} from "react-router-dom";
+import {setIsSidebarOpen} from "../../state/sidebar";
+import {DomIdentifiers} from "../util/domIdentifiers.ts";
+import {BreakPoints} from "../util/breakPoints.ts";
 
 type ConversationCardProps = {
     option: ConversationOption;
@@ -16,22 +18,17 @@ const ConversationCard: FC<ConversationCardProps> = ({ option }) => {
     const conversation = useAppSelector(store => store.conversation)
     const dispatch = useAppDispatch()
     const darkMode = useDarkMode();
-    const navigate = useNavigate();
-
-    const setCPath = (id: string|null) => {
-        if (id) {
-            navigate(`/c/${id}`, { replace: true });
-        } else {
-            navigate('/c', { replace: true });
-        }
-    };
     
     const onClick = async () => {
         const client = new ConversationClient();
         const res = await client.getConversation(option.id);
         if (res.ok && res.value) {
             dispatch(selectConversation(res.value));
-            setCPath(res.value.id)
+            if (window.innerWidth < BreakPoints.mobileWidthBreakPoint) {
+                dispatch(setIsSidebarOpen(false));
+                const inputElement = document.getElementById(DomIdentifiers.inputElementId) as HTMLInputElement;
+                inputElement?.focus();
+            }
         }
     }
     

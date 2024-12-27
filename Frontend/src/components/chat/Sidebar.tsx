@@ -4,7 +4,9 @@ import ToggleSidebarButton from "./ToggleSidebarButton.tsx";
 import SidebarBottomBox from "./SidebarBottomBox.tsx";
 import SearchBox from "../util/SearchBox.tsx";
 import {selectConversation} from "../../state/conversation";
-import {useNavigate} from "react-router-dom";
+import {setIsSidebarOpen} from "../../state/sidebar";
+import {DomIdentifiers} from "../util/domIdentifiers.ts";
+import {BreakPoints} from "../util/breakPoints.ts";
 
 type SidebarProps = {
     children: ReactNode;
@@ -13,15 +15,6 @@ type SidebarProps = {
 const Sidebar: FC<SidebarProps> = ({ children }) => {
     const dispatch = useAppDispatch()
     const sidebar = useAppSelector(store => store.sidebar)
-    const navigate = useNavigate();
-
-    const setCPath = (id: string|null) => {
-        if (id) {
-            navigate(`/c/${id}`, { replace: true });
-        } else {
-            navigate('/c', { replace: true });
-        }
-    };
     
     const sidebarClasses = (): string => {
         if (sidebar.isOpen) {
@@ -54,8 +47,12 @@ const Sidebar: FC<SidebarProps> = ({ children }) => {
                     <button
                         className="m-1 bg-blue-400 dark:bg-blue-800 hover:font-bold rounded-sm w-full"
                         onClick={() => {
-                            dispatch(selectConversation(null));
-                            setCPath(null)
+                            dispatch(selectConversation(null))
+                            if (window.innerWidth < BreakPoints.mobileWidthBreakPoint) {
+                                dispatch(setIsSidebarOpen(false));
+                                const inputElement = document.getElementById(DomIdentifiers.inputElementId) as HTMLInputElement;
+                                inputElement?.focus();
+                            }
                         }}>New Conversation</button>
                     <ToggleSidebarButton />
                 </div>
@@ -73,7 +70,8 @@ const Sidebar: FC<SidebarProps> = ({ children }) => {
                 <ToggleSidebarButton />
             </div>
             
-            <div className={`absolute z-20 h-full w-full bg-black backdrop-blur-3xl ${backdropClasses()}`}></div>
+            <div className={`absolute z-20 h-full w-full bg-black backdrop-blur-3xl ${backdropClasses()}`}
+                 onClick={() => dispatch(setIsSidebarOpen(false))}></div>
         </aside>
     );
 }

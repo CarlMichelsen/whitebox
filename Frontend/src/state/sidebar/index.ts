@@ -23,7 +23,7 @@ const sidebarSlice = createSlice({
     name: 'sidebar',
     initialState,
     reducers: {
-        setOpen: (state, action: PayloadAction<boolean>) => {
+        setIsSidebarOpen: (state, action: PayloadAction<boolean>) => {
             state.isOpen = action.payload;
         },
         setSearch: (state, action: PayloadAction<string>) => {
@@ -67,7 +67,7 @@ const sidebarSlice = createSlice({
 })
 
 export const {
-    setOpen,
+    setIsSidebarOpen,
     setSearch,
     setConversations,
     removeConversation,

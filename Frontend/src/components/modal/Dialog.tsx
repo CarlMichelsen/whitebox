@@ -23,7 +23,7 @@ const Dialog: FC<DialogProps> = ({ title, isOpen, onClose, children }) => {
         >
             <dialog
                 onMouseDown={handleDialogClick}
-                className="grid grid-rows-[1.5rem_1fr] bg-white dark:bg-neutral-800 sm:rounded-sm w-full h-max-[750px] md:w-[750px] shadow-[inset_0_4px_6px_-1px_rgba(0,0,0,0.3)]"
+                className="grid grid-rows-[1.5rem_1fr] bg-white dark:bg-neutral-800 h-[640px] sm:h-fit md:w-[750px] sm:rounded-sm w-full shadow-[inset_0_4px_6px_-1px_rgba(0,0,0,0.3)]"
                 open
             >
                 <div className="grid grid-cols-[1fr_1.5rem]">

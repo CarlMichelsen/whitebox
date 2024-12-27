@@ -33,7 +33,7 @@ const UserMessage: FC<UserMessageProps> = ({ branchSelect, branchList, message }
     const isEditingAMessage = !input.editingMessage;
     const text = message.content.map(c => c.value).join('\n');
     return (
-        <div className={`group flex justify-end ${branchList.length > 1 ? "mb-8" : ""}`}>
+        <div className={`group flex justify-end ${branchList.length > 1 ? "mb-8" : ""} ml-10 sm:ml-0`}>
             <div
                 id={"message-"+message.id}
                 className="relative shadow-2xl rounded-md bg-neutral-200 dark:bg-neutral-800 ml-auto inline-block">
