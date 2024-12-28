@@ -1,11 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Database.Entity.Id;
 using Database.Entity.Util;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Database.Entity;
 
-public class ContentEntity
+public class ContentEntity : ISoftDeletable
 {
     public required ContentEntityId Id { get; init; }
     
@@ -21,7 +22,9 @@ public class ContentEntity
     [Range(1, int.MaxValue)]
     public required int SortOrder { get; init; }
     
-    public static void OnModelCreating(EntityTypeBuilder<ContentEntity> entity)
+    public DateTime? DeletedAtUtc { get; init; }
+    
+    public static void OnModelCreating(EntityTypeBuilder<ContentEntity> entity, ModelBuilder modelBuilder)
     {
         entity
             .Property(e => e.Id)
@@ -31,5 +34,7 @@ public class ContentEntity
             .HasOne(e => e.Message)
             .WithMany(e => e.Content)
             .HasForeignKey(e => e.MessageId);
+        
+        entity.MakeSoftDeletable(modelBuilder);
     }
 }

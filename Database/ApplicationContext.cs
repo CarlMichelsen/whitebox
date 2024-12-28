@@ -55,7 +55,7 @@ public class ApplicationContext(
         
         modelBuilder.Entity<ConversationEntity>(entity => ConversationEntity.OnModelCreating(entity, modelBuilder));
         modelBuilder.Entity<MessageEntity>(entity => MessageEntity.OnModelCreating(entity, modelBuilder));
-        modelBuilder.Entity<ContentEntity>(ContentEntity.OnModelCreating);
+        modelBuilder.Entity<ContentEntity>(entity => ContentEntity.OnModelCreating(entity, modelBuilder));
         
         modelBuilder.Entity<PromptEntity>(PromptEntity.OnModelCreating);
         modelBuilder.Entity<UsageEntity>(UsageEntity.OnModelCreating);
