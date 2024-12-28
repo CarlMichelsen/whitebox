@@ -32,10 +32,12 @@ public static class Dependencies
         // Middleware
         builder.Services
             .AddHttpContextAccessor()
-            .AddScoped<UnhandledExceptionMiddleware>();
+            .AddScoped<UnhandledExceptionMiddleware>()
+            .AddScoped<SourceIdMiddleware>();
         
         // Accessor
         builder.Services
+            .AddScoped<ISourceIdAccessor, SourceIdAccessor>()
             .AddScoped<IUserContextAccessor, UserContextAccessor>();
         
         // Cache
@@ -54,7 +56,8 @@ public static class Dependencies
             .AddScoped<ICacheService, CacheService>()
             .AddScoped<IConversationService, ConversationService>()
             .AddScoped<IConversationStreamService, ConversationStreamService>()
-            .AddScoped<IPromptService, PromptService>();
+            .AddScoped<IPromptService, PromptService>()
+            .AddScoped<IRedirectRegistrationService, RedirectRegistrationService>();
         
         // Handler
         builder.Services

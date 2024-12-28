@@ -29,6 +29,8 @@ public class ApplicationContext(
     
     public DbSet<UsageEntity> Usage { get; init; }
     
+    public DbSet<RedirectEntity> Redirect { get; init; }
+    
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         var softDeleteEntries = this.ChangeTracker
@@ -57,6 +59,8 @@ public class ApplicationContext(
         
         modelBuilder.Entity<PromptEntity>(PromptEntity.OnModelCreating);
         modelBuilder.Entity<UsageEntity>(UsageEntity.OnModelCreating);
+        
+        modelBuilder.Entity<RedirectEntity>(RedirectEntity.OnModelCreating);
         
         base.OnModelCreating(modelBuilder);
     }

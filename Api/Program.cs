@@ -11,6 +11,8 @@ var app = builder.Build();
 
 app.UseMiddleware<UnhandledExceptionMiddleware>();
 
+app.UseMiddleware<SourceIdMiddleware>();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

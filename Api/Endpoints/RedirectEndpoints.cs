@@ -1,4 +1,7 @@
-﻿namespace Api.Endpoints;
+﻿using Interface.Service;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Api.Endpoints;
 
 public static class RedirectEndpoints
 {
@@ -10,14 +13,11 @@ public static class RedirectEndpoints
             .WithTags("Redirect");
         
         conversationGroup
-            .MapGet("chatLink/{base64Url}", (string base64Url) =>
+            .MapGet("chatLink/{base64Url}", async (string base64Url, [FromServices] IRedirectRegistrationService redirectRegistrationService) =>
             {
-                var bytes = Convert.FromBase64String(base64Url);
-                var url = new string(System.Text.Encoding.UTF8.GetChars(bytes));
-                var unescaped = Uri.UnescapeDataString(url);
-                
-                return Uri.TryCreate(unescaped, UriKind.Absolute, out var uri)
-                    ? Results.Redirect(uri.AbsoluteUri)
+                var redirectEntity = await redirectRegistrationService.RegisterRedirect(base64Url);
+                return redirectEntity is not null
+                    ? Results.Redirect(redirectEntity.Url)
                     : Results.BadRequest();
             });
     }
