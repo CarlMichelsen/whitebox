@@ -59,7 +59,7 @@ const Sidebar: FC<SidebarProps> = ({ children }) => {
                 
                 <SearchBox />
                 
-                <div className="hide-scrollbar overflow-y-scroll">
+                <div className="h-screen hide-scrollbar overflow-y-scroll">
                     {children}
                 </div>
                 

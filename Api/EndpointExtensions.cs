@@ -22,5 +22,7 @@ public static class EndpointExtensions
         apiGroup.RegisterConversationEndpoints();
         
         apiGroup.RegisterModelEndpoints();
+        
+        apiGroup.RegisterRedirectEndpoints();
     }
 }
