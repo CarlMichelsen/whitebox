@@ -28,7 +28,7 @@ public static class ConversationMapper
             LastAlteredUtc: TimeMapper.GetUnixTimeSeconds(conversationEntity.LastAlteredUtc));
     }
     
-    public static MessageDto Map(MessageEntity messageEntity)
+    public static MessageDto Map(MessageEntity messageEntity, Guid conversationId)
     {
         UsageDto? usage = null;
         LlmModelDto? model = null;
@@ -51,6 +51,7 @@ public static class ConversationMapper
         
         return new MessageDto(
             Id: messageEntity.Id.Value,
+            ConversationId: conversationId,
             PreviousMessageId: messageEntity.PreviousMessageId?.Value,
             AiModel: model,
             Content: messageEntity.Content.Select(Map).ToList(),
@@ -85,15 +86,15 @@ public static class ConversationMapper
         sectionList.SelectMessages(conversationEntity);
         
         return sectionList
-            .Select(Map)
+            .Select(sl => Map(sl, conversationEntity.Id.Value))
             .ToList();
     }
 
-    private static ConversationSectionDto Map(ConversationSection conversationSection)
+    private static ConversationSectionDto Map(ConversationSection conversationSection, Guid conversationId)
     {
         return new ConversationSectionDto(
             SelectedMessageId: conversationSection.SelectedMessageId?.Value,
-            Messages: conversationSection.Messages.ToDictionary(kv => kv.Key.Value, kv => Map(kv.Value)));
+            Messages: conversationSection.Messages.ToDictionary(kv => kv.Key.Value, kv => Map(kv.Value, conversationId)));
     }
 
     private static MessageContentDto Map(ContentEntity contentEntity)

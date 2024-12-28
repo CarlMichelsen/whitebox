@@ -1,14 +1,14 @@
 ﻿import {FC} from "react";
 import {ConversationMessage} from "../../../../model/conversation/conversation.ts";
 import BotAvatar from "../BotAvatar.tsx";
-import {whiteBoxMarked} from "../../../../util/helpers/marked.ts";
+import {escapeHTML, whiteBoxMarked} from "../../../../util/helpers/marked.ts";
 
 type BotMessageProps = {
     message: ConversationMessage;
 }
 
 const BotMessage: FC<BotMessageProps> = ({ message }) => {
-    const text = message.content.map(c => c.value).join('\n');
+    const text = escapeHTML(message.content.map(c => c.value).join('\n'));
     return (
         <div id={"message-"+message.id}
              className="grid sm:grid-cols-[auto_1fr] sm:grid-rows-1 grid-cols-1 grid-rows-[auto_1fr] gap-1 sm:gap-2 mt-6">

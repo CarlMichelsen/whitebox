@@ -11,6 +11,7 @@ export const handleAssistantMessageAction = (state: ConversationState, payload: 
     
     const initialAssistantMessage = {
         id: payload.messageId,
+        conversationId: payload.conversationId,
         previousMessageId: payload.replyToMessageId,
         aiModel: payload.model,
         usage: null,

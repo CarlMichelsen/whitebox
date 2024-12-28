@@ -47,7 +47,7 @@ const ConversationSectionListItem: FC<ConversationSectionListItemProps> = ({ con
     }
     
     return (
-        <li key={conversationSectionIndex}>
+        <li key={conversationSectionIndex} className="group">
             {renderSelectedMessage()}
         </li>
     )

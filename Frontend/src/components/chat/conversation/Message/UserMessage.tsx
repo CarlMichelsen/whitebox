@@ -7,8 +7,12 @@ import CrossWhite from "../../../../assets/icons/cross-white.svg"
 import CrossBlack from "../../../../assets/icons/cross-black.svg"
 import ArrowWhite from "../../../../assets/icons/arrow-white.svg"
 import ArrowBlack from "../../../../assets/icons/arrow-black.svg"
+import GarbageWhite from "../../../../assets/icons/garbage-white.svg"
+import GarbageBlack from "../../../../assets/icons/garbage-black.svg"
 import {setEditingMessage} from "../../../../state/input";
-import {whiteBoxMarked} from "../../../../util/helpers/marked.ts";
+import {escapeHTML, whiteBoxMarked} from "../../../../util/helpers/marked.ts";
+import UserMessageButton from "./UserMessageButton.tsx";
+import {deleteMessage} from "../../../../state/conversation";
 
 type UserMessageProps = {
     branchSelect: (messageId: string) => void;
@@ -31,30 +35,36 @@ const UserMessage: FC<UserMessageProps> = ({ branchSelect, branchList, message }
     
     const isEditingThisMessage = input.editingMessage === message.id;
     const isEditingAMessage = !input.editingMessage;
-    const text = message.content.map(c => c.value).join('\n');
+    const text = escapeHTML(message.content.map(c => c.value).join('\n'));
     return (
-        <div className={`group flex justify-end ${branchList.length > 1 ? "mb-8" : ""} ml-10 sm:ml-0`}>
+        <div className={`flex justify-end ${branchList.length > 1 ? "mb-8" : ""}  ml-10 pt-10 sm:pt-4 sm:ml-24`}>
             <div
                 id={"message-"+message.id}
                 className="relative shadow-2xl rounded-md bg-neutral-200 dark:bg-neutral-800 ml-auto inline-block">
-                <button
-                    onClick={() => dispatch(setEditingMessage(isEditingThisMessage ? null : message.id))}
-                    className="absolute -left-10 top-0 aspect-square w-8 p-1.5 sm:hidden sm:group-hover:block rounded-full sm:hover:bg-neutral-400 sm:dark:hover:bg-neutral-700">
-                    <img
-                        draggable="false"
-                        src={isEditingThisMessage
-                            ? (darkMode ? CrossWhite : CrossBlack)
-                            : (darkMode ? EditWhite : EditBlack)}
-                        alt="edit"/>
-                </button>
-                
+
+                <ol className="absolute sm:-left-20 sm:-top-1 left-0 -top-10 h-8 p-1.5 sm:hidden sm:group-hover:block space-x-2 sm:space-x-0">
+                    <li className="inline">
+                        <UserMessageButton
+                            onClick={() => dispatch(setEditingMessage(isEditingThisMessage ? null : message.id))}
+                            iconSrc={isEditingThisMessage
+                                ? (darkMode ? CrossWhite : CrossBlack)
+                                : (darkMode ? EditWhite : EditBlack)}/>
+                    </li>
+
+                    <li className={isEditingThisMessage ? "inline" : "hidden"}>
+                        <UserMessageButton
+                            onClick={() => dispatch(deleteMessage({ conversationId: message.conversationId, messageId: message.id}))}
+                            iconSrc={darkMode ? GarbageWhite : GarbageBlack}/>
+                    </li>
+                </ol>
+
                 <div className="shadow-inner px-2 py-1 sm:px-3 sm:py-2 rounded-md">
                     <span dangerouslySetInnerHTML={({__html: whiteBoxMarked.parse(text) as string})}></span>
                 </div>
-                
+
                 {branchList.length > 1 ? (
                     <div className="absolute px-1 right-0 -bottom-10 h-10 w-32 grid grid-rows-1 grid-cols-3">
-                        <button
+                    <button
                             disabled={branchId === 1 || !isEditingAMessage}
                             onClick={() => selectBranchId(branchId - 1)}
                             className="m-1 pb-0.5 rounded-md w-6 sm:enabled:hover:bg-neutral-300 sm:enabled:dark:hover:bg-neutral-800 disabled:opacity-10">

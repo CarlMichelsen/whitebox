@@ -18,6 +18,7 @@ export type MessageUsage = {
 
 export type ConversationMessage = {
     id: string;
+    conversationId: string;
     previousMessageId: string|null;
     aiModel: LlmModel|null;
     usage: MessageUsage|null;

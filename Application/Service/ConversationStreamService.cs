@@ -54,7 +54,7 @@ public class ConversationStreamService(
         await handler(new UserMessageEventDto
         {
             ConversationId = conversation.Id.Value,
-            Message = ConversationMapper.Map(conversation.LastAppendedMessage!),
+            Message = ConversationMapper.Map(conversation.LastAppendedMessage!, conversation.Id.Value),
         });
         
         var assistantMessageId = new MessageEntityId(Guid.CreateVersion7());

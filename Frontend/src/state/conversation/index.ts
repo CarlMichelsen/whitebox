@@ -55,6 +55,13 @@ const conversationSlice = createSlice({
         setAttached: (state, action: PayloadAction<boolean>) => {
             state.attached = action.payload;
         },
+        deleteMessage: (_, _1: PayloadAction<{conversationId: string, messageId: string}>) => {
+            /*handleUserMessageAction(state, action.payload);
+            if (state.attached && state.selectedConversation) {
+                toLastMessage(state.selectedConversation.sections);
+            }*/
+            console.warn("deleteMessage not implemented!");
+        },
         selectConversation: (state, action: PayloadAction<Conversation|null>) => {
             state.selectedConversation = action.payload;
             history.replaceState({}, '', action.payload?.id ? `/c/${action.payload?.id}` : '/c');
@@ -94,6 +101,7 @@ const conversationSlice = createSlice({
 
 export const {
     setAttached,
+    deleteMessage,
     selectConversation,
     setSectionSelectedMessage,
     handleAssistantMessage,
