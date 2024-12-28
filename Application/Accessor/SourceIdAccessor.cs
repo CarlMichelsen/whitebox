@@ -20,7 +20,7 @@ public class SourceIdAccessor(IHttpContextAccessor httpContextAccessor) : ISourc
             throw new NullReferenceException("No sourceId found in request header");
         }
 
-        if (!Guid.TryParse(sourceIdString, out Guid sourceId))
+        if (!Guid.TryParse(sourceIdString, out var sourceId))
         {
             throw new NullReferenceException("Invalid sourceId found in request header");
         }
