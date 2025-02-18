@@ -1,5 +1,5 @@
 using System.IO.Compression;
-using Api.Log;
+using Api.Logging;
 using Api.Middleware;
 using Application.Accessor;
 using Application.Configuration;
