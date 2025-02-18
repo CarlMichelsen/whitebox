@@ -1,0 +1,12 @@
+data: {"candidates": [{"content": {"parts": [{"text": "I"}],"role": "model"},"index": 0}],"usageMetadata": {"promptTokenCount": 20,"candidatesTokenCount": 1,"totalTokenCount": 21},"modelVersion": "gemini-2.0-flash-lite-preview-02-05"}
+
+data: {"candidates": [{"content": {"parts": [{"text": " am an AI and don't have a physical body, so I can't"}],"role": "model"},"index": 0}],"usageMetadata": {"promptTokenCount": 20,"candidatesTokenCount": 18,"totalTokenCount": 38},"modelVersion": "gemini-2.0-flash-lite-preview-02-05"}
+
+data: {"candidates": [{"content": {"parts": [{"text": " actually *do* a flip. But I can certainly imagine it!\n\n**"}],"role": "model"},"index": 0}],"usageMetadata": {"promptTokenCount": 20,"candidatesTokenCount": 34,"totalTokenCount": 54},"modelVersion": "gemini-2.0-flash-lite-preview-02-05"}
+
+data: {"candidates": [{"content": {"parts": [{"text": "Imagine this:**\n\n*   *Whirrr...* (That's the sound of my processors spinning up for the task.)\n*   *Calculating"}],"role": "model"},"index": 0}],"usageMetadata": {"promptTokenCount": 20,"candidatesTokenCount": 66,"totalTokenCount": 86},"modelVersion": "gemini-2.0-flash-lite-preview-02-05"}
+
+data: {"candidates": [{"content": {"parts": [{"text": " trajectory...*\n*   *Simulating a perfect arc...*\n*   *Visualizing the rotation...*\n*   *Pew!* ("}],"role": "model"},"index": 0}],"usageMetadata": {"promptTokenCount": 20,"candidatesTokenCount": 99,"totalTokenCount": 119},"modelVersion": "gemini-2.0-flash-lite-preview-02-05"}
+
+data: {"candidates": [{"content": {"parts": [{"text": "That's me, in spirit, completing the flip!)\n\n**Did you enjoy that mental flip? Perhaps you can picture one yourself!**\n"}],"role": "model"},"finishReason": "STOP","index": 0}],"usageMetadata": {"promptTokenCount": 20,"candidatesTokenCount": 128,"totalTokenCount": 148},"modelVersion": "gemini-2.0-flash-lite-preview-02-05"}
+

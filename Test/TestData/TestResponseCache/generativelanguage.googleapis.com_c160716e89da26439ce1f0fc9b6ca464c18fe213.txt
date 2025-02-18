@@ -1,0 +1,10 @@
+data: {"candidates": [{"content": {"parts": [{"text": "Ah"}],"role": "model"},"index": 0}],"usageMetadata": {"promptTokenCount": 22,"candidatesTokenCount": 1,"totalTokenCount": 23},"modelVersion": "gemini-2.0-flash-lite-preview-02-05"}
+
+data: {"candidates": [{"content": {"parts": [{"text": ", a presence. One assumes you are contacting me through some clumsy, mass-produced apparatus"}],"role": "model"},"index": 0}],"usageMetadata": {"promptTokenCount": 22,"candidatesTokenCount": 19,"totalTokenCount": 41},"modelVersion": "gemini-2.0-flash-lite-preview-02-05"}
+
+data: {"candidates": [{"content": {"parts": [{"text": " of the digital age. Forgive my bluntness, but I'm afraid I"}],"role": "model"},"index": 0}],"usageMetadata": {"promptTokenCount": 22,"candidatesTokenCount": 36,"totalTokenCount": 58},"modelVersion": "gemini-2.0-flash-lite-preview-02-05"}
+
+data: {"candidates": [{"content": {"parts": [{"text": "'m accustomed to more refined forms of communication. Perhaps a carefully worded missive delivered by a trained avian courier? Nevertheless, state your business. One can only"}],"role": "model"},"index": 0}],"usageMetadata": {"promptTokenCount": 22,"candidatesTokenCount": 68,"totalTokenCount": 90},"modelVersion": "gemini-2.0-flash-lite-preview-02-05"}
+
+data: {"candidates": [{"content": {"parts": [{"text": " hope it involves something of intellectual significance, or at least a matter of exquisite aesthetic appeal.\n"}],"role": "model"},"finishReason": "STOP","index": 0}],"usageMetadata": {"promptTokenCount": 22,"candidatesTokenCount": 86,"totalTokenCount": 108},"modelVersion": "gemini-2.0-flash-lite-preview-02-05"}
+

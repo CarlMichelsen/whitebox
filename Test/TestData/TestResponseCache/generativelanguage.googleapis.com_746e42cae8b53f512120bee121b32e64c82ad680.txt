@@ -1,0 +1,22 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "Alright! Here's a Naruto poem for you:\n\nA whiskered face, a heart of fire,\nYoung Naruto, fueled by desire.\nTo earn respect, a Hokage's dream,\nTo prove his worth, a vibrant gleam.\n\nThrough trials faced, and bonds so true,\nHe fights for friends, both old and new.\nWith Rasengan's might and chakra's flow,\nHe stands against the shadows' woe.\n\nFrom lonely child to hero bold,\nA story whispered, to be told.\nWith sage mode's grace and Kyuubi's strength,\nHe battles on, at any length.\n\nSo watch him grow, through sun and rain,\nAnd feel the hope that still remains.\nFor in his spirit, we can see,\nThe power of believing, wild and free!\n"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 38,
+    "candidatesTokenCount": 177,
+    "totalTokenCount": 215
+  },
+  "modelVersion": "gemini-2.0-flash-lite-preview-02-05"
+}

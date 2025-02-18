@@ -32,7 +32,7 @@
     <ItemGroup>
       <ProjectReference Include="..\Api\Api.csproj" />
       <ProjectReference Include="..\Application\Application.csproj" />
-      <ProjectReference Include="..\Interface\Interface.csproj" />
+      <ProjectReference Include="..\Presentation\Presentation.csproj" />
       <ProjectReference Include="..\LlmIntegration\LlmIntegration.csproj" />
     </ItemGroup>
 
