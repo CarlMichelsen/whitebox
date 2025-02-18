@@ -7,4 +7,5 @@ public record LlmModel(
     [property: JsonPropertyName("modelName")] string ModelName,
     [property: JsonPropertyName("modelDescription")] string ModelDescription,
     [property: JsonPropertyName("modelIdentifier")] string ModelIdentifier,
-    [property: JsonPropertyName("maxCompletionTokens")] int MaxCompletionTokens = 2048);
+    [property: JsonPropertyName("maxCompletionTokens")] int MaxCompletionTokens = 2048,
+    [property: JsonPropertyName("legacy")] bool IsLegacy = false);

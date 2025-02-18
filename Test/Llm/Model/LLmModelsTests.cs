@@ -18,10 +18,10 @@ public class LLmModelsTests
     
     [Theory]
     [InlineData(true, "claude-3-5-sonnet-latest")]
-    [InlineData(true, "gemini-1.5-flash-8b")]
+    [InlineData(true, "grok-2-1212")]
     [InlineData(true, "grok-beta")]
     [InlineData(false, "random sentence")]
-    [InlineData(false, "this is in fact not a modelidentifier")]
+    [InlineData(false, "this is in fact not a model-identifier")]
     public void CanFindModelByIdentifier(bool expectedFound, string identifier)
     {
         // Arrange

@@ -2,22 +2,27 @@ using Api;
 using Api.Extensions;
 using Api.Middleware;
 using Application.Configuration;
+using Scalar.AspNetCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddDependencies();
+builder.AddApplicationDependencies();
 
 var app = builder.Build();
 
-app.UseMiddleware<UnhandledExceptionMiddleware>();
+app.UseMiddleware<TraceIdMiddleware>();
 
-app.UseMiddleware<SourceIdMiddleware>();
+app.UseSerilogRequestLogging();
+
+app.UseExceptionHandler(_ => { });
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-    app.UseCors(ApplicationConstants.DevelopmentCorsPolicyName);
+    app.MapOpenApi()
+        .CacheOutput();
+
+    app.MapScalarApiReference();
 }
 else
 {
@@ -38,6 +43,6 @@ app.RegisterEndpoints();
 app.Services.GetRequiredService<ILogger<Program>>()
     .LogInformation(
         "{ApplicationName} service has started",
-        ApplicationConstants.ApplicationName);
+        ApplicationConstants.Name);
 
 app.Run();

@@ -18,6 +18,8 @@ public static class LlmModels
     public static OpenAiModelGroup OpenAi { get; } = new();
     
     public static XModelGroup X { get; } = new();
+    
+    public static LegacyModels Legacy { get; } = new();
 
     public static bool TryGetModel(string modelIdentifier, out LlmModel? model)
     {
@@ -53,6 +55,6 @@ public static class LlmModels
             }
         }
 
-        return list;
+        return list.Where(m => !m.IsLegacy).ToList();
     }
 }

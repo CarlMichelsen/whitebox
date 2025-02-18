@@ -1,4 +1,5 @@
 using System.IO.Compression;
+using Api.Logging;
 using Api.Middleware;
 using Application.Accessor;
 using Application.Configuration;
@@ -21,9 +22,12 @@ namespace Api;
 
 public static class Dependencies
 {
-    public static void AddDependencies(this WebApplicationBuilder builder)
+    public static void AddApplicationDependencies(this WebApplicationBuilder builder)
     {
         // Configuration
+        builder.Services
+            .ConfigureApplicationOpenApi();
+        
         builder.Configuration.AddJsonFile(
             "secrets.json",
             optional: builder.Environment.IsDevelopment(),
@@ -32,8 +36,17 @@ public static class Dependencies
         // Middleware
         builder.Services
             .AddHttpContextAccessor()
-            .AddScoped<UnhandledExceptionMiddleware>()
-            .AddScoped<SourceIdMiddleware>();
+            .AddScoped<TraceIdMiddleware>()
+            .AddProblemDetails(options =>
+            {
+                options.CustomizeProblemDetails = context =>
+                {
+                    // Let problem-details know what the trace-identifier is.
+                    context.ProblemDetails.Extensions["traceId"] = 
+                        context.HttpContext.TraceIdentifier;
+                };
+            })
+            .AddExceptionHandler<GlobalExceptionHandler>();
         
         // Accessor
         builder.Services
@@ -71,7 +84,7 @@ public static class Dependencies
         builder.Services
             .RegisterGenericLlmClientDependencies(
                 builder.Configuration, 
-                ApplicationConstants.ApplicationUserAgent);
+                ApplicationConstants.UserAgent);
         
         // Auth
         builder.RegisterAuthDependencies();
@@ -88,13 +101,17 @@ public static class Dependencies
             options.Providers.Add<GzipCompressionProvider>();
         });
         
-        // Configure Serilog from "appsettings.(env).json
-        Log.Logger = new LoggerConfiguration()
-            .ReadFrom.Configuration(builder.Configuration)
-            .Enrich.WithProperty("Application", ApplicationConstants.ApplicationName)
-            .Enrich.WithProperty("Environment", GetEnvironmentName(builder))
-            .CreateLogger();
-        builder.Host.UseSerilog();
+        // Serilog
+        builder.Host.UseSerilog((context, sp, configuration) =>
+        {
+            configuration
+                .ReadFrom.Configuration(context.Configuration)
+                .ReadFrom.Services(sp)
+                .Enrich.With(sp.GetRequiredService<TraceIdEnricher>())
+                .Enrich.WithProperty("Application", ApplicationConstants.Name)
+                .Enrich.WithProperty("Environment", GetEnvironmentName(builder));
+        });
+        builder.Services.AddSingleton<TraceIdEnricher>();
         
         // Database
         builder.Services.AddDbContext<ApplicationContext>(options =>
@@ -118,8 +135,7 @@ public static class Dependencies
         {
             // Swagger
             builder.Services
-                .AddEndpointsApiExplorer()
-                .AddSwaggerGen();
+                .AddEndpointsApiExplorer();
 
             // Development CORS
             builder.Services.AddCors(options =>

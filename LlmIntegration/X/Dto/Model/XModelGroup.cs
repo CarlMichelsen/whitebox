@@ -9,4 +9,10 @@ public class XModelGroup
         ModelName: "Grok Beta",
         ModelDescription: "Comparable performance to Grok 2 but with improved efficiency, speed and capabilities.",
         ModelIdentifier: "grok-beta");
+    
+    public LlmModel Grok2 { get; } = new(
+        Provider: LlmProvider.X,
+        ModelName: "Grok 2",
+        ModelDescription: "Grok version 2.",
+        ModelIdentifier: "grok-2-1212");
 }
