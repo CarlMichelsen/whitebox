@@ -6,7 +6,7 @@ import {LlmModel} from "../../../model/conversation/llmModel";
 import {ChatConfigurationClient} from "../../../util/clients/chatConfigurationClient";
 import ModelProviderSelector from "./ModelProviderSelector.tsx";
 
-const ConnectedModelProviderSelector: FC<{onNewSelection: () => void}> = ({ onNewSelection }) => {
+const ConnectedModelProviderSelector: FC<{onNewSelection?: () => void}> = ({ onNewSelection }) => {
     const input = useAppSelector(state => state.input);
     const queryClient = useQueryClient();
 
@@ -21,7 +21,7 @@ const ConnectedModelProviderSelector: FC<{onNewSelection: () => void}> = ({ onNe
         const res =await client.setSelectedModelIdentifier({ modelIdentifier: m.modelIdentifier });
         if (res.ok) {
             await queryClient.invalidateQueries("chat-configuration");
-            onNewSelection();
+            onNewSelection && onNewSelection();
         }
     }
 

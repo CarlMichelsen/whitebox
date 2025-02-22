@@ -5,7 +5,7 @@ import {ConversationSection} from "../../../model/conversation/conversation.ts";
 import {ConversationState, selectConversation} from "../../../state/conversation";
 import {useLocation} from "react-router-dom";
 import {ConversationClient} from "../../../util/clients/conversationClient.ts";
-import NoConversationSelected from "../NoConversationSelected.tsx";
+import NoConversationSelected from "./NoConversationSelected.tsx";
 
 const SelectedConversation: FC = () => {
     const dispatch = useAppDispatch()
