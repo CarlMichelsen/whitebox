@@ -1,15 +1,15 @@
 ﻿import {FC} from "react";
-import {LlmModel, LlmProviderGroup} from "../../model/conversation/llmModel";
-import {getImageUrl} from "../../util/helpers/providerIcon";
-import {useDarkMode} from "../../hooks";
+import {LlmModel, LlmProviderGroup} from "../../../model/conversation/llmModel";
+import {getImageUrl} from "../../../util/helpers/providerIcon";
+import {useDarkMode} from "../../../hooks";
 
-type LargeLanguageModelProviderSelectorProps = {
+type ModelProviderSelectorProps = {
     selectedModel: LlmModel;
     providerGroup: LlmProviderGroup;
     modelClicked: (model: LlmModel) => void;
 }
 
-const LargeLanguageModelProviderSelector: FC<LargeLanguageModelProviderSelectorProps> = ({ selectedModel, providerGroup, modelClicked }) => {
+const ModelProviderSelector: FC<ModelProviderSelectorProps> = ({ selectedModel, providerGroup, modelClicked }) => {
     const darkMode = useDarkMode();
     
     const getBgClasses = (m: LlmModel) => {
@@ -30,7 +30,7 @@ const LargeLanguageModelProviderSelector: FC<LargeLanguageModelProviderSelectorP
             </div>
             
             <ol className="ml-2 space-y-1">
-                {providerGroup.models.map(m => (
+                {providerGroup.models.map((m) => (
                     <li key={m.modelIdentifier} id={"selectable-model-" + m.modelIdentifier}>
                         <button
                             className={`p-1 text-left w-full rounded-sm block ${getBgClasses(m)}`}
@@ -45,4 +45,4 @@ const LargeLanguageModelProviderSelector: FC<LargeLanguageModelProviderSelectorP
     );
 }
 
-export default LargeLanguageModelProviderSelector;
+export default ModelProviderSelector;
