@@ -23,6 +23,8 @@ if (app.Environment.IsDevelopment())
         .CacheOutput();
 
     app.MapScalarApiReference();
+
+    app.UseCors(ApplicationConstants.DevelopmentCorsPolicyName);
 }
 else
 {
