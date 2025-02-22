@@ -6,7 +6,7 @@ import {LlmModel} from "../../model/conversation/llmModel.ts";
 export type InputStatus = "ready"|"sending"|"receiving";
 
 // Define a type for the slice state
-type InputState = {
+export type InputState = {
     text: string;
     rows: number;
     previousMessage: string|null;

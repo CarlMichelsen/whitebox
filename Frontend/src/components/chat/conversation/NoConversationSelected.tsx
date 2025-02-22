@@ -1,13 +1,15 @@
 ﻿import {FC} from "react";
 import ConnectedModelProviderSelector from "../config/ConnectedModelProviderSelector.tsx";
 import SystemMessageEditor from "../system/SystemMessageEditor.tsx";
-import {useAppSelector} from "../../../hooks.ts";
+import {useAppDispatch, useAppSelector} from "../../../hooks.ts";
 import {ChatConfiguration} from "../../../model/chatConfiguration/chatConfiguration.ts";
 import {ChatConfigurationClient} from "../../../util/clients/chatConfigurationClient.ts";
 import {SetDefaultSystemMessage} from "../../../model/chatConfiguration/dto/setDefaultSystemMessage.ts";
+import {InputState, setChatConfiguration} from "../../../state/input";
 
 const NoConversationSelected: FC = () => {
-    const input = useAppSelector(state => state.input);
+    const input: InputState = useAppSelector(state => state.input);
+    const dispatch = useAppDispatch()
     const config: ChatConfiguration|null = input.chatConfiguration;
     
     return (
@@ -27,7 +29,15 @@ const NoConversationSelected: FC = () => {
                     saveChanges={async (m) => {
                     const client = new ChatConfigurationClient();
                     const payload: SetDefaultSystemMessage = {systemMessage: m};
-                    await client.setDefaultSystemMessage(payload);
+                    const res = await client.setDefaultSystemMessage(payload);
+                    if (res.ok && res.value && input.chatConfiguration) {
+                        const newChatConfig = {
+                            ...input.chatConfiguration,
+                            defaultSystemMessage: res.value
+                        } satisfies ChatConfiguration;
+                        
+                        dispatch(setChatConfiguration(newChatConfig));
+                    }
                 }}/>
             ) : (
                 <p>Loading...</p>
