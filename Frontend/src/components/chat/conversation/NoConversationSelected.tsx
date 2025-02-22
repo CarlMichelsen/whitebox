@@ -1,9 +1,10 @@
 ﻿import {FC} from "react";
 import ConnectedModelProviderSelector from "../config/ConnectedModelProviderSelector.tsx";
-import {delay} from "../../../util/delay.ts";
 import SystemMessageEditor from "../system/SystemMessageEditor.tsx";
 import {useAppSelector} from "../../../hooks.ts";
 import {ChatConfiguration} from "../../../model/chatConfiguration/chatConfiguration.ts";
+import {ChatConfigurationClient} from "../../../util/clients/chatConfigurationClient.ts";
+import {SetDefaultSystemMessage} from "../../../model/chatConfiguration/dto/setDefaultSystemMessage.ts";
 
 const NoConversationSelected: FC = () => {
     const input = useAppSelector(state => state.input);
@@ -21,9 +22,12 @@ const NoConversationSelected: FC = () => {
             <h2 className="text-lg mb-1">Edit default system message</h2>
 
             {config !== null ? (
-                <SystemMessageEditor initialMessage={config.defaultSystemMessage ?? ""} saveChanges={async (m) => {
-                    await delay(300);
-                    console.log("saved", m);
+                <SystemMessageEditor
+                    initialMessage={config.defaultSystemMessage ?? ""}
+                    saveChanges={async (m) => {
+                    const client = new ChatConfigurationClient();
+                    const payload: SetDefaultSystemMessage = {systemMessage: m};
+                    await client.setDefaultSystemMessage(payload);
                 }}/>
             ) : (
                 <p>Loading...</p>

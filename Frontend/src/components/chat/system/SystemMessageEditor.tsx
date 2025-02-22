@@ -22,9 +22,9 @@ const SystemMessageEditor: FC<SystemMessageEditorProps> = ({ initialMessage, sav
             setStatus("saving...");
             await saveChanges(content);
             setStatus("saved");
-            await delay(300);
+            await delay(700);
             setStatus(null);
-        }, 400));
+        }, 800));
     }
 
     useEffect(() => {
@@ -32,7 +32,7 @@ const SystemMessageEditor: FC<SystemMessageEditorProps> = ({ initialMessage, sav
             if (timeoutId !== null) {
                 clearTimeout(timeoutId);
                 if (message !== null) {
-                    saveChanges(message);
+                    saveChanges(message).catch(console.error);
                 }
             }
         }
