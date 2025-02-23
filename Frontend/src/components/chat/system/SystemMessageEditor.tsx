@@ -41,7 +41,7 @@ const SystemMessageEditor: FC<SystemMessageEditorProps> = ({ initialMessage, sav
     return (
         <div className="my-1">
             <textarea
-                className="resize-none w-full focus:outline-none p-1 rounded-sm transition-colors ease-in-out bg-neutral-100 focus:bg-white dark:bg-black dark:focus:bg-black"
+                className="resize-none w-full h-48 focus:outline-none p-1 rounded-sm transition-colors ease-in-out bg-neutral-100 focus:bg-white dark:bg-black dark:focus:bg-black"
                 value={message ?? ""}
                 onChange={event => onChange(event.target.value)}
             ></textarea>
