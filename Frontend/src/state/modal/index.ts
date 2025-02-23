@@ -1,7 +1,7 @@
 ﻿import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 import {getTitle} from "./modalTitleMap.ts";
 
-export type ModalType = "model-selector";
+export type ModalType = "model-selector"|"conversation-system-message";
 
 type ModalState = {
     type: ModalType|null;
