@@ -25,6 +25,7 @@ const NoConversationSelected: FC = () => {
 
             {config !== null ? (
                 <SystemMessageEditor
+                    label="Default system message editor"
                     initialMessage={config.defaultSystemMessage ?? ""}
                     saveChanges={async (m) => {
                     const client = new ChatConfigurationClient();

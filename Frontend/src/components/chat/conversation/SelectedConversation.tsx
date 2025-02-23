@@ -6,6 +6,7 @@ import {ConversationState, selectConversation} from "../../../state/conversation
 import {useLocation} from "react-router-dom";
 import {ConversationClient} from "../../../util/clients/conversationClient.ts";
 import NoConversationSelected from "./NoConversationSelected.tsx";
+import {openModal} from "../../../state/modal";
 
 const SelectedConversation: FC = () => {
     const dispatch = useAppDispatch()
@@ -39,14 +40,22 @@ const SelectedConversation: FC = () => {
     }, [location.pathname]);
     
     return conversation.selectedConversation !== null ? (
-        <ol className="space-y-4 p-1 sm:p-0 mb-36">
-            {conversation.selectedConversation.sections
-                .filter((cs: ConversationSection) => cs.selectedMessageId !== null)
-                .map((cs: ConversationSection, index: number) => <ConversationSectionListItem
-                    conversationSectionIndex={index}
-                    conversationSection={cs}
-                    key={cs.selectedMessageId}/>)}
-        </ol>
+        <div>
+            <button
+                className="block mx-auto p-2 mb-4 rounded-sm bg-blue-400 dark:bg-blue-800 hover:bg-blue-600 dark:hover:bg-blue-600"
+                onClick={() => dispatch(openModal("conversation-system-message"))}>
+                Edit system message for this conversation
+            </button>
+            
+            <ol className="space-y-4 p-1 sm:p-0 mb-36">
+                {conversation.selectedConversation.sections
+                    .filter((cs: ConversationSection) => cs.selectedMessageId !== null)
+                    .map((cs: ConversationSection, index: number) => <ConversationSectionListItem
+                        conversationSectionIndex={index}
+                        conversationSection={cs}
+                        key={cs.selectedMessageId}/>)}
+            </ol>
+        </div>
     ) : <NoConversationSelected />
 }
 

@@ -1,6 +1,7 @@
 ﻿using Interface.Dto;
 using Interface.Dto.Conversation;
 using Interface.Dto.Conversation.Request;
+using Interface.Dto.Conversation.Response;
 using Interface.Handler;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,5 +32,11 @@ public static class ConversationEndpoints
             async ([FromServices] IConversationHandler handler, [FromRoute] Guid id) =>
             await handler.GetConversation(id))
             .Produces<ServiceResponse<ConversationDto>>();
+        
+        conversationGroup.MapPatch(
+                "/{id:guid}",
+                async ([FromServices] IConversationHandler handler, [FromRoute] Guid id, [FromBody] SetConversationSystemMessage systemMessage) =>
+                await handler.SetConversationSystemMessage(id, systemMessage))
+            .Produces<ServiceResponse<SetSystemMessageResponseDto>>();
     }
 }

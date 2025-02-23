@@ -55,6 +55,13 @@ const conversationSlice = createSlice({
         setAttached: (state, action: PayloadAction<boolean>) => {
             state.attached = action.payload;
         },
+        setConversationSystemMessage: (state, action: PayloadAction<string|null>) => {
+            if (!state.selectedConversation) {
+                return;
+            }
+
+            state.selectedConversation.systemMessage = action.payload;
+        },
         deleteMessage: (_, _1: PayloadAction<{conversationId: string, messageId: string}>) => {
             /*handleUserMessageAction(state, action.payload);
             if (state.attached && state.selectedConversation) {
@@ -101,6 +108,7 @@ const conversationSlice = createSlice({
 
 export const {
     setAttached,
+    setConversationSystemMessage,
     deleteMessage,
     selectConversation,
     setSectionSelectedMessage,

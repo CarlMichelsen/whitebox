@@ -2,11 +2,12 @@
 import {delay} from "../../../util/delay.ts";
 
 type SystemMessageEditorProps = {
+    label: string;
     initialMessage?: string;
     saveChanges: (message: string) => Promise<void>;
 }
 
-const SystemMessageEditor: FC<SystemMessageEditorProps> = ({ initialMessage, saveChanges }) => {
+const SystemMessageEditor: FC<SystemMessageEditorProps> = ({ label, initialMessage, saveChanges }) => {
     const [status, setStatus] = useState<string|null>(null);
     const [timeoutId, setTimeoutId] = useState<number|null>(null);
     const [message, setMessage] = useState<string|null>(initialMessage ?? null);
@@ -22,9 +23,9 @@ const SystemMessageEditor: FC<SystemMessageEditorProps> = ({ initialMessage, sav
             setStatus("saving...");
             await saveChanges(content);
             setStatus("saved");
-            await delay(700);
+            await delay(500);
             setStatus(null);
-        }, 800));
+        }, 550));
     }
 
     useEffect(() => {
@@ -41,7 +42,8 @@ const SystemMessageEditor: FC<SystemMessageEditorProps> = ({ initialMessage, sav
     return (
         <div className="my-1">
             <textarea
-                className="resize-none w-full h-48 focus:outline-none p-1 rounded-sm transition-colors ease-in-out bg-neutral-100 focus:bg-white dark:bg-black dark:focus:bg-black"
+                aria-label={label}
+                className="resize-none dark:border-none border w-full h-96 focus:outline-none p-1 rounded-sm transition-colors ease-in-out bg-neutral-100 focus:bg-white dark:bg-black dark:focus:bg-black"
                 value={message ?? ""}
                 onChange={event => onChange(event.target.value)}
             ></textarea>
