@@ -4,15 +4,15 @@ namespace LLMIntegration.X.Dto.Model;
 
 public class XModelGroup
 {
-    public LlmModel GrokBeta { get; } = new(
+    public LlmModel Grok3 { get; } = new(
         Provider: LlmProvider.X,
-        ModelName: "Grok Beta",
-        ModelDescription: "Comparable performance to Grok 2 but with improved efficiency, speed and capabilities.",
-        ModelIdentifier: "grok-beta");
+        ModelName: "Grok 3",
+        ModelDescription: "Grok version 3.",
+        ModelIdentifier: "grok-3-beta");
     
-    public LlmModel Grok2 { get; } = new(
+    public LlmModel Grok3Mini { get; } = new(
         Provider: LlmProvider.X,
-        ModelName: "Grok 2",
-        ModelDescription: "Grok version 2.",
-        ModelIdentifier: "grok-2-1212");
+        ModelName: "Grok 3 Mini",
+        ModelDescription: "Grok version 3 (mini).",
+        ModelIdentifier: "grok-3-mini-beta");
 }

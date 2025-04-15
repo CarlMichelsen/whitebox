@@ -29,7 +29,7 @@ public class XAiIntegrationTests
         // Arrange
         var client = this.serviceProvider.GetRequiredService<IXAiClient>();
         var prompt = new OpenAiPrompt(
-            Model: LlmModels.X.GrokBeta.ModelIdentifier,
+            Model: LlmModels.X.Grok3.ModelIdentifier,
             Messages: [
                 new OpenAiMessage(
                     Role: "system",
@@ -63,7 +63,7 @@ public class XAiIntegrationTests
         // Arrange
         var client = this.serviceProvider.GetRequiredService<IXAiClient>();
         var prompt = new OpenAiPrompt(
-            Model: LlmModels.X.GrokBeta.ModelIdentifier,
+            Model: LlmModels.X.Grok3.ModelIdentifier,
             Messages: [
                 new OpenAiMessage(
                     Role: "system",
