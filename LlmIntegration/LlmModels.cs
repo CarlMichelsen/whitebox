@@ -21,14 +21,14 @@ public static class LlmModels
     
     public static LegacyModels Legacy { get; } = new();
 
-    public static bool TryGetModel(string modelIdentifier, out LlmModel? model)
+    public static bool TryGetModel(string modelIdentifier, out LlmModel? model, bool includeLegacy = false)
     {
-        var allModels = GetModels();
+        var allModels = GetModels(includeLegacy);
         model = allModels.FirstOrDefault(m => m.ModelIdentifier == modelIdentifier);
         return model is not null;
     }
 
-    public static List<LlmModel> GetModels()
+    public static List<LlmModel> GetModels(bool includeLegacy = false)
     {
         var list = new List<LlmModel>();
         
@@ -55,6 +55,8 @@ public static class LlmModels
             }
         }
 
-        return list.Where(m => !m.IsLegacy).ToList();
+        return list
+            .Where(m => m.IsLegacy == includeLegacy)
+            .ToList();
     }
 }

@@ -8,7 +8,7 @@ public static class ChatConfigurationMapper
 {
     public static ChatConfigurationDto Map(ChatConfigurationEntity entity)
     {
-        if (!LlmModels.TryGetModel(entity.SelectedModelIdentifier, out var model))
+        if (!LlmModels.TryGetModel(entity.SelectedModelIdentifier, out var model, true))
         {
             throw new Exception("Selected model is not valid");
         }
