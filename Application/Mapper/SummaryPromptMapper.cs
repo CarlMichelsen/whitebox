@@ -15,8 +15,8 @@ public static class SummaryPromptMapper
     {
         var convPrompt = PromptConversationMapper.CreatePromptFromLatestUserMessage(
             conversation,
-            LlmModels.OpenAi.Gpt4OMini.ModelIdentifier,
-            LlmModels.OpenAi.Gpt4OMini.MaxCompletionTokens,
+            LlmModels.OpenAi.Gpt4O.ModelIdentifier,
+            LlmModels.OpenAi.Gpt4O.MaxCompletionTokens,
             true);
 
         var messages = convPrompt.Content.Messages;

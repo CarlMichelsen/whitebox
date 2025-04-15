@@ -29,7 +29,7 @@ public class OpenAiIntegrationTests
         // Arrange
         var client = this.serviceProvider.GetRequiredService<IOpenAiClient>();
         var prompt = new OpenAiPrompt(
-            Model: LlmModels.OpenAi.Gpt4OMini.ModelIdentifier,
+            Model: LlmModels.OpenAi.Gpt4O.ModelIdentifier,
             Messages: [
                 new OpenAiMessage(
                     Role: "system",
@@ -63,7 +63,7 @@ public class OpenAiIntegrationTests
         // Arrange
         var client = this.serviceProvider.GetRequiredService<IOpenAiClient>();
         var prompt = new OpenAiPrompt(
-            Model: LlmModels.OpenAi.Gpt4OMini.ModelIdentifier,
+            Model: LlmModels.OpenAi.Gpt4O.ModelIdentifier,
             Messages: [
                 new OpenAiMessage(
                     Role: "system",

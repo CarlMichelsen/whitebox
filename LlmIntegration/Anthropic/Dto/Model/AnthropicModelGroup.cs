@@ -4,11 +4,11 @@ namespace LLMIntegration.Anthropic.Dto.Model;
 
 public class AnthropicModelGroup
 {
-    public LlmModel Claude35Sonnet { get; } = new(
+    public LlmModel Claude37Sonnet { get; } = new(
         Provider: LlmProvider.Anthropic,
-        ModelName: "Claude 3.5 Sonnet",
+        ModelName: "Claude 3.7 Sonnet",
         ModelDescription: "Our most intelligent model",
-        ModelIdentifier: "claude-3-5-sonnet-latest");
+        ModelIdentifier: "claude-3-7-sonnet-latest");
     
     public LlmModel Claude35Haiku { get; } = new(
         Provider: LlmProvider.Anthropic,

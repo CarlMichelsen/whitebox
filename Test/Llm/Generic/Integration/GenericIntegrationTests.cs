@@ -27,7 +27,7 @@ public class GenericIntegrationTests
     public static IEnumerable<object[]> GetLlmModels()
     {
         yield return [LlmModels.Anthropic.Claude35Haiku];
-        yield return [LlmModels.OpenAi.Gpt4OMini];
+        yield return [LlmModels.OpenAi.Gpt4O];
         yield return [LlmModels.X.GrokBeta];
         yield return [LlmModels.Google.Flash15Dash8B];
     }

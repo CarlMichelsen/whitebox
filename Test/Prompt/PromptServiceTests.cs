@@ -52,7 +52,7 @@ public class PromptServiceTests
         
         await applicationContext.SaveChangesAsync();
         var prompt = new LlmPrompt(
-            Model: LlmModels.Anthropic.Claude35Sonnet,
+            Model: LlmModels.Anthropic.Claude37Sonnet,
             Content: new LlmContent(
                 SystemMessage: "Be an elitist asshole.",
                 Messages: [
@@ -103,7 +103,7 @@ public class PromptServiceTests
         
         await applicationContext.SaveChangesAsync();
         var prompt = new LlmPrompt(
-            Model: LlmModels.Anthropic.Claude35Sonnet,
+            Model: LlmModels.Anthropic.Claude37Sonnet,
             Content: new LlmContent(
                 SystemMessage: "Be an elitist asshole.",
                 Messages: [
