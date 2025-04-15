@@ -55,8 +55,14 @@ public static class LlmModels
             }
         }
 
+        if (includeLegacy)
+        {
+            return list
+                .ToList();
+        }
+
         return list
-            .Where(m => m.IsLegacy == includeLegacy)
+            .Where(m => !m.IsLegacy)
             .ToList();
     }
 }
