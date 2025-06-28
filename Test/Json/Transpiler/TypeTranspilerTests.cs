@@ -1,14 +1,16 @@
 ﻿using LLMIntegration.Json;
+using Xunit.Abstractions;
 
 namespace Test.Json.Transpiler;
 
-public class TypeTranspilerTests
+public class TypeTranspilerTests(
+    ITestOutputHelper testOutputHelper)
 {
     [Fact]
     public void ShouldTranspileSingleTypeWithPrimitiveMembers()
     {
         // Arrange
-        var transpiler = new TypeScriptTranspiler();
+        var transpiler = new SimpleTypeScriptTranspiler();
 
         // Act
         var typeScriptTypes = transpiler.Transpile([typeof(TestFun)], []);
@@ -23,11 +25,12 @@ public class TypeTranspilerTests
     public void ShouldTranspileTypeWithGenerics()
     {
         // Arrange
-        var transpiler = new TypeScriptTranspiler();
+        var transpiler = new SimpleTypeScriptTranspiler();
         var type = typeof(GenericTestFun<TestFun>);
 
         // Act
         var typeScriptTypes = transpiler.Transpile([type], []);
+        testOutputHelper.WriteLine(string.Join("\n", typeScriptTypes));
 
         // Assert
         Assert.NotEmpty(typeScriptTypes);
@@ -35,15 +38,20 @@ public class TypeTranspilerTests
         
         var genericTestFun = typeScriptTypes.First(t => t.DerivedFrom == type);
         Assert.Equal("GenericTestFun", genericTestFun.TypeName);
-        Assert.Contains("Metadata", genericTestFun.Members.Select(m => m.TypeName));
-        Assert.Contains("Value", genericTestFun.Members.Select(m => m.TypeName));
+        Assert.Contains("Metadata", genericTestFun.Members.Select(m => m.MemberName));
+        Assert.Contains("string", genericTestFun.Members.Select(m => m.Type.TypeName));
+        
+        Assert.Contains("Value", genericTestFun.Members.Select(m => m.MemberName));
+        Assert.Contains("TestFun", genericTestFun.Members.Select(m => m.Type.TypeName));
+        
+        Assert.Empty(genericTestFun.Generics); // There should not be a defined generic on this type because it is explicit
     }
 
     [Fact]
     public void ShouldTranspileTypeWithEnumerableAddTheEnumerableTypeToParentAndANonEnumerableToList()
     {
         // Arrange
-        var transpiler = new TypeScriptTranspiler();
+        var transpiler = new SimpleTypeScriptTranspiler();
         var type = typeof(ListHolder);
 
         // Act
@@ -55,14 +63,16 @@ public class TypeTranspilerTests
         var notHolder = typeScriptTypes.First(t => t.DerivedFrom != type);
         
         Assert.False(notHolder.IsEnumerable, "The list should contain the type (unless it is primitive) but never enumerable types");
-        Assert.True(holder.Members.First().IsEnumerable, "The member should be enumerable");
+        var holderList = holder.Members.First();
+        Assert.True(holderList.Type.IsEnumerable, "The member should be enumerable");
+        Assert.Equal(TypeScriptType.Keyword.Type, holderList.Type.TypeScriptKeyword);
     }
     
     [Fact]
     public void ShouldTranspileTypeWithEnumerablePrimitiveAddTheEnumerableTypeToParentButNotToList()
     {
         // Arrange
-        var transpiler = new TypeScriptTranspiler();
+        var transpiler = new SimpleTypeScriptTranspiler();
         var type = typeof(PrimitiveListHolder);
 
         // Act
@@ -72,8 +82,9 @@ public class TypeTranspilerTests
         Assert.Single(typeScriptTypes);
         var holder = typeScriptTypes.First(t => t.DerivedFrom == type);
         var holderList = holder.Members.First();
-        Assert.Equal(TypeScriptType.Keyword.Primitive, holderList.TypeScriptKeyword); // The list member should be primitive
-        Assert.True(holderList.IsEnumerable, "The list member should be enumerable");
+        Assert.Equal(TypeScriptType.Keyword.Primitive, holderList.Type.TypeScriptKeyword); // The list member should be primitive
+        Assert.True(holderList.Type.IsEnumerable, "The list member should be enumerable");
+        Assert.Equal(TypeScriptType.Keyword.Primitive, holderList.Type.TypeScriptKeyword);
     }
 
     private record TestFun(string Hello);

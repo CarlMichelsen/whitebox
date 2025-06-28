@@ -1,21 +1,24 @@
 ﻿using System.Collections.Immutable;
+using System.Text;
 
 namespace LLMIntegration.Json;
 
 public record TypeScriptType
 {
+    private string? cachedTypeScriptString;
+    
     public TypeScriptType(
         Keyword keyword,
         Type? derivedFrom,
         string typeName,
-        IEnumerable<TypeScriptType>? members = null,
+        IEnumerable<TypeScriptTypeMember>? members = null,
         IEnumerable<TypeScriptType>? generics = null,
         bool isEnumerable = false)
     {
         this.TypeScriptKeyword = keyword;
         this.DerivedFrom = derivedFrom;
         this.TypeName = typeName;
-        this.Members = (members ?? []).ToImmutableSortedSet(TypeScriptTypeComparer.Instance);
+        this.Members = (members ?? []).ToImmutableSortedSet(TypeScriptTypeMemberComparer.Instance);
         this.Generics = (generics ?? []).ToImmutableSortedSet(TypeScriptTypeComparer.Instance);
         this.IsEnumerable = isEnumerable;
     }
@@ -44,66 +47,80 @@ public record TypeScriptType
     
     public string TypeName { get; }
     
-    public ImmutableSortedSet<TypeScriptType> Members { get; }
+    public ImmutableSortedSet<TypeScriptTypeMember> Members { get; }
     
     public ImmutableSortedSet<TypeScriptType> Generics { get; }
     
-    public bool IsEnumerable { get; }
-    
-    /// <summary>
-    /// Class that is used to sort TypeScriptType deterministically so they can be compared.
-    /// </summary>
-    private sealed class TypeScriptTypeComparer : IComparer<TypeScriptType>
+    public bool IsEnumerable { get; init; }
+
+    public override string ToString()
+        => this.cachedTypeScriptString ??= this.GenerateTypeScriptString();
+
+    private string GenerateTypeScriptString()
     {
-        public static readonly TypeScriptTypeComparer Instance = new();
-
-        public int Compare(TypeScriptType? x, TypeScriptType? y)
+        if (this.TypeScriptKeyword == Keyword.Primitive)
         {
-            if (ReferenceEquals(x, y))
-            {
-                return 0;
-            }
-
-            if (x is null)
-            {
-                return -1;
-            }
-
-            if (y is null)
-            {
-                return 1;
-            }
-
-            // First compare by TypeName
-            var typeNameComparison = string.Compare(x.TypeName, y.TypeName, StringComparison.Ordinal);
-            if (typeNameComparison != 0)
-            {
-                return typeNameComparison;
-            }
-
-            // Then by IsEnumerable
-            var enumerableComparison = x.IsEnumerable.CompareTo(y.IsEnumerable);
-            if (enumerableComparison != 0)
-            {
-                return enumerableComparison;
-            }
-
-            // Then by member and generic counts
-            var memberCountComparison = x.Members.Count.CompareTo(y.Members.Count);
-            if (memberCountComparison != 0)
-            {
-                return memberCountComparison;
-            }
-
-            var genericCountComparison = x.Generics.Count.CompareTo(y.Generics.Count);
-            if (genericCountComparison != 0)
-            {
-                return genericCountComparison;
-            }
-
-            // If we get here, we need a more complex comparison for content equality
-            // We can use a hash code or structural comparison as a fallback
-            return x.GetHashCode().CompareTo(y.GetHashCode());
+            return this.TypeName;
         }
+        
+        var delimiter = this.TypeScriptKeyword == Keyword.Enum
+            ? ','
+            : ';';
+        
+        var sb = new StringBuilder(KeyWordMapper(this.TypeScriptKeyword));
+        sb.Append(' ');
+        sb.Append(this.TypeName);
+        
+        if (this.Generics.Count > 0)
+        {
+            sb.Append('<');
+            foreach (var (generic, index) in this.Generics.Select((g, i) => (g, i)))
+            {
+                sb.Append(generic.TypeName);
+                if (index != this.Generics.Count - 1)
+                {
+                    sb.Append(',');
+                }
+            }
+            
+            sb.Append('>');
+        }
+        
+        if (this.TypeScriptKeyword == Keyword.Type)
+        {
+            sb.Append(" = ");
+        }
+        
+        sb.Append('{');
+        sb.AppendLine();
+        
+        foreach (var member in this.Members)
+        {
+            sb.Append('\t');
+            sb.Append(member.MemberName);
+            sb.Append(':');
+            sb.Append(' ');
+            sb.Append(member.Type.TypeName);
+            if (member.Type.IsEnumerable)
+            {
+                sb.Append("[]");
+            }
+            
+            sb.Append(delimiter);
+            sb.AppendLine();
+        }
+        
+        sb.Append('}');
+
+        return sb.ToString();
     }
+
+    private static string KeyWordMapper(Keyword keyword)
+        => keyword switch
+        {
+            Keyword.Type => "type",
+            Keyword.Enum => "enum",
+            Keyword.Primitive => throw new ArgumentOutOfRangeException(nameof(keyword), keyword, "Primitive keywords should not be mapped to string"),
+            _ => throw new ArgumentOutOfRangeException(nameof(keyword), keyword, null),
+        };
 }

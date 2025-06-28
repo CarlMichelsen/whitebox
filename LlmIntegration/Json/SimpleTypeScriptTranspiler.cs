@@ -2,7 +2,7 @@
 
 namespace LLMIntegration.Json;
 
-public class TypeScriptTranspiler
+public class SimpleTypeScriptTranspiler
 {
     private static IReadOnlyDictionary<Type, string> TypeMapping { get; } = new Dictionary<Type, string>()
     {
@@ -29,6 +29,10 @@ public class TypeScriptTranspiler
         while (typesToProcess.Count > 0)
         {
             var type = typesToProcess.Dequeue();
+            if (type.IsGenericParameter)
+            {
+                continue;
+            }
             
             // Skip if already processed or primitive
             if (processedTypes.Contains(type) || TypeMapping.ContainsKey(type))
@@ -40,11 +44,15 @@ public class TypeScriptTranspiler
             
             if (type.IsEnum)
             {
-                var enumValues = Enum.GetNames(type).Select(name => 
-                    new TypeScriptType(
-                        TypeScriptType.Keyword.Primitive, 
-                        null, 
-                        name));
+                var nameValueList = Enum.GetNames(type).Zip(Enum.GetValues(type).Cast<int>());
+                
+                var enumValues = nameValueList.Select(nameValue => 
+                    new TypeScriptTypeMember(
+                        nameValue.First,
+                        new TypeScriptType(
+                            TypeScriptType.Keyword.Primitive,
+                            null,
+                            nameValue.Second.ToString())));
                         
                 var enumType = new TypeScriptType(
                     TypeScriptType.Keyword.Enum,
@@ -59,45 +67,66 @@ public class TypeScriptTranspiler
                 var elementType = type.GetGenericArguments()[0];
                 typesToProcess.Enqueue(elementType);
             }
-            else if (IsEnumerable(type))
-            {
-                // TODO: this should be after properties/generics assignment - we need to add an enumerable copy to the member/generics list.
-                var elementType = GetEnumerableType(type);
-                typesToProcess.Enqueue(elementType);
-            }
             else
             {
-                var members = new List<TypeScriptType>();
+                var members = new List<TypeScriptTypeMember>();
                 var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
                                     .Where(p => p.GetIndexParameters().Length == 0); // Skip indexers
                                     
                 foreach (var property in properties)
                 {
-                    // TODO: process the actual type recursively here instead of adding to queue - if enumerable make a copy and add it to member directly
                     var propertyType = property.PropertyType;
-                    members.Add(new TypeScriptType(
-                        TypeScriptType.Keyword.Primitive,
-                        propertyType,
+                    var typeScriptType = this.GetTypeScriptType(propertyType);
+                    
+                    // Create a member with the property name but with the correct type
+                    members.Add(new TypeScriptTypeMember(
                         property.Name,
-                        null,
-                        null,
-                        false));
+                        typeScriptType));
                     
                     // Add property type to processing queue if it's not a primitive
                     if (!TypeMapping.ContainsKey(propertyType) && !processedTypes.Contains(propertyType))
                     {
-                        typesToProcess.Enqueue(propertyType);
+                        if (IsEnumerable(propertyType))
+                        {
+                            var elementType = GetEnumerableType(propertyType);
+                            var enumerableType = this.GetTypeScriptType(elementType) with { IsEnumerable = true };
+                            members.Add(new TypeScriptTypeMember(
+                                property.Name,
+                                enumerableType));
+                            if (!TypeMapping.ContainsKey(elementType) && !processedTypes.Contains(elementType))
+                            {
+                                typesToProcess.Enqueue(elementType);
+                            }
+                        }
+                        else
+                        {
+                            typesToProcess.Enqueue(propertyType);
+                        }
                     }
                 }
                 
-                var genericArguments = type.IsGenericType ? type.GetGenericArguments() : [];
-                var generics = genericArguments.Select(this.GetTypeScriptType).ToList();
+                var genericArguments = type.IsGenericType ? type.GetGenericArguments().Where(arg => arg.IsGenericParameter) : [];
+                var generics = new List<TypeScriptType>();
                 
                 foreach (var genericArg in genericArguments)
                 {
+                    var typeScriptGeneric = this.GetTypeScriptType(genericArg);
+                    generics.Add(typeScriptGeneric);
+                    
                     if (!TypeMapping.ContainsKey(genericArg) && !processedTypes.Contains(genericArg))
                     {
-                        typesToProcess.Enqueue(genericArg);
+                        if (IsEnumerable(genericArg))
+                        {
+                            var elementType = GetEnumerableType(genericArg);
+                            if (!TypeMapping.ContainsKey(elementType) && !processedTypes.Contains(elementType))
+                            {
+                                typesToProcess.Enqueue(elementType);
+                            }
+                        }
+                        else
+                        {
+                            typesToProcess.Enqueue(genericArg);
+                        }
                     }
                 }
                 
@@ -143,22 +172,17 @@ public class TypeScriptTranspiler
         }
         
         // Handle arrays and lists
-        if (type.IsArray || 
-            (type.IsGenericType && (
-                type.GetGenericTypeDefinition() == typeof(List<>) ||
-                type.GetGenericTypeDefinition() == typeof(IList<>) ||
-                type.GetGenericTypeDefinition() == typeof(ICollection<>) ||
-                type.GetGenericTypeDefinition() == typeof(IEnumerable<>))))
+        if (IsEnumerable(type))
         {
-            Type elementType = type.IsArray ? type.GetElementType()! : type.GetGenericArguments()[0];
+            var elementType = GetEnumerableType(type);
             var innerType = this.GetTypeScriptType(elementType);
             
             return new TypeScriptType(
-                TypeScriptType.Keyword.Primitive,
+                innerType.TypeScriptKeyword,
                 type,
                 innerType.TypeName,
-                null,
-                null,
+                innerType.Members,
+                innerType.Generics,
                 true);
         }
         
@@ -175,6 +199,15 @@ public class TypeScriptTranspiler
                 type.Name.Split('`')[0],
                 null,
                 genericArgs);
+        }
+        
+        // For enums
+        if (type.IsEnum)
+        {
+            return new TypeScriptType(
+                TypeScriptType.Keyword.Enum,
+                type,
+                type.Name);
         }
         
         // Handle regular class/struct types
