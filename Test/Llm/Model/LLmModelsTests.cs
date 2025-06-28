@@ -1,4 +1,4 @@
-﻿using LLMIntegration.Util;
+﻿using LLMIntegration;
 
 namespace Test.Llm.Model;
 

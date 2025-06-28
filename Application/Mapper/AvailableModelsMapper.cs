@@ -1,4 +1,5 @@
 ﻿using Interface.Dto.Model;
+using LLMIntegration;
 using LLMIntegration.Util;
 
 namespace Application.Mapper;

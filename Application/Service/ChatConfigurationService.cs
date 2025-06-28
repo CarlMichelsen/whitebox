@@ -7,7 +7,7 @@ using Interface.Dto.Configuration;
 using Interface.Dto.Model;
 using Interface.Repository;
 using Interface.Service;
-using LLMIntegration.Util;
+using LLMIntegration;
 using Microsoft.Extensions.Logging;
 
 namespace Application.Service;

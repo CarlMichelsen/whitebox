@@ -1,6 +1,6 @@
 ﻿using LLMIntegration.Util;
 
-namespace LLMIntegration.Anthropic.Dto.Model;
+namespace LLMIntegration.Model;
 
 public class AnthropicModelGroup
 {

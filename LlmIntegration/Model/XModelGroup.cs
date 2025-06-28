@@ -1,6 +1,6 @@
 ﻿using LLMIntegration.Util;
 
-namespace LLMIntegration.X.Dto.Model;
+namespace LLMIntegration.Model;
 
 public class XModelGroup
 {

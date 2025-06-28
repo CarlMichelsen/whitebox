@@ -1,6 +1,6 @@
 ﻿using LLMIntegration.Util;
 
-namespace LLMIntegration.Google.Dto.Model;
+namespace LLMIntegration.Model;
 
 public class GoogleModelGroup
 {

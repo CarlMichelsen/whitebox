@@ -1,7 +1,7 @@
 ﻿using Database.Entity;
 using Domain.Exception;
+using LLMIntegration;
 using LLMIntegration.Generic.Dto;
-using LLMIntegration.Util;
 
 namespace Application.Mapper;
 

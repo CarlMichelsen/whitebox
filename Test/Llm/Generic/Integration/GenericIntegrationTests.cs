@@ -1,4 +1,5 @@
-﻿using LLMIntegration.Generic;
+﻿using LLMIntegration;
+using LLMIntegration.Generic;
 using LLMIntegration.Generic.Dto;
 using LLMIntegration.Generic.Dto.Response.Stream;
 using LLMIntegration.Util;

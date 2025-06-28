@@ -1,4 +1,5 @@
-﻿using LLMIntegration.Google;
+﻿using LLMIntegration;
+using LLMIntegration.Google;
 using LLMIntegration.Google.Dto;
 using LLMIntegration.Google.Dto.Response.Stream;
 using LLMIntegration.Interface;

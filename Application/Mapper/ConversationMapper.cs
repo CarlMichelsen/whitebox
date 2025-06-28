@@ -5,7 +5,7 @@ using Domain.Exception;
 using Domain.User;
 using Interface.Dto.Conversation;
 using Interface.Dto.Model;
-using LLMIntegration.Util;
+using LLMIntegration;
 
 namespace Application.Mapper;
 

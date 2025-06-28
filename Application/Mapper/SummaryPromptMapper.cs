@@ -1,6 +1,6 @@
 ﻿using Database.Entity;
+using LLMIntegration;
 using LLMIntegration.Generic.Dto;
-using LLMIntegration.Util;
 
 namespace Application.Mapper;
 
