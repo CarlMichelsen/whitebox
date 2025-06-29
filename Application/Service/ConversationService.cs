@@ -37,6 +37,12 @@ public class ConversationService(
             : new ServiceResponse<ConversationDto>(conversationDto);
     }
 
+    public async Task<ServiceResponse> DeleteConversation(ConversationEntityId conversationId)
+    {
+        // TODO: Implement this
+        throw new NotImplementedException("Not Implemented");
+    }
+
     public async Task<ServiceResponse<SetSystemMessageResponseDto>> SetConversationSystemMessage(
         ConversationEntityId conversationId,
         SetConversationSystemMessage setConversationSystemMessage)
@@ -66,6 +72,7 @@ public class ConversationService(
         var user = contextAccessor.GetUserContext().User;
         var conversations = await applicationContext.Conversation
             .Where(c => c!.CreatorId == user.Id)
+            .Take(100)
             .ToListAsync();
         
         var options = conversations

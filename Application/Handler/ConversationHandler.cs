@@ -29,6 +29,21 @@ public class ConversationHandler(
         }
     }
 
+    public async Task<IResult> DeleteConversation(Guid conversationId)
+    {
+        try
+        {
+            var conversationEntityId = new ConversationEntityId(conversationId);
+            var conversationResponse = await conversationService.DeleteConversation(conversationEntityId);
+            return Results.Ok(conversationResponse);
+        }
+        catch (Exception e)
+        {
+            logger.LogCritical(e, "ConversationHandler failed to get conversation");  
+            return Results.Ok(new ServiceResponse("Exception"));
+        }
+    }
+
     public async Task<IResult> SetConversationSystemMessage(Guid conversationId, SetConversationSystemMessage systemMessage)
     {
         try

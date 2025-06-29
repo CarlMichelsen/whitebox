@@ -10,6 +10,8 @@ public interface IConversationService
 {
     Task<ServiceResponse<ConversationDto>> GetConversation(ConversationEntityId conversationId);
     
+    Task<ServiceResponse> DeleteConversation(ConversationEntityId conversationId);
+    
     Task<ServiceResponse<SetSystemMessageResponseDto>> SetConversationSystemMessage(ConversationEntityId conversationId, SetConversationSystemMessage setConversationSystemMessage);
     
     Task<ServiceResponse<List<ConversationOptionDto>>> GetConversationList();

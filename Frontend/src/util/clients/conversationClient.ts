@@ -31,6 +31,10 @@ export class ConversationClient extends BaseClient
         return await this.request<Conversation>("GET", `${this.conversationPath}/${id}`);
     }
 
+    public async deleteConversation(id: string) {
+        return await this.request<void>("DELETE", `${this.conversationPath}/${id}`);
+    }
+
     public async setConversationSystemMessage(id: string, systemMessagePayload: SetConversationSystemMessage) {
         return await this.request<SetSystemMessageResponse>("PATCH", `${this.conversationPath}/${id}`, systemMessagePayload);
     }

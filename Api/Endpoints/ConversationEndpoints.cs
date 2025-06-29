@@ -33,6 +33,12 @@ public static class ConversationEndpoints
             await handler.GetConversation(id))
             .Produces<ServiceResponse<ConversationDto>>();
         
+        conversationGroup.MapDelete(
+                "/{id:guid}",
+                async ([FromServices] IConversationHandler handler, [FromRoute] Guid id) =>
+                await handler.DeleteConversation(id))
+            .Produces<ServiceResponse>();
+        
         conversationGroup.MapPatch(
                 "/{id:guid}",
                 async ([FromServices] IConversationHandler handler, [FromRoute] Guid id, [FromBody] SetConversationSystemMessage systemMessage) =>
