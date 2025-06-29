@@ -22,12 +22,12 @@ const SidebarBottomBox: FC = () => {
                     <p>{auth.user!.username}</p>
                     <button
                         onClick={onLogoutClick}
-                        className="rounded-sm bg-red-400 dark:bg-red-800 hover:font-bold w-full">
+                        className="rounded-xs bg-red-400 dark:bg-red-800 hover:font-bold w-full">
                         Logout
                     </button>
                 </div>
                 <img
-                    className="aspect-square w-12 rounded-sm"
+                    className="aspect-square w-12 rounded-xs"
                     src={auth.user!.avatarUrl}
                     alt="profile" />
             </div>

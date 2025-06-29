@@ -67,7 +67,7 @@ const UserMessage: FC<UserMessageProps> = ({ branchSelect, branchList, message }
                     <button
                             disabled={branchId === 1 || !isEditingAMessage}
                             onClick={() => selectBranchId(branchId - 1)}
-                            className="m-1 pb-0.5 rounded-md w-6 sm:enabled:hover:bg-neutral-300 sm:enabled:dark:hover:bg-neutral-800 disabled:opacity-10">
+                            className="m-1 pb-0.5 rounded-md w-6 sm:enabled:hover:bg-neutral-300 sm:dark:enabled:hover:bg-neutral-800 disabled:opacity-10">
                             <img
                                 draggable="false"
                                 src={darkMode ? ArrowWhite : ArrowBlack}
@@ -82,7 +82,7 @@ const UserMessage: FC<UserMessageProps> = ({ branchSelect, branchList, message }
                         <button
                             disabled={branchId === branchList.length || !isEditingAMessage}
                             onClick={() => selectBranchId(branchId + 1)}
-                            className="m-1 pb-0.5 rounded-md w-6 sm:enabled:hover:bg-neutral-300 sm:enabled:dark:hover:bg-neutral-800 disabled:opacity-10">
+                            className="m-1 pb-0.5 rounded-md w-6 sm:enabled:hover:bg-neutral-300 sm:dark:enabled:hover:bg-neutral-800 disabled:opacity-10">
                             <img
                                 draggable="false"
                                 src={darkMode ? ArrowWhite : ArrowBlack}

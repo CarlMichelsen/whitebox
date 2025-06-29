@@ -38,7 +38,7 @@ const ConversationCard: FC<ConversationCardProps> = ({ option }) => {
         <div className={`grid grid-cols-[1fr_auto] h-6 ${selected ? "dark:bg-neutral-800 bg-neutral-300 grid-cols-[1fr_auto]" : "grid-cols-1"}`} id={"option-"+option.id}>
             <button
                 onClick={onClick}
-                className="inline-block text-left rounded-sm hover:underline ml-1 overflow-hidden text-ellipsis whitespace-nowrap text-sm">
+                className="inline-block text-left rounded-xs hover:underline ml-1 overflow-hidden text-ellipsis whitespace-nowrap text-sm">
                 {option.summary}
             </button>
 

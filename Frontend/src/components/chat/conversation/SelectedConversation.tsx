@@ -42,7 +42,7 @@ const SelectedConversation: FC = () => {
     return conversation.selectedConversation !== null ? (
         <div>
             <button
-                className="block mx-auto p-2 mb-4 rounded-sm bg-blue-400 dark:bg-blue-800 hover:bg-blue-600 dark:hover:bg-blue-600"
+                className="block mx-auto p-2 mb-4 rounded-xs bg-blue-400 dark:bg-blue-800 hover:bg-blue-600 dark:hover:bg-blue-600"
                 onClick={() => dispatch(openModal("conversation-system-message"))}>
                 Edit system message for this conversation
             </button>
