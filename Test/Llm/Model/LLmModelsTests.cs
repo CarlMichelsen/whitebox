@@ -1,4 +1,4 @@
-﻿using LLMIntegration.Util;
+﻿using LLMIntegration;
 
 namespace Test.Llm.Model;
 
@@ -17,8 +17,8 @@ public class LLmModelsTests
     }
     
     [Theory]
-    [InlineData(true, "claude-3-7-sonnet-latest")]
-    [InlineData(true, "grok-3-beta")]
+    [InlineData(true, "claude-3-5-haiku-latest")]
+    [InlineData(true, "grok-3")]
     [InlineData(false, "random sentence")]
     [InlineData(false, "this is in fact not a model-identifier")]
     public void CanFindModelByIdentifier(bool expectedFound, string identifier)

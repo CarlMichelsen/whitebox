@@ -1,7 +1,7 @@
-﻿using Interface.Dto;
-using Interface.Dto.Model;
+﻿using Presentation.Dto;
+using Presentation.Dto.Model;
 
-namespace Interface.Handler;
+namespace Presentation.Handler;
 
 public interface IModelHandler
 {

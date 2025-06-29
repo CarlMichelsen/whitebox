@@ -11,7 +11,7 @@ const SearchBox: FC = () => {
     return (
         <span className="relative mx-1 mb-1">
             <input
-                className="block h-8 w-full pl-0.5 py-0.5 pr-7 focus:outline-none transition-colors ease-in-out border border-color rounded-sm bg-neutral-200 focus:bg-white dark:bg-neutral-900 focus:dark:bg-black"
+                className="block h-8 w-full pl-0.5 py-0.5 pr-7 focus:outline-hidden transition-colors ease-in-out border border-color rounded-xs bg-neutral-200 focus:bg-white dark:bg-neutral-900 dark:focus:bg-black"
                 placeholder="Under construction"
                 onChange={e => dispatch(setSearch(e.target.value))}
                 type="search" />

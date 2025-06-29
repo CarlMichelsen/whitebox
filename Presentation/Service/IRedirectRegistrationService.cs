@@ -1,6 +1,6 @@
 ﻿using Database.Entity;
 
-namespace Interface.Service;
+namespace Presentation.Service;
 
 public interface IRedirectRegistrationService
 {

@@ -3,12 +3,12 @@ using Database;
 using Database.Entity;
 using Database.Entity.Id;
 using Domain.Conversation.Action;
-using Interface.Accessor;
-using Interface.Dto.Conversation;
-using Interface.Dto.Conversation.Response.Stream;
-using Interface.Repository;
-using Interface.Service;
 using LLMIntegration.Generic.Dto.Response.Stream;
+using Presentation.Accessor;
+using Presentation.Dto.Conversation;
+using Presentation.Dto.Conversation.Response.Stream;
+using Presentation.Repository;
+using Presentation.Service;
 
 namespace Application.Service;
 

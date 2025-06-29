@@ -1,4 +1,4 @@
-﻿namespace Interface.Service;
+﻿namespace Presentation.Service;
 
 public interface ICacheService
 {

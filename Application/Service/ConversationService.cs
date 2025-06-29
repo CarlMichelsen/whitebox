@@ -1,14 +1,14 @@
 ﻿using Application.Mapper;
 using Database;
 using Database.Entity.Id;
-using Interface.Accessor;
-using Interface.Dto;
-using Interface.Dto.Conversation;
-using Interface.Dto.Conversation.Request;
-using Interface.Dto.Conversation.Response;
-using Interface.Repository;
-using Interface.Service;
 using Microsoft.EntityFrameworkCore;
+using Presentation.Accessor;
+using Presentation.Dto;
+using Presentation.Dto.Conversation;
+using Presentation.Dto.Conversation.Request;
+using Presentation.Dto.Conversation.Response;
+using Presentation.Repository;
+using Presentation.Service;
 
 namespace Application.Service;
 
@@ -35,6 +35,18 @@ public class ConversationService(
         return conversationDto is null
             ? new ServiceResponse<ConversationDto>("Conversation not found")
             : new ServiceResponse<ConversationDto>(conversationDto);
+    }
+
+    public async Task<ServiceResponse> DeleteConversation(ConversationEntityId conversationId)
+    {
+        // TODO: Implement this
+        throw new NotImplementedException("Not Implemented");
+    }
+
+    public async Task<ServiceResponse> DeleteMessage(ConversationEntityId conversationId, MessageEntityId messageId)
+    {
+        // TODO: Implement this
+        throw new NotImplementedException();
     }
 
     public async Task<ServiceResponse<SetSystemMessageResponseDto>> SetConversationSystemMessage(
@@ -66,6 +78,7 @@ public class ConversationService(
         var user = contextAccessor.GetUserContext().User;
         var conversations = await applicationContext.Conversation
             .Where(c => c!.CreatorId == user.Id)
+            .Take(100)
             .ToListAsync();
         
         var options = conversations

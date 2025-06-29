@@ -47,7 +47,7 @@ const ChatInputBox: FC = () => {
                 <EditIndicator />
                 
                 <LineHeightEditableTextBox
-                    className={`p-3 focus:outline-none rounded-md w-full shadow-inner border ${getBorderColor()} transition-colors ease-in-out bg-neutral-100 focus:bg-white dark:bg-neutral-900 focus:dark:bg-black`}
+                    className={`p-3 focus:outline-hidden rounded-md w-full shadow-inner border ${getBorderColor()} transition-colors ease-in-out bg-neutral-100 focus:bg-white dark:bg-neutral-900 dark:focus:bg-black`}
                     disabled={false}
                     rows={input.rows}
                     text={input.text}

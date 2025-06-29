@@ -1,4 +1,4 @@
-﻿namespace Interface.Dto.Configuration;
+﻿namespace Presentation.Dto.Configuration;
 
 public record SetSelectedModelDto(
     string ModelIdentifier);

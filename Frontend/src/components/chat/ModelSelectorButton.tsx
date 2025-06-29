@@ -19,7 +19,7 @@ const ModelSelectorButton: FC = () => {
             src={getImageUrl(config.selectedModel.provider, darkMode)}
             alt={config.selectedModel.provider}/>
         <button
-            className="w-full h-full rounded-sm dark:bg-neutral-600 bg-neutral-300 px-2"
+            className="w-full h-full rounded-xs dark:bg-neutral-600 bg-neutral-300 px-2"
             onClick={() => dispatch(openModal("model-selector"))}>
             {config.selectedModel.modelName}
         </button>

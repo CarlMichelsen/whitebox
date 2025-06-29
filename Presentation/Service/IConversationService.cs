@@ -1,14 +1,18 @@
 ﻿using Database.Entity.Id;
-using Interface.Dto;
-using Interface.Dto.Conversation;
-using Interface.Dto.Conversation.Request;
-using Interface.Dto.Conversation.Response;
+using Presentation.Dto;
+using Presentation.Dto.Conversation;
+using Presentation.Dto.Conversation.Request;
+using Presentation.Dto.Conversation.Response;
 
-namespace Interface.Service;
+namespace Presentation.Service;
 
 public interface IConversationService
 {
     Task<ServiceResponse<ConversationDto>> GetConversation(ConversationEntityId conversationId);
+    
+    Task<ServiceResponse> DeleteConversation(ConversationEntityId conversationId);
+    
+    Task<ServiceResponse> DeleteMessage(ConversationEntityId conversationId, MessageEntityId messageId);
     
     Task<ServiceResponse<SetSystemMessageResponseDto>> SetConversationSystemMessage(ConversationEntityId conversationId, SetConversationSystemMessage setConversationSystemMessage);
     

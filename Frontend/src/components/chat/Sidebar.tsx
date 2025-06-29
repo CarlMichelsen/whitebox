@@ -45,7 +45,7 @@ const Sidebar: FC<SidebarProps> = ({ children }) => {
             <div className={`h-screen fixed z-30 w-64 dark:bg-neutral-900 bg-neutral-100 ${sidebarClasses()} grid grid-rows-[auto_auto_1fr_auto]`}>
                 <div className="grid grid-cols-[1fr_auto] gap-1">
                     <button
-                        className="m-1 bg-blue-400 dark:bg-blue-800 hover:font-bold rounded-sm w-full"
+                        className="m-1 bg-blue-400 dark:bg-blue-800 hover:font-bold rounded-xs w-full"
                         onClick={() => {
                             dispatch(selectConversation(null))
                             if (window.innerWidth < BreakPoints.mobileWidthBreakPoint) {

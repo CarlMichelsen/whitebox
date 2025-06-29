@@ -1,5 +1,5 @@
 ﻿using Database.Entity;
-using Interface.Dto.Conversation;
+using Presentation.Dto.Conversation;
 
 namespace Application.Mapper;
 

@@ -19,7 +19,7 @@ const ModelProviderSelector: FC<ModelProviderSelectorProps> = ({ selectedModel, 
     }
     
     return (
-        <div className="border border-color rounded-sm p-1">
+        <div className="border border-color rounded-xs p-1">
             <div className="grid grid-cols-[1.5rem_auto]">
                 <img
                     className="aspect-square pr-1"
@@ -33,7 +33,7 @@ const ModelProviderSelector: FC<ModelProviderSelectorProps> = ({ selectedModel, 
                 {providerGroup.models.map((m) => (
                     <li key={m.modelIdentifier} id={"selectable-model-" + m.modelIdentifier}>
                         <button
-                            className={`p-1 text-left w-full rounded-sm block ${getBgClasses(m)}`}
+                            className={`p-1 text-left w-full rounded-xs block ${getBgClasses(m)}`}
                             onClick={() => modelClicked(m)}>
                             <h4 className="italic">{m.modelName}</h4>
                             <p className="text-xs">{m.modelDescription}</p>

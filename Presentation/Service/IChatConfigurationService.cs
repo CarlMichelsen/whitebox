@@ -1,8 +1,8 @@
-﻿using Interface.Dto;
-using Interface.Dto.Configuration;
-using Interface.Dto.Model;
+﻿using Presentation.Dto;
+using Presentation.Dto.Configuration;
+using Presentation.Dto.Model;
 
-namespace Interface.Service;
+namespace Presentation.Service;
 
 public interface IChatConfigurationService
 {

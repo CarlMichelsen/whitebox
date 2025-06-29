@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
-using Interface.Dto.Configuration;
-using LLMIntegration.Util;
+using LLMIntegration;
+using Presentation.Dto.Configuration;
 
 namespace Application.Validation.ChatConfiguration;
 

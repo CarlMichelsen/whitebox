@@ -1,12 +1,12 @@
 ﻿using System.Text.Json;
 using Database.Entity.Id;
 using Domain.Conversation.Action;
-using Interface.Dto.Conversation.Request;
-using Interface.Dto.Conversation.Response.Stream;
-using Interface.Handler;
-using Interface.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Presentation.Dto.Conversation.Request;
+using Presentation.Dto.Conversation.Response.Stream;
+using Presentation.Handler;
+using Presentation.Service;
 
 namespace Application.Handler;
 

@@ -1,7 +1,7 @@
-﻿using Interface.Dto.Configuration;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
+using Presentation.Dto.Configuration;
 
-namespace Interface.Handler;
+namespace Presentation.Handler;
 
 public interface IChatConfigurationHandler
 {

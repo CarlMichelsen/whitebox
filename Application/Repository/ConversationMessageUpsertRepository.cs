@@ -4,8 +4,7 @@ using Database.Entity;
 using Database.Entity.Id;
 using Domain.Conversation.Action;
 using Domain.Exception;
-using Interface.Repository;
-using Microsoft.EntityFrameworkCore;
+using Presentation.Repository;
 
 namespace Application.Repository;
 

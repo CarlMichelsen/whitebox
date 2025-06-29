@@ -1,5 +1,6 @@
 using Api;
 using Api.Extensions;
+using Api.Logging;
 using Api.Middleware;
 using Application.Configuration;
 using Scalar.AspNetCore;
@@ -42,9 +43,6 @@ app.UseStaticFiles(StaticFileOptionsFactory.Create());
 
 app.RegisterEndpoints();
 
-app.Services.GetRequiredService<ILogger<Program>>()
-    .LogInformation(
-        "{ApplicationName} service has started",
-        ApplicationConstants.Name);
+app.LogStartup();
 
 app.Run();

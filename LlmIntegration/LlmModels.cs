@@ -1,10 +1,8 @@
 ﻿using System.Reflection;
-using LLMIntegration.Anthropic.Dto.Model;
-using LLMIntegration.Google.Dto.Model;
-using LLMIntegration.OpenAi.Dto.Model;
-using LLMIntegration.X.Dto.Model;
+using LLMIntegration.Model;
+using LLMIntegration.Util;
 
-namespace LLMIntegration.Util;
+namespace LLMIntegration;
 
 /// <summary>
 /// A static class that contains models for each LlmProvider.
@@ -20,11 +18,12 @@ public static class LlmModels
     public static XModelGroup X { get; } = new();
     
     public static LegacyModels Legacy { get; } = new();
+    
+    private static IReadOnlyList<LlmModel> Models { get; } = GetModels().AsReadOnly();
 
-    public static bool TryGetModel(string modelIdentifier, out LlmModel? model, bool includeLegacy = false)
+    public static bool TryGetModel(string modelIdentifier, out LlmModel? model)
     {
-        var allModels = GetModels(includeLegacy);
-        model = allModels.FirstOrDefault(m => m.ModelIdentifier == modelIdentifier);
+        model = Models.FirstOrDefault(m => m.ModelIdentifier == modelIdentifier);
         return model is not null;
     }
 

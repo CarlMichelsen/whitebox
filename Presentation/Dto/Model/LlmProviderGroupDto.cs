@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Interface.Dto.Model;
+namespace Presentation.Dto.Model;
 
 public record LlmProviderGroupDto(
     [property: JsonPropertyName("provider")] string Provider,

@@ -1,8 +1,8 @@
-﻿using Interface.Dto;
-using Interface.Dto.Configuration;
-using Interface.Dto.Model;
-using Interface.Handler;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Presentation.Dto;
+using Presentation.Dto.Configuration;
+using Presentation.Dto.Model;
+using Presentation.Handler;
 
 namespace Api.Endpoints;
 

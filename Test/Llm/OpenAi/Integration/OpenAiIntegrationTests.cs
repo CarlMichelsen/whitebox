@@ -1,8 +1,8 @@
-﻿using LLMIntegration.Interface;
+﻿using LLMIntegration;
+using LLMIntegration.Interface;
 using LLMIntegration.OpenAi;
 using LLMIntegration.OpenAi.Dto;
 using LLMIntegration.OpenAi.Dto.Response.Stream;
-using LLMIntegration.Util;
 using Microsoft.Extensions.DependencyInjection;
 using Test.Fake;
 

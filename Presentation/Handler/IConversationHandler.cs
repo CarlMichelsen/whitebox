@@ -1,11 +1,15 @@
-﻿using Interface.Dto.Conversation.Request;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
+using Presentation.Dto.Conversation.Request;
 
-namespace Interface.Handler;
+namespace Presentation.Handler;
 
 public interface IConversationHandler
 {
     Task<IResult> GetConversation(Guid conversationId);
+    
+    Task<IResult> DeleteConversation(Guid conversationId);
+    
+    Task<IResult> DeleteMessage(Guid conversationId, Guid messageId);
     
     Task<IResult> SetConversationSystemMessage(Guid conversationId, SetConversationSystemMessage systemMessage);
     

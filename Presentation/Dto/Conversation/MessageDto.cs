@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
-using Interface.Dto.Model;
+using Presentation.Dto.Model;
 
-namespace Interface.Dto.Conversation;
+namespace Presentation.Dto.Conversation;
 
 public record MessageDto(
     [property: JsonPropertyName("id")] Guid Id,

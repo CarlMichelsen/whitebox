@@ -1,6 +1,6 @@
-﻿using Interface.Dto.Conversation.Request;
+﻿using Presentation.Dto.Conversation.Request;
 
-namespace Interface.Handler;
+namespace Presentation.Handler;
 
 public interface IConversationStreamHandler
 {

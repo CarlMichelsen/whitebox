@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Interface.Dto.Conversation.Request;
+namespace Presentation.Dto.Conversation.Request;
 
 public record SetConversationSystemMessage(
     [property: JsonPropertyName("systemMessage")]

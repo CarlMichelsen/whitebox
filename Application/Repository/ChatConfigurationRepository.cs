@@ -2,9 +2,9 @@
 using Database.Entity;
 using Database.Entity.Id;
 using Domain.User;
-using Interface.Repository;
-using LLMIntegration.Util;
+using LLMIntegration;
 using Microsoft.EntityFrameworkCore;
+using Presentation.Repository;
 
 namespace Application.Repository;
 

@@ -43,7 +43,7 @@ const SystemMessageEditor: FC<SystemMessageEditorProps> = ({ label, initialMessa
         <div className="my-1">
             <textarea
                 aria-label={label}
-                className="resize-none dark:border-none border w-full h-96 focus:outline-none p-1 rounded-sm transition-colors ease-in-out bg-neutral-100 focus:bg-white dark:bg-black dark:focus:bg-black"
+                className="resize-none dark:border-none border w-full h-96 focus:outline-hidden p-1 rounded-xs transition-colors ease-in-out bg-neutral-100 focus:bg-white dark:bg-black dark:focus:bg-black"
                 value={message ?? ""}
                 onChange={event => onChange(event.target.value)}
             ></textarea>

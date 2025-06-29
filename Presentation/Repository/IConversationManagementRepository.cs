@@ -1,6 +1,6 @@
 ﻿using Database.Entity.Id;
 
-namespace Interface.Repository;
+namespace Presentation.Repository;
 
 public interface IConversationManagementRepository
 {

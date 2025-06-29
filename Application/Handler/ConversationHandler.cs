@@ -1,12 +1,12 @@
 ﻿using Database.Entity.Id;
-using Interface.Dto;
-using Interface.Dto.Conversation;
-using Interface.Dto.Conversation.Request;
-using Interface.Dto.Conversation.Response;
-using Interface.Handler;
-using Interface.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Presentation.Dto;
+using Presentation.Dto.Conversation;
+using Presentation.Dto.Conversation.Request;
+using Presentation.Dto.Conversation.Response;
+using Presentation.Handler;
+using Presentation.Service;
 
 namespace Application.Handler;
 
@@ -26,6 +26,37 @@ public class ConversationHandler(
         {
             logger.LogCritical(e, "ConversationHandler failed to get conversation");  
             return Results.Ok(new ServiceResponse<ConversationDto>("Exception"));
+        }
+    }
+
+    public async Task<IResult> DeleteConversation(Guid conversationId)
+    {
+        try
+        {
+            var conversationEntityId = new ConversationEntityId(conversationId);
+            var conversationResponse = await conversationService.DeleteConversation(conversationEntityId);
+            return Results.Ok(conversationResponse);
+        }
+        catch (Exception e)
+        {
+            logger.LogCritical(e, "ConversationHandler failed to delete conversation");  
+            return Results.Ok(new ServiceResponse("Exception"));
+        }
+    }
+
+    public async Task<IResult> DeleteMessage(Guid conversationId, Guid messageId)
+    {
+        try
+        {
+            var conversationEntityId = new ConversationEntityId(conversationId);
+            var messageEntityId = new MessageEntityId(messageId);
+            var conversationResponse = await conversationService.DeleteMessage(conversationEntityId, messageEntityId);
+            return Results.Ok(conversationResponse);
+        }
+        catch (Exception e)
+        {
+            logger.LogCritical(e, "ConversationHandler failed to delete message in conversation");  
+            return Results.Ok(new ServiceResponse("Exception"));
         }
     }
 

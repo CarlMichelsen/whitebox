@@ -1,15 +1,15 @@
 ﻿using Application.Repository;
 using Application.Service;
 using Database;
-using Interface.Accessor;
-using Interface.Repository;
-using Interface.Service;
+using LLMIntegration;
 using LLMIntegration.Generic;
 using LLMIntegration.Generic.Dto;
 using LLMIntegration.Generic.Dto.Response.Stream;
-using LLMIntegration.Util;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Presentation.Accessor;
+using Presentation.Repository;
+using Presentation.Service;
 using Test.Fake;
 
 namespace Test.Prompt;
@@ -52,7 +52,7 @@ public class PromptServiceTests
         
         await applicationContext.SaveChangesAsync();
         var prompt = new LlmPrompt(
-            Model: LlmModels.Anthropic.Claude37Sonnet,
+            Model: LlmModels.Anthropic.Claude4Sonnet,
             Content: new LlmContent(
                 SystemMessage: "Be an elitist asshole.",
                 Messages: [
@@ -103,7 +103,7 @@ public class PromptServiceTests
         
         await applicationContext.SaveChangesAsync();
         var prompt = new LlmPrompt(
-            Model: LlmModels.Anthropic.Claude37Sonnet,
+            Model: LlmModels.Anthropic.Claude4Sonnet,
             Content: new LlmContent(
                 SystemMessage: "Be an elitist asshole.",
                 Messages: [

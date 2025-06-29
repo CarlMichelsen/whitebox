@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Interface.Dto.Conversation.Response.Stream;
+namespace Presentation.Dto.Conversation.Response.Stream;
 
 public class ConversationEventDto : BaseStreamResponseDto
 {

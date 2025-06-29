@@ -1,4 +1,4 @@
-﻿namespace Interface.Dto;
+﻿namespace Presentation.Dto;
 
 public record SpeechToTextResponse(
     string Identifier,

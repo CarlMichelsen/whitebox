@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Interface.Dto.Conversation.Response;
+namespace Presentation.Dto.Conversation.Response;
 
 public record SetSystemMessageResponseDto(
     [property: JsonPropertyName("conversationId")]

@@ -1,6 +1,6 @@
-﻿using Interface.Dto.Model;
+﻿using Presentation.Dto.Model;
 
-namespace Interface.Dto.Configuration;
+namespace Presentation.Dto.Configuration;
 
 public record ChatConfigurationDto(
     string Id,

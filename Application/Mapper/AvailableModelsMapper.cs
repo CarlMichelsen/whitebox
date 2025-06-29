@@ -1,5 +1,6 @@
-﻿using Interface.Dto.Model;
+﻿using LLMIntegration;
 using LLMIntegration.Util;
+using Presentation.Dto.Model;
 
 namespace Application.Mapper;
 

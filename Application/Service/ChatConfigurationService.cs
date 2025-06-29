@@ -1,14 +1,14 @@
 ﻿using Application.Mapper;
 using Application.Validation.ChatConfiguration;
 using Database;
-using Interface.Accessor;
-using Interface.Dto;
-using Interface.Dto.Configuration;
-using Interface.Dto.Model;
-using Interface.Repository;
-using Interface.Service;
-using LLMIntegration.Util;
+using LLMIntegration;
 using Microsoft.Extensions.Logging;
+using Presentation.Accessor;
+using Presentation.Dto;
+using Presentation.Dto.Configuration;
+using Presentation.Dto.Model;
+using Presentation.Repository;
+using Presentation.Service;
 
 namespace Application.Service;
 

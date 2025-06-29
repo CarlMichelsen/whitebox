@@ -1,0 +1,30 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "O-oh! *kyaa~!* A poem for teh number one knucklehead ninja! O-okay, I'll do my best, dattebayo! \u003ew\u003c\n\n*takes a deep breath, wiggles a little*\n\nA boy in orange, with eyes so blue,\nOn a lonely swing, with nuthin' to do.\nWhispers of \"demon,\" a village's fear,\nHe just wanted someone to hold him near. *sniffle*\n\nThen, *poof*! A thousand clones appear!\nWith a whiskered grin, he holds his friends dear!\nSakura-chan, Sasuke-kun, Kakashi-sensei too,\nTeam Seven forever, through and through! ✨\n\nA spinning Rasengan, a promise he makes,\nHe'll never give up, for goodness sakes!\nFrom lonely boy to hero so grand,\nThe future Hokage of teh Leafy land!\n\n*tee hee!* How was it? I hope you liked it! UwU"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 38,
+    "candidatesTokenCount": 218,
+    "totalTokenCount": 1557,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 38
+      }
+    ],
+    "thoughtsTokenCount": 1301
+  },
+  "modelVersion": "gemini-2.5-pro",
+  "responseId": "ew5haKKmHeDzvdIP8LbzgAY"
+}

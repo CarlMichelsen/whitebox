@@ -8,15 +8,14 @@ using Application.Handler;
 using Application.Repository;
 using Application.Service;
 using Database;
-using Interface.Accessor;
-using Interface.Handler;
-using Interface.Repository;
-using Interface.Service;
 using LLMIntegration.Generic;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
-using Serilog;
+using Presentation.Accessor;
+using Presentation.Handler;
+using Presentation.Repository;
+using Presentation.Service;
 
 namespace Api;
 
@@ -50,7 +49,6 @@ public static class Dependencies
         
         // Accessor
         builder.Services
-            .AddScoped<ISourceIdAccessor, SourceIdAccessor>()
             .AddScoped<IUserContextAccessor, UserContextAccessor>();
         
         // Cache
@@ -103,16 +101,7 @@ public static class Dependencies
         });
         
         // Serilog
-        builder.Host.UseSerilog((context, sp, configuration) =>
-        {
-            configuration
-                .ReadFrom.Configuration(context.Configuration)
-                .ReadFrom.Services(sp)
-                .Enrich.With(sp.GetRequiredService<TraceIdEnricher>())
-                .Enrich.WithProperty("Application", ApplicationConstants.Name)
-                .Enrich.WithProperty("Environment", GetEnvironmentName(builder));
-        });
-        builder.Services.AddSingleton<TraceIdEnricher>();
+        builder.ApplicationUseSerilog();
         
         // Database
         builder.Services.AddDbContext<ApplicationContext>(options =>
@@ -180,7 +169,4 @@ public static class Dependencies
         
         builder.Services.AddAuthorization();
     }
-
-    private static string GetEnvironmentName(WebApplicationBuilder builder) =>
-        builder.Environment.IsProduction() ? "Production" : "Development";
 }
