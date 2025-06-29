@@ -12,6 +12,8 @@ public interface IConversationService
     
     Task<ServiceResponse> DeleteConversation(ConversationEntityId conversationId);
     
+    Task<ServiceResponse> DeleteMessage(ConversationEntityId conversationId, MessageEntityId messageId);
+    
     Task<ServiceResponse<SetSystemMessageResponseDto>> SetConversationSystemMessage(ConversationEntityId conversationId, SetConversationSystemMessage setConversationSystemMessage);
     
     Task<ServiceResponse<List<ConversationOptionDto>>> GetConversationList();

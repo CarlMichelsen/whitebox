@@ -28,21 +28,27 @@ public static class ConversationEndpoints
             .Produces<ServiceResponse<List<ConversationOptionDto>>>();
         
         conversationGroup.MapGet(
-            "/{id:guid}",
-            async ([FromServices] IConversationHandler handler, [FromRoute] Guid id) =>
-            await handler.GetConversation(id))
+            "/{conversationId:guid}",
+            async ([FromServices] IConversationHandler handler, [FromRoute] Guid conversationId) =>
+            await handler.GetConversation(conversationId))
             .Produces<ServiceResponse<ConversationDto>>();
         
         conversationGroup.MapDelete(
-                "/{id:guid}",
-                async ([FromServices] IConversationHandler handler, [FromRoute] Guid id) =>
-                await handler.DeleteConversation(id))
+                "/{conversationId:guid}",
+                async ([FromServices] IConversationHandler handler, [FromRoute] Guid conversationId) =>
+                await handler.DeleteConversation(conversationId))
+            .Produces<ServiceResponse>();
+        
+        conversationGroup.MapDelete(
+                "/{conversationId:guid}/{messageId:guid}",
+                async ([FromServices] IConversationHandler handler, [FromRoute] Guid conversationId, [FromRoute] Guid messageId) =>
+                await handler.DeleteMessage(conversationId, messageId))
             .Produces<ServiceResponse>();
         
         conversationGroup.MapPatch(
-                "/{id:guid}",
-                async ([FromServices] IConversationHandler handler, [FromRoute] Guid id, [FromBody] SetConversationSystemMessage systemMessage) =>
-                await handler.SetConversationSystemMessage(id, systemMessage))
+                "/{conversationId:guid}",
+                async ([FromServices] IConversationHandler handler, [FromRoute] Guid conversationId, [FromBody] SetConversationSystemMessage systemMessage) =>
+                await handler.SetConversationSystemMessage(conversationId, systemMessage))
             .Produces<ServiceResponse<SetSystemMessageResponseDto>>();
     }
 }

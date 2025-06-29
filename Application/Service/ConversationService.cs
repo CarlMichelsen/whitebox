@@ -43,6 +43,12 @@ public class ConversationService(
         throw new NotImplementedException("Not Implemented");
     }
 
+    public async Task<ServiceResponse> DeleteMessage(ConversationEntityId conversationId, MessageEntityId messageId)
+    {
+        // TODO: Implement this
+        throw new NotImplementedException();
+    }
+
     public async Task<ServiceResponse<SetSystemMessageResponseDto>> SetConversationSystemMessage(
         ConversationEntityId conversationId,
         SetConversationSystemMessage setConversationSystemMessage)

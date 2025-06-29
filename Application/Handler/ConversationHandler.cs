@@ -39,7 +39,23 @@ public class ConversationHandler(
         }
         catch (Exception e)
         {
-            logger.LogCritical(e, "ConversationHandler failed to get conversation");  
+            logger.LogCritical(e, "ConversationHandler failed to delete conversation");  
+            return Results.Ok(new ServiceResponse("Exception"));
+        }
+    }
+
+    public async Task<IResult> DeleteMessage(Guid conversationId, Guid messageId)
+    {
+        try
+        {
+            var conversationEntityId = new ConversationEntityId(conversationId);
+            var messageEntityId = new MessageEntityId(messageId);
+            var conversationResponse = await conversationService.DeleteMessage(conversationEntityId, messageEntityId);
+            return Results.Ok(conversationResponse);
+        }
+        catch (Exception e)
+        {
+            logger.LogCritical(e, "ConversationHandler failed to delete message in conversation");  
             return Results.Ok(new ServiceResponse("Exception"));
         }
     }

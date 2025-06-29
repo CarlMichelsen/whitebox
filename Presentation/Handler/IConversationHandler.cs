@@ -9,6 +9,8 @@ public interface IConversationHandler
     
     Task<IResult> DeleteConversation(Guid conversationId);
     
+    Task<IResult> DeleteMessage(Guid conversationId, Guid messageId);
+    
     Task<IResult> SetConversationSystemMessage(Guid conversationId, SetConversationSystemMessage systemMessage);
     
     Task<IResult> GetConversationList();
