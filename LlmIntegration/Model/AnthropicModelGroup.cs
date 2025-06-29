@@ -4,21 +4,21 @@ namespace LLMIntegration.Model;
 
 public class AnthropicModelGroup
 {
-    public LlmModel Claude37Sonnet { get; } = new(
+    public LlmModel Claude4Sonnet { get; } = new(
         Provider: LlmProvider.Anthropic,
-        ModelName: "Claude 3.7 Sonnet",
+        ModelName: "Claude 4 Sonnet",
         ModelDescription: "Our most intelligent model",
-        ModelIdentifier: "claude-3-7-sonnet-latest");
+        ModelIdentifier: "claude-sonnet-4-20250514");
+    
+    public LlmModel Claude4Opus { get; } = new(
+        Provider: LlmProvider.Anthropic,
+        ModelName: "Claude 4 Opus",
+        ModelDescription: "Powerful model for highly complex tasks",
+        ModelIdentifier: "claude-opus-4-20250514");
     
     public LlmModel Claude35Haiku { get; } = new(
         Provider: LlmProvider.Anthropic,
         ModelName: "Claude 3.5 Haiku",
         ModelDescription: "Our fastest model",
         ModelIdentifier: "claude-3-5-haiku-latest");
-    
-    public LlmModel Claude3Opus { get; } = new(
-        Provider: LlmProvider.Anthropic,
-        ModelName: "Claude 3 Opus",
-        ModelDescription: "Powerful model for highly complex tasks",
-        ModelIdentifier: "claude-3-opus-latest");
 }

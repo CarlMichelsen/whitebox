@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Interface.Dto.Configuration;
+using Presentation.Dto.Configuration;
 
 namespace Application.Validation.ChatConfiguration;
 

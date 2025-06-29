@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace Interface.Dto;
+namespace Presentation.Dto;
 
 public record ServiceResponse
 {

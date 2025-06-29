@@ -1,9 +1,9 @@
-﻿using Interface.Dto;
-using Interface.Dto.Conversation;
-using Interface.Dto.Conversation.Request;
-using Interface.Dto.Conversation.Response;
-using Interface.Handler;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Presentation.Dto;
+using Presentation.Dto.Conversation;
+using Presentation.Dto.Conversation.Request;
+using Presentation.Dto.Conversation.Response;
+using Presentation.Handler;
 
 namespace Api.Endpoints;
 

@@ -1,8 +1,8 @@
 ﻿using Application.Mapper;
-using Interface.Dto;
-using Interface.Dto.Model;
-using Interface.Handler;
 using Microsoft.Extensions.Caching.Memory;
+using Presentation.Dto;
+using Presentation.Dto.Model;
+using Presentation.Handler;
 
 namespace Application.Handler;
 

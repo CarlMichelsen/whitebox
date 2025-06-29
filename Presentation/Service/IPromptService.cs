@@ -2,7 +2,7 @@
 using LLMIntegration.Generic.Dto;
 using LLMIntegration.Generic.Dto.Response.Stream;
 
-namespace Interface.Service;
+namespace Presentation.Service;
 
 public interface IPromptService
 {

@@ -1,6 +1,6 @@
-﻿using Interface.Dto;
-using Interface.Handler;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Presentation.Dto;
+using Presentation.Handler;
 
 namespace Api.Endpoints;
 

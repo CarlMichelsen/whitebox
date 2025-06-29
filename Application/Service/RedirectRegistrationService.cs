@@ -3,16 +3,17 @@ using Database.Entity;
 using Database.Entity.Id;
 using Domain.Exception;
 using Domain.User;
-using Interface.Accessor;
-using Interface.Service;
+using Presentation.Accessor;
+using Presentation.Service;
 
 namespace Application.Service;
 
 public class RedirectRegistrationService(
     ApplicationContext applicationContext,
-    IUserContextAccessor userContextAccessor,
-    ISourceIdAccessor sourceIdAccessor) : IRedirectRegistrationService
+    IUserContextAccessor userContextAccessor) : IRedirectRegistrationService
 {
+    private const string PlaceholderSourceId = "0197bb42-a89e-7966-8dc4-280dd9c3d484";
+    
     public async Task<RedirectEntity?> RegisterRedirect(string base64Url)
     {
         AuthenticatedUser? authenticatedUser = default;
@@ -45,7 +46,7 @@ public class RedirectRegistrationService(
             Url = uri.AbsoluteUri,
             UserId = userEntity?.Id,
             User = userEntity,
-            SourceId = sourceIdAccessor.GetSourceId(),
+            SourceId = new SourceId(Guid.Parse(PlaceholderSourceId)),
             RedirectedAtUtc = DateTime.UtcNow,
         };
 

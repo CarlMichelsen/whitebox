@@ -20,6 +20,9 @@ public class TraceIdMiddleware(ILogger<TraceIdMiddleware> logger) : IMiddleware
                 ApplicationConstants.TraceIdHeaderName);
         }
             
+        context.Request.Headers
+            .Append(ApplicationConstants.TraceIdHeaderName, context.TraceIdentifier);
+        
         context.Response.Headers
             .Append(ApplicationConstants.TraceIdHeaderName, context.TraceIdentifier);
             

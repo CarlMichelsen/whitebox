@@ -1,0 +1,29 @@
+{
+  "candidates": [
+    {
+      "content": {
+        "parts": [
+          {
+            "text": "Konoha's Whispers, Naruto's Might\n\nA village hidden, nestled in green,\nWhere shadows danced and futures convened.\nA young boy born, with a sealed, fierce roar,\nA jinchuriki, knocking at destiny's door.\n\nWith spiky blonde hair and a determined gleam,\nHe chased a dream, a village's esteem.\nCalled a demon, a monster, with eyes full of pain,\nBut his spirit burned bright, through sunshine and rain.\n\nHe trained with diligence, with a mischievous grin,\nTo prove them wrong, to let his light begin.\nA rasengan forming, a swirling bright sphere,\nAgainst the odds, banishing every fear.\n\nFriends he gathered, a bond strong and true,\nSasuke the rival, Sakura too.\nThrough trials and battles, they learned to rely,\nOn each other's strength, beneath the vast sky.\n\nThe Nine-Tails raging, a tempest within,\nHe learned to control it, to rise and to win.\nFrom outcast to hero, his legend took flight,\nThe Hokage's dream, bathed in warm, golden light.\n\nHe faced Akatsuki, their shadows so deep,\nWith courage unwavering, secrets to keep.\nPain and Gaara, the bonds he would forge,\nA heart full of kindness, on every surge.\n\nThe Fourth Great Ninja War, a world in despair,\nHe stood as a beacon, beyond all compare.\nWith talk-no-jutsu, and a spirit so bold,\nHe changed the hearts, stories untold.\n\nSo raise up your hands, let the cheers resound,\nFor Naruto Uzumaki, on hallowed ground.\nThe hero of Konoha, the ninja so grand,\nForever remembered, throughout the land!\n\nNyan! Hope you liked it! *^*"
+          }
+        ],
+        "role": "model"
+      },
+      "finishReason": "STOP",
+      "index": 0
+    }
+  ],
+  "usageMetadata": {
+    "promptTokenCount": 38,
+    "candidatesTokenCount": 390,
+    "totalTokenCount": 428,
+    "promptTokensDetails": [
+      {
+        "modality": "TEXT",
+        "tokenCount": 38
+      }
+    ]
+  },
+  "modelVersion": "gemini-2.5-flash-lite-preview-06-17",
+  "responseId": "fQ5haPqlAbGkvdIPxc_Y8Ag"
+}

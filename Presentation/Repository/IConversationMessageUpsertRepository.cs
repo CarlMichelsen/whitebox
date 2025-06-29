@@ -2,7 +2,7 @@
 using Database.Entity.Id;
 using Domain.Conversation.Action;
 
-namespace Interface.Repository;
+namespace Presentation.Repository;
 
 public interface IConversationMessageUpsertRepository
 {

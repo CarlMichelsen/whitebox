@@ -30,7 +30,8 @@ public class GenericIntegrationTests
         yield return [LlmModels.Anthropic.Claude35Haiku];
         yield return [LlmModels.OpenAi.Gpt4O];
         yield return [LlmModels.X.Grok3];
-        yield return [LlmModels.Google.Flash15Dash8B];
+        yield return [LlmModels.Google.Gemini25Pro];
+        yield return [LlmModels.Google.Gemini25FlashLite];
     }
 
     [Theory]

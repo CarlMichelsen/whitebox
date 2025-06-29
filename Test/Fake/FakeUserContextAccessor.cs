@@ -1,6 +1,6 @@
 ﻿using Domain.User;
-using Interface.Accessor;
 using Microsoft.AspNetCore.Http;
+using Presentation.Accessor;
 
 namespace Test.Fake;
 

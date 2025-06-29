@@ -1,5 +1,5 @@
-﻿using Interface.Service;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Presentation.Service;
 
 namespace Api.Endpoints;
 

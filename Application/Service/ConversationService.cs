@@ -1,14 +1,14 @@
 ﻿using Application.Mapper;
 using Database;
 using Database.Entity.Id;
-using Interface.Accessor;
-using Interface.Dto;
-using Interface.Dto.Conversation;
-using Interface.Dto.Conversation.Request;
-using Interface.Dto.Conversation.Response;
-using Interface.Repository;
-using Interface.Service;
 using Microsoft.EntityFrameworkCore;
+using Presentation.Accessor;
+using Presentation.Dto;
+using Presentation.Dto.Conversation;
+using Presentation.Dto.Conversation.Request;
+using Presentation.Dto.Conversation.Response;
+using Presentation.Repository;
+using Presentation.Service;
 
 namespace Application.Service;
 

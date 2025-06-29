@@ -1,6 +1,0 @@
-data: {"candidates": [{"content": {"parts": [{"text": "I"}],"role": "model"}}],"usageMetadata": {"promptTokenCount": 20,"totalTokenCount": 20,"promptTokensDetails": [{"modality": "TEXT","tokenCount": 20}]},"modelVersion": "gemini-2.0-flash-lite-preview-02-05"}
-
-data: {"candidates": [{"content": {"parts": [{"text": " am an AI and don't have a physical body, so I am unable to do a"}],"role": "model"}}],"usageMetadata": {"promptTokenCount": 20,"totalTokenCount": 20,"promptTokensDetails": [{"modality": "TEXT","tokenCount": 20}]},"modelVersion": "gemini-2.0-flash-lite-preview-02-05"}
-
-data: {"candidates": [{"content": {"parts": [{"text": " flip. 😉\n"}],"role": "model"},"finishReason": "STOP"}],"usageMetadata": {"promptTokenCount": 17,"candidatesTokenCount": 24,"totalTokenCount": 41,"promptTokensDetails": [{"modality": "TEXT","tokenCount": 17}],"candidatesTokensDetails": [{"modality": "TEXT","tokenCount": 24}]},"modelVersion": "gemini-2.0-flash-lite-preview-02-05"}
-

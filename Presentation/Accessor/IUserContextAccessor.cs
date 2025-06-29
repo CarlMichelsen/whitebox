@@ -1,7 +1,7 @@
 using Domain.User;
 using Microsoft.AspNetCore.Http;
 
-namespace Interface.Accessor;
+namespace Presentation.Accessor;
 
 public interface IUserContextAccessor
 {

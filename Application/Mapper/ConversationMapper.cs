@@ -3,9 +3,9 @@ using Database.Entity.Id;
 using Domain.Conversation;
 using Domain.Exception;
 using Domain.User;
-using Interface.Dto.Conversation;
-using Interface.Dto.Model;
 using LLMIntegration;
+using Presentation.Dto.Conversation;
+using Presentation.Dto.Model;
 
 namespace Application.Mapper;
 

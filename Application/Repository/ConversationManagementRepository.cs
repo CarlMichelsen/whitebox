@@ -1,7 +1,7 @@
 ﻿using Database;
 using Database.Entity.Id;
-using Interface.Repository;
 using Microsoft.EntityFrameworkCore;
+using Presentation.Repository;
 
 namespace Application.Repository;
 

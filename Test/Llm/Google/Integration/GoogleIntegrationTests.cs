@@ -30,7 +30,7 @@ public class GoogleIntegrationTests
         // Arrange
         var client = this.serviceProvider.GetRequiredService<IGoogleClient>();
         var prompt = new GooglePrompt(
-            Model: LlmModels.Google.Flash15Dash8B.ModelIdentifier,
+            Model: LlmModels.Google.Gemini25Pro.ModelIdentifier,
             Contents: [
                 new GoogleContent(
                     Role: "user",
@@ -68,7 +68,7 @@ public class GoogleIntegrationTests
         // Arrange
         var client = this.serviceProvider.GetRequiredService<IGoogleClient>();
         var prompt = new GooglePrompt(
-            Model: LlmModels.Google.Flash15Dash8B.ModelIdentifier,
+            Model: LlmModels.Google.Gemini25Flash.ModelIdentifier,
             Contents: [
                 new GoogleContent(
                     Role: "user",

@@ -1,10 +1,10 @@
 ﻿using Database.Entity.Id;
-using Interface.Dto;
-using Interface.Dto.Conversation;
-using Interface.Dto.Conversation.Request;
-using Interface.Dto.Conversation.Response;
+using Presentation.Dto;
+using Presentation.Dto.Conversation;
+using Presentation.Dto.Conversation.Request;
+using Presentation.Dto.Conversation.Response;
 
-namespace Interface.Service;
+namespace Presentation.Service;
 
 public interface IConversationService
 {

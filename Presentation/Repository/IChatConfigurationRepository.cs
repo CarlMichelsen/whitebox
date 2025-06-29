@@ -1,7 +1,7 @@
 ﻿using Database.Entity;
 using Domain.User;
 
-namespace Interface.Repository;
+namespace Presentation.Repository;
 
 public interface IChatConfigurationRepository
 {

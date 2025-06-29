@@ -26,6 +26,20 @@ public class LegacyModels
         ModelDescription: "Our previous most intelligent model",
         ModelIdentifier: "claude-3-5-sonnet-latest",
         IsLegacy: true);
+    
+    public LlmModel Claude37Sonnet { get; } = new(
+        Provider: LlmProvider.Anthropic,
+        ModelName: "Claude 3.7 Sonnet",
+        ModelDescription: "Our most intelligent model",
+        ModelIdentifier: "claude-3-7-sonnet-latest",
+        IsLegacy: true);
+    
+    public LlmModel Claude3Opus { get; } = new(
+        Provider: LlmProvider.Anthropic,
+        ModelName: "Claude 3 Opus",
+        ModelDescription: "Powerful model for highly complex tasks",
+        ModelIdentifier: "claude-3-opus-latest",
+        IsLegacy: true);
 
     public LlmModel Flash15Dash8B { get; } = new(
         Provider: LlmProvider.Google,
@@ -53,5 +67,19 @@ public class LegacyModels
         ModelName: "Grok 2",
         ModelDescription: "Grok version 2.",
         ModelIdentifier: "grok-2-1212",
+        IsLegacy: true);
+    
+    public LlmModel Flash20 { get; } = new(
+        Provider: LlmProvider.Google,
+        ModelName: "Gemini 2.0 Flash",
+        ModelDescription: "Gemini 2.0 Flash delivers next-gen features and improved capabilities, including superior speed, native tool use, multimodal generation, and a 1M token context window.",
+        ModelIdentifier: "gemini-2.0-flash",
+        IsLegacy: true);
+    
+    public LlmModel Flash15 { get; } = new(
+        Provider: LlmProvider.Google,
+        ModelName: "Gemini 1.5 Flash",
+        ModelDescription: "Our most balanced multimodal model with great performance for most tasks",
+        ModelIdentifier: "gemini-1.5-flash",
         IsLegacy: true);
 }

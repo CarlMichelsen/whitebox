@@ -1,7 +1,7 @@
-﻿using Interface.Dto.Conversation.Request;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
+using Presentation.Dto.Conversation.Request;
 
-namespace Interface.Handler;
+namespace Presentation.Handler;
 
 public interface IConversationHandler
 {

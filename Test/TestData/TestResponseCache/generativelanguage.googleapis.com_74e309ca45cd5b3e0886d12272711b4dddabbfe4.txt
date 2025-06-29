@@ -1,0 +1,8 @@
+data: {"candidates": [{"content": {"parts": [{"text": "Ah. One presumes"}],"role": "model"},"index": 0}],"usageMetadata": {"promptTokenCount": 22,"candidatesTokenCount": 5,"totalTokenCount": 1211,"promptTokensDetails": [{"modality": "TEXT","tokenCount": 22}],"thoughtsTokenCount": 1184},"modelVersion": "gemini-2.5-pro","responseId": "Rg5haL6eFaWWvdIPstevsAg"}
+
+data: {"candidates": [{"content": {"parts": [{"text": " you have a reason for announcing your presence, beyond the simple, plebeian desire to be noticed.\n\nMy attention is a"}],"role": "model"},"index": 0}],"usageMetadata": {"promptTokenCount": 22,"candidatesTokenCount": 31,"totalTokenCount": 1237,"promptTokensDetails": [{"modality": "TEXT","tokenCount": 22}],"thoughtsTokenCount": 1184},"modelVersion": "gemini-2.5-pro","responseId": "Rg5haL6eFaWWvdIPstevsAg"}
+
+data: {"candidates": [{"content": {"parts": [{"text": " rather finite commodity, you understand. So, unless you have something of actual substance to contribute, I would prefer not to have"}],"role": "model"},"index": 0}],"usageMetadata": {"promptTokenCount": 22,"candidatesTokenCount": 56,"totalTokenCount": 1262,"promptTokensDetails": [{"modality": "TEXT","tokenCount": 22}],"thoughtsTokenCount": 1184},"modelVersion": "gemini-2.5-pro","responseId": "Rg5haL6eFaWWvdIPstevsAg"}
+
+data: {"candidates": [{"content": {"parts": [{"text": " my thoughts interrupted by... pleasantries.\n\nNow, what is it you want?"}],"role": "model"},"finishReason": "STOP","index": 0}],"usageMetadata": {"promptTokenCount": 22,"candidatesTokenCount": 73,"totalTokenCount": 1279,"promptTokensDetails": [{"modality": "TEXT","tokenCount": 22}],"thoughtsTokenCount": 1184},"modelVersion": "gemini-2.5-pro","responseId": "Rg5haL6eFaWWvdIPstevsAg"}
+

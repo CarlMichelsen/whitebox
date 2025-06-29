@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Interface.Dto.Conversation;
+namespace Presentation.Dto.Conversation;
 
 public record ConversationSectionDto(
     [property: JsonPropertyName("selectedMessageId")] Guid? SelectedMessageId,

@@ -3,14 +3,14 @@ using System.Text.Json;
 using Database;
 using Database.Entity;
 using Database.Entity.Id;
-using Interface.Accessor;
-using Interface.Service;
 using LLMIntegration.Generic;
 using LLMIntegration.Generic.Dto;
 using LLMIntegration.Generic.Dto.Response;
 using LLMIntegration.Generic.Dto.Response.Stream;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Presentation.Accessor;
+using Presentation.Service;
 
 namespace Application.Service;
 

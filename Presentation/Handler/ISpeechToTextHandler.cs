@@ -1,7 +1,7 @@
-﻿using Interface.Dto;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
+using Presentation.Dto;
 
-namespace Interface.Handler;
+namespace Presentation.Handler;
 
 public interface ISpeechToTextHandler
 {

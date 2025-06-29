@@ -75,7 +75,15 @@ public class TestReplayHttpDelegatingHandler : DelegatingHandler
             var responseBody = await response.Content.ReadAsStringAsync(cancellationToken);
             await File.WriteAllTextAsync(cacheFileName, responseBody, cancellationToken);
         }
-
+        
+        var fileResponseContent = await File.ReadAllTextAsync(
+            cacheFileName,
+            cancellationToken);
+        
+        response.Content = new StringContent(
+            fileResponseContent,
+            Encoding.UTF8,
+            "application/json");
         return response;
     }
     

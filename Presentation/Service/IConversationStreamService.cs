@@ -1,7 +1,7 @@
 ﻿using Domain.Conversation.Action;
-using Interface.Dto.Conversation.Response.Stream;
+using Presentation.Dto.Conversation.Response.Stream;
 
-namespace Interface.Service;
+namespace Presentation.Service;
 
 public interface IConversationStreamService
 {

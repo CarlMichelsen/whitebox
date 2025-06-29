@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
-using Interface.Dto.Model;
+using Presentation.Dto.Model;
 
-namespace Interface.Dto.Conversation.Response.Stream;
+namespace Presentation.Dto.Conversation.Response.Stream;
 
 public class AssistantMessageEventDto : BaseStreamResponseDto
 {
