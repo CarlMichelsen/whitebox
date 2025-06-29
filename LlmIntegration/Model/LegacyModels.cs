@@ -69,6 +69,20 @@ public class LegacyModels
         ModelIdentifier: "grok-2-1212",
         IsLegacy: true);
     
+    public LlmModel Grok3Beta { get; } = new(
+        Provider: LlmProvider.X,
+        ModelName: "Grok 3 Beta",
+        ModelDescription: "Grok version 3 Beta.",
+        ModelIdentifier: "grok-3-beta",
+        IsLegacy: true);
+    
+    public LlmModel Grok3BetaMini { get; } = new(
+        Provider: LlmProvider.X,
+        ModelName: "Grok 3 Beta Mini",
+        ModelDescription: "Grok version 3 Beta (mini).",
+        ModelIdentifier: "grok-3-mini-beta",
+        IsLegacy: true);
+    
     public LlmModel Flash20 { get; } = new(
         Provider: LlmProvider.Google,
         ModelName: "Gemini 2.0 Flash",
