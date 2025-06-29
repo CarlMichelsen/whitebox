@@ -19,7 +19,7 @@ public static class LlmModels
     
     public static LegacyModels Legacy { get; } = new();
     
-    private static IReadOnlyList<LlmModel> Models { get; } = GetModels().AsReadOnly();
+    private static IReadOnlyList<LlmModel> Models { get; } = GetModels(true).AsReadOnly();
 
     public static bool TryGetModel(string modelIdentifier, out LlmModel? model)
     {
