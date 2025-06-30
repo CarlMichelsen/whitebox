@@ -78,6 +78,7 @@ public class ConversationService(
         var user = contextAccessor.GetUserContext().User;
         var conversations = await applicationContext.Conversation
             .Where(c => c!.CreatorId == user.Id)
+            .OrderByDescending(c => c.LastAlteredUtc)
             .Take(100)
             .ToListAsync();
         
