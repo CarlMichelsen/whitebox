@@ -19,6 +19,7 @@ public static class XAiDependencies
         
         return services.AddHttpClient<IXAiClient, XAiClient>((sp, client) =>
         {
+            client.Timeout = TimeSpan.FromMinutes(15);
             var xAiOptions = sp.GetRequiredService<IOptions<XAiOptions>>();
             var apiKey = ApiKeyUtil.GetRandomKey(xAiOptions.Value.ApiKeys);
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(

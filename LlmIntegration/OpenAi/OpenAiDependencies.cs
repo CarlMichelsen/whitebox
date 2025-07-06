@@ -19,6 +19,7 @@ public static class OpenAiDependencies
         
         return services.AddHttpClient<IOpenAiClient, OpenAiClient>((sp, client) =>
         {
+            client.Timeout = TimeSpan.FromMinutes(15);
             var openAiOptions = sp.GetRequiredService<IOptions<OpenAiOptions>>();
             var apiKey = ApiKeyUtil.GetRandomKey(openAiOptions.Value.ApiKeys);
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(

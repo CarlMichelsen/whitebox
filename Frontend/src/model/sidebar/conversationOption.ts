@@ -1,9 +1,3 @@
-export type SortableConversationOption = {
-    id: string;
-    title: string;
-    lastAltered: Date;
-}
-
 export type ConversationOption = {
     id: string;
     summary: string;
