@@ -17,6 +17,7 @@ public static class GoogleDependencies
         
         return services.AddHttpClient<IGoogleClient, GoogleClient>((sp, client) =>
         {
+            client.Timeout = TimeSpan.FromMinutes(15);
             var googleOptions = sp.GetRequiredService<IOptions<GoogleOptions>>();
             client.DefaultRequestHeaders.Add("Accept", "application/json");
             client.DefaultRequestHeaders.UserAgent.ParseAdd(userAgent);

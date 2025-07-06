@@ -18,6 +18,7 @@ public static class AnthropicDependencies
         
         return services.AddHttpClient<IAnthropicClient, AnthropicClient>((sp, client) =>
         {
+            client.Timeout = TimeSpan.FromMinutes(15);
             var anthropicOptions = sp.GetRequiredService<IOptions<AnthropicOptions>>();
             var apiKey = ApiKeyUtil.GetRandomKey(anthropicOptions.Value.ApiKeys);
             client.DefaultRequestHeaders.Add("x-api-key", apiKey);

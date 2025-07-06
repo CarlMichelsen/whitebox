@@ -1,68 +1,78 @@
 ﻿import {ConversationOption, ConversationOptionSection, NamedTimeSpan} from "../../model/sidebar/conversationOption.ts";
 
+type TimeSpanDefinition = {
+    title: string;
+    getTimeSpan: (now: Date) => { start: Date; end: Date };
+}
+
+const TIME_SPAN_DEFINITIONS: TimeSpanDefinition[] = [
+    {
+        title: "Today",
+        getTimeSpan: (now) => ({
+            start: new Date(now.getFullYear(), now.getMonth(), now.getDate()),
+            end: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999)
+        })
+    },
+    {
+        title: "Yesterday",
+        getTimeSpan: (now) => ({
+            start: new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1),
+            end: new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1, 23, 59, 59, 999)
+        })
+    },
+    {
+        title: "This Week",
+        getTimeSpan: (now) => {
+            const start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            start.setDate(start.getDate() - start.getDay());
+            const end = new Date(start);
+            end.setDate(end.getDate() + 6);
+            end.setHours(23, 59, 59, 999);
+            return { start, end };
+        }
+    },
+    {
+        title: "This Month",
+        getTimeSpan: (now) => ({
+            start: new Date(now.getFullYear(), now.getMonth(), 1),
+            end: new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999)
+        })
+    },
+    {
+        title: "Last Month",
+        getTimeSpan: (now) => ({
+            start: new Date(now.getFullYear(), now.getMonth() - 1, 1),
+            end: new Date(now.getFullYear(), now.getMonth(), 0, 23, 59, 59, 999)
+        })
+    },
+    {
+        title: "This Year",
+        getTimeSpan: (now) => ({
+            start: new Date(now.getFullYear(), 0, 1),
+            end: new Date(now.getFullYear(), 11, 31, 23, 59, 59, 999)
+        })
+    },
+    {
+        title: "Older",
+        getTimeSpan: (now) => ({
+            start: new Date(0),
+            end: new Date(now.getFullYear(), 0, 1)
+        })
+    }
+];
+
 const getTimeSpans = (): NamedTimeSpan[] => {
     const now = new Date();
-    
-    const startOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const endOfToday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999);
 
-    const startOfYesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
-    const endOfYesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1, 23, 59, 59, 999);
-
-    const startOfThisWeek = endOfYesterday;
-    startOfThisWeek.setDate(startOfThisWeek.getDate() - startOfThisWeek.getDay());
-
-    const endOfThisWeek = new Date(startOfThisWeek);
-    endOfThisWeek.setDate(endOfThisWeek.getDate() + 6);
-    endOfThisWeek.setHours(23, 59, 59, 999);
-
-    const startOfThisMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-    const endOfThisMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999);
-
-    const startOfLastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-    const endOfLastMonth = new Date(now.getFullYear(), now.getMonth(), 0, 23, 59, 59, 999);
-
-    const startOfThisYear = new Date(now.getFullYear(), 0, 1);
-    const endOfThisYear = new Date(now.getFullYear(), 11, 31, 23, 59, 59, 999);
-    
-    return [
-        {
-            title: "Today",
-            start: startOfToday.getTime(),
-            end: endOfToday.getTime(),
-        },
-        {
-            title: "Yesterday",
-            start: startOfYesterday.getTime(),
-            end: endOfYesterday.getTime(),
-        },
-        {
-            title: "This Week",
-            start: startOfThisWeek.getTime(),
-            end: endOfThisWeek.getTime(),
-        },
-        {
-            title: "This Month",
-            start: startOfThisMonth.getTime(),
-            end: endOfThisMonth.getTime(),
-        },
-        {
-            title: "Last Month",
-            start: startOfLastMonth.getTime(),
-            end: endOfLastMonth.getTime(),
-        },
-        {
-            title: "This Year",
-            start: startOfThisYear.getTime(),
-            end: endOfThisYear.getTime(),
-        },
-        {
-            title: "Older",
-            start: new Date(0).getTime(),
-            end: startOfThisYear.getTime(),
-        },
-    ] satisfies NamedTimeSpan[];
-}
+    return TIME_SPAN_DEFINITIONS.map(def => {
+        const { start, end } = def.getTimeSpan(now);
+        return {
+            title: def.title,
+            start: start.getTime(),
+            end: end.getTime(),
+        };
+    });
+};
 
 const inTimeSpan = (epoch: number, span: NamedTimeSpan): boolean => {
     return epoch >= span.start && epoch <= span.end;
@@ -82,7 +92,7 @@ export const optionsToSections = (options: ConversationOption[]): ConversationOp
             const isInSection = inTimeSpan(option.lastAltered, section);
             if (isInSection) {
                 optionsToConsume.push(option.id);
-                section.options.unshift(option);
+                section.options.push(option);
             }
         }
 
